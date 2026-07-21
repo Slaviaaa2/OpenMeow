@@ -1,16 +1,60 @@
-# OpenMeow ドライバのビルド → dist 組み立て → SteamVR への登録
+﻿# OpenMeow ドライバのビルド → dist 組み立て → SteamVR への登録
 $ErrorActionPreference = "Stop"
 $root = $PSScriptRoot
 
-Write-Host "== ビルド (NativeAOT) ==" -ForegroundColor Cyan
+function Test-CommandExists([string]$name) {
+    return [bool](Get-Command $name -ErrorAction SilentlyContinue)
+}
+
+function Update-SessionPath {
+    # インストーラー完了直後は現プロセスの PATH が更新されないため、レジストリから読み直す
+    $machine = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+    $user = [System.Environment]::GetEnvironmentVariable("Path", "User")
+    $env:Path = "$machine;$user"
+}
+
+function Request-InstallerRun([string]$label, [string]$url, [string]$fileName, [string[]]$arguments = @()) {
+    $answer = Read-Host "$label が見つかりません。インストーラーをダウンロードして起動しますか? (y/n)"
+    if ($answer -notmatch '^[Yy]') {
+        throw "$label のインストールが必要です。インストール後に再実行してください。"
+    }
+    $installerPath = Join-Path $env:TEMP $fileName
+    Write-Host "ダウンロード中: $url" -ForegroundColor Cyan
+    Invoke-WebRequest -Uri $url -OutFile $installerPath -UseBasicParsing
+    Write-Host "インストーラーを起動します。インストールが完了したらこのウィンドウに戻ってください。" -ForegroundColor Cyan
+    if ($arguments.Count -gt 0) {
+        Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
+    } else {
+        Start-Process -FilePath $installerPath -Wait
+    }
+    Update-SessionPath
+}
+
+Write-Host "== 前提ツールの確認 ==" -ForegroundColor Cyan
+if (-not (Test-CommandExists "dotnet")) {
+    Request-InstallerRun ".NET SDK" "https://aka.ms/dotnet/10.0/dotnet-sdk-win-x64.exe" "dotnet-sdk-win-x64.exe" @("/passive", "/norestart")
+    if (-not (Test-CommandExists "dotnet")) {
+        throw ".NET SDK のインストールを確認できませんでした。インストール後に新しいターミナルを開いて再実行してください。"
+    }
+}
+
 # 環境によっては NativeAOT の findvcvarsall.bat が stderr ノイズでリンカパスを壊すため、
 # vswhere で見つけた VS 開発者環境 + IlcUseEnvironmentalTools でビルドする
 $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-$vsDevCmd = $null
-if (Test-Path $vswhere) {
+function Get-VsDevCmdPath {
+    if (-not (Test-Path $vswhere)) { return $null }
     $vsBase = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath 2>$null | Select-Object -First 1
-    if ($vsBase -and (Test-Path "$vsBase\Common7\Tools\VsDevCmd.bat")) { $vsDevCmd = "$vsBase\Common7\Tools\VsDevCmd.bat" }
+    if ($vsBase -and (Test-Path "$vsBase\Common7\Tools\VsDevCmd.bat")) { return "$vsBase\Common7\Tools\VsDevCmd.bat" }
+    return $null
 }
+$vsDevCmd = Get-VsDevCmdPath
+if (-not $vsDevCmd) {
+    Request-InstallerRun "C++ Build Tools" "https://aka.ms/vs/17/release/vs_buildtools.exe" "vs_buildtools.exe" @("--add", "Microsoft.VisualStudio.Workload.VCTools", "--includeRecommended", "--passive", "--norestart")
+    $vsDevCmd = Get-VsDevCmdPath
+    if (-not $vsDevCmd) { Write-Host "C++ Build Tools が確認できませんでした。VsDevCmd なしでビルドを試みます。" -ForegroundColor Yellow }
+}
+
+Write-Host "== ビルド (NativeAOT) ==" -ForegroundColor Cyan
 if ($vsDevCmd) {
     cmd /c "`"$vsDevCmd`" -arch=x64 -no_logo && dotnet publish `"$root\src\OpenMeow.Driver\OpenMeow.Driver.csproj`" -c Release -r win-x64 /p:IlcUseEnvironmentalTools=true"
 } else {

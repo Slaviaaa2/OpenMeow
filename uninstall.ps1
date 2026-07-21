@@ -1,4 +1,4 @@
-# OpenMeow ドライバの登録解除
+﻿# OpenMeow ドライバの登録解除
 $ErrorActionPreference = "Stop"
 $steamRoot = (Get-ItemProperty "HKCU:\Software\Valve\Steam" -ErrorAction SilentlyContinue).SteamPath
 if (-not $steamRoot) { $steamRoot = "C:\Program Files (x86)\Steam" }
