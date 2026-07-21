@@ -3,3 +3,6 @@ obj/
 dist/
 .vs/
 *.user
+
+# ローカル作業メモ
+IMPLEMENTATION_PLAN.md

@@ -1,131 +1,111 @@
 # OpenMeow 🐱
 
-**.NET 10 だけで書かれた SteamVR 仮想デバイスドライバ。**
-VR 機材ゼロで、キーボード+マウスから仮想 HMD + Vive コントローラ2本を動かして
-VR ゲーム(主に VRChat)を遊ぶバカみたいなツール。
+![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)
+![Platform: Windows x64](https://img.shields.io/badge/Platform-Windows%20x64-blue.svg)
+![.NET 10](https://img.shields.io/badge/.NET-10-512BD4.svg)
 
-C++ を1行も書かずに、NativeAOT で OpenVR ドライバ API の C++ vtable を手動再現した
-ネイティブ DLL(`driver_openmeow.dll`)を生成し、vrserver.exe に直接ロードさせている。
+**VR 機材なしで SteamVR ゲームを遊ぶための仮想デバイスドライバ。**
+仮想 HMD と Vive コントローラ 2 本を、キーボード+マウスの FPS ライクな操作で動かせます。
+ドライバ本体は C++ を使わず .NET 10(NativeAOT)だけで実装されています。
 
-## 仕組み
+> OpenMeow is a SteamVR virtual device driver written entirely in .NET 10 (NativeAOT).
+> It emulates an HMD and two Vive wands so you can play VR games with a keyboard and
+> mouse — no headset required.
 
-- `HmdDriverFactory` を `UnmanagedCallersOnly` でエクスポート
-- `IServerTrackedDeviceProvider_004` / `ITrackedDeviceServerDriver_005` /
-  `IVRDisplayComponent_003` / `IVRVirtualDisplay_002` の vtable をアンマネージドメモリに手動構築
-- HMD は `IVRVirtualDisplay` の仮想ディスプレイ(実ウィンドウなし)。コンポジタから届く
-  合成済みフレーム(keyed mutex 付き D3D11 共有テクスチャ)をドライバが直接読み戻し、
-  共有メモリ経由でコントロールパネルにライブ表示する(~45fps)
-- コントローラは SteamVR 同梱の Vive ワンド(`vive_controller`)としてエミュレート
-  → 各ゲームの既定バインディングがそのまま使える
-- 入力はコントロールパネル(WinForms)がマウスをキャプチャして共有メモリでドライバへ送る。
-  キーボードはドライバ自身(vrserver プロセス内)が `GetAsyncKeyState` でグローバル監視
-  するので、どこにフォーカスがあっても効く
+## 特徴
 
-構成: `src/OpenMeow.Driver`(NativeAOT ドライバ DLL)+ `src/OpenMeow.Overlay`
-(コントロールパネル。ドライバが自動起動)+ `driver/`(マニフェスト類)。
+- **ハードウェア不要** — 仮想 HMD + コントローラ 2 本が SteamVR に本物として認識される
+- **低遅延ライブビュー** — コンポジタが HMD へ送る合成済みフレームをドライバが直接受け取り、
+  コントロールパネルに表示(SteamVR の VR ビューを経由しない)
+- **FPS ライクな操作** — マウスで見回し、クリックでトリガー。手の向きは注視点へ自動収束するので
+  「見てクリック」だけで VR 内の UI に触れる
+- **既定バインディングがそのまま動く** — コントローラは HTC Vive ワンドとして認識される
+- **セットアップ最小** — ルームセットアップ不要。`install.ps1` 一発で導入完了
+
+## 動作環境
+
+| 要件 | 用途 |
+|---|---|
+| Windows 10/11 (x64) | 実行環境 |
+| [SteamVR](https://store.steampowered.com/app/250820/SteamVR/) | 実行環境 |
+| [.NET 10 SDK](https://dotnet.microsoft.com/download) | ビルド |
+| Visual Studio 2022 / Build Tools(C++ ワークロード) | NativeAOT のリンク |
 
 ## インストール
 
-前提(Windows x64):
-- .NET 10 SDK
-- Visual Studio Build Tools(C++ ビルドツール。NativeAOT のリンクに必要)
-- SteamVR
-
 ```powershell
-.\install.ps1    # ビルド → dist\openmeow 組み立て → vrpathreg 登録
-.\uninstall.ps1  # 登録解除
+git clone https://github.com/Slaviaaa2/OpenMeow.git
+cd OpenMeow
+.\install.ps1     # ビルド → ドライバ組み立て → SteamVR への登録
 ```
 
-SteamVR を起動すると仮想 HMD とコントローラ2本が現れ、コントロールパネルが自動で開く。
-ルームセットアップは不要(install.ps1 がキャリブレーション済みデータを直書きする)。
+SteamVR を起動すると仮想デバイスが認識され、コントロールパネルが自動で開きます。
 
-## 操作(コントロールパネル方式・推奨)
+アンインストール:
 
-SteamVR 起動時に自動で開く「OpenMeow コントロール」ウィンドウに **VR 映像が直接映る**。
-これは SteamVR の VR ビューではなく、コンポジタが仮想 HMD へ送る合成済みフレームを
-ドライバの `IVRVirtualDisplay::Present` で受け取り、共有メモリ経由で流している独自ビュー
-(左目、~45fps)。映像を**クリックすると FPS 風のマウス操作が始まる**(ESC で解除)。
+```powershell
+.\uninstall.ps1
+```
 
-**モードレス&ホールド式**: 切替モードはなく、ボタンを押している間だけ意味が変わる。
-両手は「構え位置+自分で付けたオフセット」のまま頭の向きに追従するだけで、
-**勝手に下がる・位置を忘れるなどの自動遷移は一切ない**(リセットは BackSpace のみ)。
-全ポーズはバネ補間でなめらかに動く。
+## 使い方
+
+コントロールパネルに VR 映像が表示されます。**映像をクリックすると操作開始**、
+**ESC で解除**(チャット入力などに戻れます)。
+
+操作はモードレスのホールド式です。ボタンを押している間だけ意味が変わり、
+手は「置いた位置+頭への追従」を維持します(勝手に動きません)。
+
+### マウス
 
 | 入力 | 動作 |
 |---|---|
-| マウス | 見回し(手は視線に自動照準) |
-| 左クリック / 右クリック | トリガー / グリップ(通常は右手、左手系ホールド中は左手) |
-| **Space+マウス** | 右手の位置(ホイール=奥行き) |
-| **中クリック+マウス** | 右手の手首(ホイール=横倒しロール) |
-| **サイド奥(X1)+マウス** | 左手の位置(Alt でも代用可) |
-| **サイド手前(X2)+マウス** | 左手の手首(Alt+中クリックでも可) |
-| **Tab+マウス** | 左トラックパッドを倒す(仮想スティック。歩行用、離すと中央戻り) |
-| **R+マウス** | 右トラックパッドを倒す(旋回など) |
-| Tab/R+左クリック | そのパッドの押し込み |
-| PgUp / PgDn | ホールド中の手の奥行き(視線方向に押す/引く) |
-| Y / B | 右手 / 左手のグリップ保持トグル(物を持ちっぱなしにできる) |
-| F5 / F6 | マウスの左右 / 上下を反転(視線・手首・手の位置に適用。スティックは対象外) |
-| W / A / S / D | 移動(常に頭。手は追従) |
+| マウス移動 | 見回し(手は注視点に自動照準) |
+| 左クリック / 右クリック | トリガー / グリップ(通常は右手、左手ホールド中は左手) |
+| Space +マウス | 右手の位置(ホイール = 奥行き) |
+| 中クリック+マウス | 右手の手首(ホイール = ロール) |
+| サイド奥 X1 +マウス | 左手の位置(左Alt でも可) |
+| サイド手前 X2 +マウス | 左手の手首(左Alt+中クリックでも可) |
+| Tab +マウス | 左トラックパッド(歩行)。離すと中央へ戻る |
+| R +マウス | 右トラックパッド(旋回) |
+| Tab / R +左クリック | そのパッドの押し込み |
+
+### キーボード
+
+| キー | 動作 |
+|---|---|
+| W / A / S / D | 移動(頭。手は追従) |
 | Q / E | 下降 / 上昇 |
-| ← / → ↑ / ↓ | 頭の微回転 |
-| 左Shift | 高速(2.5倍) |
-| 左Ctrl | 低速(0.3倍、微調整用) |
-| BackSpace | ホールド中の手(または頭)のオフセットをリセット |
-| ESC | マウス操作解除(チャット入力などへ復帰) |
-
-## キー操作(フォールバック: パネル未起動時)
-
-コントロールパネルが起動していない場合は従来のグローバルキー方式で動く:
-**F9** = キャプチャ ON/OFF、**F10** = 対象切替。移動・回転キーは上と同じ。
-
-### 左手コントローラ
-
-| キー | ボタン |
-|---|---|
-| Z | トリガー |
-| X | グリップ |
-| C | メニュー |
-| V | トラックパッド押し込み |
-| T / F / G / H | トラックパッド 上/左/下/右(タッチ) |
-| F7 | システムボタン |
-
-### 右手コントローラ
-
-| キー | ボタン |
-|---|---|
-| U | トリガー |
-| O | グリップ |
-| P | メニュー |
-| M | トラックパッド押し込み |
-| I / J / K / L | トラックパッド 上/左/下/右(タッチ) |
-| F8 | システムボタン |
+| ← → ↑ ↓ | 頭または(手首ホールド中の)手の微回転 |
+| 左Shift / 左Ctrl | 高速 / 低速 |
+| PgUp / PgDn | ホールド中の手の奥行き |
+| Y / B | 右手 / 左手のグリップ保持トグル |
+| F5 / F6 | マウス左右 / 上下の反転トグル |
+| BackSpace | ホールド中の手(または頭)のリセット |
+| Z X C V + T F G H + F7 | 左手のボタン類(トリガー/グリップ/メニュー/パッド/システム) |
+| U O P M + I J K L + F8 | 右手のボタン類(同上) |
 
 ## トラブルシューティング
 
 - ドライバログ: `%LOCALAPPDATA%\OpenMeow\openmeow_driver.log`
-- SteamVR 側ログ: `C:\Program Files (x86)\Steam\logs\vrserver.txt`(`openmeow` で検索)
-- ビルドは `install.ps1` 経由で行うこと(NativeAOT の `findvcvarsall.bat` が
-  この環境では stderr ノイズでリンカパスを壊すため、VS 開発者環境 +
-  `IlcUseEnvironmentalTools=true` を使っている)
-- `driver_openmeow.dll` が更新できない場合: steam.exe が DLL を掴んでいる。
-  install.ps1 は自動で旧 DLL を `.old` に退避するのでそのまま実行すればよい
+- SteamVR 側ログ: `<Steam>\logs\vrserver.txt`(`openmeow` で検索)
+- ビルドは必ず `install.ps1` 経由で行ってください(NativeAOT のリンカ検出問題を回避します)
+- ドライバ DLL が更新できない場合は Steam が旧 DLL を掴んでいます。
+  `install.ps1` が自動で退避するのでそのまま再実行すれば問題ありません
 
-## 注意
+## 仕組み
 
-- 操作中(マウスキャプチャ中)は WASD 等がグローバルに拾われる。チャットで文字を打つ前に **ESC** で解除すること。
-- システムボタン(F7/F8)は SteamVR ダッシュボードの開閉。**システム+トリガー同時押しは SteamVR のスクリーンショットショートカット**なので連打に注意。
-- 本ソフトは SteamVR の非公開挙動に依存する実験的なツールであり、無保証。自己責任で使用すること。
+OpenVR ドライバ API は C++ の仮想クラス群ですが、本プロジェクトは vtable を
+アンマネージドメモリに手動構築することで、C# (NativeAOT) のみで
+`vrserver.exe` に直接ロードされるネイティブドライバ DLL を実現しています。
+HMD は `IVRVirtualDisplay` の仮想ディスプレイとして動作し、コンポジタの合成済み
+フレームを D3D11 経由で読み戻してコントロールパネルへストリーミングします。
 
-## 設計メモ(ハマった罠)
+詳細は [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) を参照してください。
 
-- **拡張モード HMD(デスクトップ上のヘッドセットウィンドウ)は使わない。**
-  コンポジタがフルスクリーン独占を要求し、ゲームとフォーカスを奪い合って
-  「ヘッドセットエラー(-202)」「フルスクリーン喪失(-203)」が無限に出る。さらにその
-  ウィンドウはフォーカス中 S キーで連続スクショという地雷ホットキー持ち。
-  代わりに `IVRVirtualDisplay` を実装し(受信フレームは破棄、90Hz 擬似 vsync)、
-  ウィンドウ自体を存在させない。
-- 既定 `power.turnOffScreensTimeout=5s` はドライバ Init で 24h に上書き
-  (放置→スタンバイ→キーで復帰、のたびにフォーカスが飛ぶため)。
-- 装着センサー(`/proximity` 常時 true)がないと、HMD が10秒で Idle になり
-  速い移動のたびに UserInteraction 遷移イベントでウィンドウが前面化する。
-- ルームセットアップ免除は `chaperone_info.vrchap` に universe 2 の立位データを直書き。
+## コントリビュート
+
+Issue / Pull Request を歓迎します。
+
+## ライセンス
+
+[WTFPL](LICENSE)
