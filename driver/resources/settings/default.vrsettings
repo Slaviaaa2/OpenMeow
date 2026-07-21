@@ -1,0 +1,6 @@
+{
+	"driver_openmeow": {
+		"enable": true,
+		"loadPriority": 100
+	}
+}
