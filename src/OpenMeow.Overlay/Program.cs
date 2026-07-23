@@ -287,7 +287,7 @@ internal sealed class ControlForm : Form
         };
         grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
         grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
-        grid.Controls.Add(MakeHelpLabel(
+        var leftHelp = MakeHelpLabel(
             "◆ 視点・トリガー\n" +
             "マウス移動 … 見回し(手は視線へ自動照準)\n" +
             "左クリック … トリガー / 右クリック … グリップ\n" +
@@ -297,8 +297,8 @@ internal sealed class ControlForm : Form
             "中クリック … 右手の手首(ホイール=横倒し)\n" +
             "X1(または Alt) … 左手の位置 / X2 … 左手の手首\n" +
             "Tab … 左パッド(歩行) / R … 右パッド(旋回)\n" +
-            "※ パッド系 +左クリックで押し込み"), 0, 0);
-        grid.Controls.Add(MakeHelpLabel(
+            "※ パッド系 +左クリックで押し込み");
+        var rightHelp = MakeHelpLabel(
             "◆ 移動・視点\n" +
             "WASD … 移動 / Q・E … 下降・上昇\n" +
             "矢印 … 頭(手首ホールド中は手)の微回転\n" +
@@ -309,11 +309,26 @@ internal sealed class ControlForm : Form
             "Y・B … 右手・左手グリップ保持\n" +
             "F5・F6 … 左右・上下 反転\n" +
             "左手 … Z X C V + T F G H + F7\n" +
-            "右手 … U O P M + I J K L + F8"), 1, 0);
+            "右手 … U O P M + I J K L + F8");
+        grid.Controls.Add(leftHelp, 0, 0);
+        grid.Controls.Add(rightHelp, 1, 0);
         CenterContent(grid, helpHost, 1200);
-        helpHost.Resize += (_, _) => CenterContent(grid, helpHost, 1200);
+
+        void LayoutHelp()
+        {
+            CenterContent(grid, helpHost, 1200);
+            int columnWidth = Math.Max(1, grid.ClientSize.Width / 2 - 16);
+            int contentHeight = Math.Max(
+                leftHelp.GetPreferredSize(new Size(columnWidth, 0)).Height,
+                rightHelp.GetPreferredSize(new Size(columnWidth, 0)).Height);
+            int requiredHeight = Math.Max(240, contentHeight + _help.Padding.Vertical + 12);
+            if (_help.Height != requiredHeight) _help.Height = requiredHeight;
+        }
+
+        helpHost.Resize += (_, _) => LayoutHelp();
         helpHost.Controls.Add(grid);
         _help.Controls.Add(helpHost);
+        LayoutHelp();
 
         _viewPanel.Dock = DockStyle.Fill;
         _viewPanel.Receiver = _receiver;

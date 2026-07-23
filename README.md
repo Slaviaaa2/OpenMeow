@@ -42,7 +42,11 @@ irm https://raw.githubusercontent.com/Slaviaaa2/OpenMeow/main/bootstrap.ps1 | ie
 ```
 
 このセットアップは、GitHubからOpenMeowのソース一式をHTTPSでダウンロードし、
-`%LOCALAPPDATA%\OpenMeow\source` に保存してビルド・登録まで行います。
+`%LOCALAPPDATA%\OpenMeow\source` に保存してビルド・登録まで行います。`source` は
+オンラインセットアップ専用の管理キャッシュで、実行のたびに最新版へ丸ごと置き換わります。
+手動で変更する作業用コピーには使わないでください。新版のダウンロードと構成確認が完了するまでは
+既存の `source` を変更せず、旧版は新版のビルドが成功するまで一時バックアップされます。
+ビルドに失敗した場合は、調査と復旧のため新版と旧版の両方を残します。
 途中で.NET SDKやC++ Build Toolsが必要になった場合は、公式インストーラーの起動を確認します。
 この1行は、取得したセットアップスクリプトをそのまま実行する便利な方法です。
 内容を確認してから実行したい場合は、URLの `bootstrap.ps1` を保存してからPowerShellで開いてください。
