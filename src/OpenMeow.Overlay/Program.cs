@@ -190,14 +190,14 @@ internal sealed class ViewPanel : Panel
     }
 }
 
-/// <summary>OBS 等からウィンドウキャプチャするための、映像だけを表示する出力画面。</summary>
+/// <summary>外部ソフトから取り込める、映像だけを表示する出力画面。</summary>
 internal sealed class VideoOutputForm : Form
 {
     private readonly ViewPanel _view = new();
 
     public VideoOutputForm(FrameReceiver receiver)
     {
-        Text = "OpenMeow 映像出力 (OBS)";
+        Text = "OpenMeow 映像出力";
         StartPosition = FormStartPosition.CenterScreen;
         FormBorderStyle = FormBorderStyle.Sizable;
         ShowInTaskbar = true;
@@ -292,7 +292,7 @@ internal sealed class ControlForm : Form
         _launchBtn.Click += (_, _) => LaunchSteamVr();
         _helpBtn = MakeButton("操作説明を隠す", Color.FromArgb(55, 58, 68));
         _helpBtn.Click += (_, _) => ToggleHelp();
-        _outputBtn = MakeButton("OBS出力", Color.FromArgb(109, 76, 170));
+        _outputBtn = MakeButton("映像出力", Color.FromArgb(109, 76, 170));
         _outputBtn.Click += (_, _) => ShowVideoOutput();
         _settingsBtn = MakeButton("設定", Color.FromArgb(75, 78, 92));
         _settingsBtn.Click += (_, _) => ShowSettings();
@@ -468,7 +468,7 @@ internal sealed class ControlForm : Form
         };
         _outputForm = output;
 
-        // 所有ウィンドウにはしない。メイン画面を最小化してもOBS出力を残すため。
+        // 所有ウィンドウにはしない。メイン画面を最小化しても映像出力を残すため。
         output.Show();
         output.Activate();
     }
