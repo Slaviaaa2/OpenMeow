@@ -220,9 +220,10 @@ internal sealed class ControlForm : Form
         BackColor = Color.FromArgb(24, 26, 32);
         ForeColor = Color.Gainsboro;
         MinimumSize = new Size(620, 460);
-        Size = new Size(960, 760);
         var wa = Screen.PrimaryScreen!.WorkingArea;
-        Location = new Point(wa.Right - Width - 16, wa.Bottom - Height - 16);
+        Size = new Size(Math.Min(960, wa.Width - 32), Math.Min(760, wa.Height - 32));
+        Location = new Point(Math.Max(wa.Left + 16, wa.Right - Width - 16),
+            Math.Max(wa.Top + 16, wa.Bottom - Height - 16));
 
         // ── ヘッダ(状態表示 + 起動/説明トグルボタン)──
         var header = new Panel { Dock = DockStyle.Top, Height = 48, BackColor = Color.FromArgb(18, 20, 26) };
@@ -261,9 +262,10 @@ internal sealed class ControlForm : Form
         _help.Height = 176;
         _help.BackColor = Color.FromArgb(20, 22, 28);
         _help.Padding = new Padding(2, 6, 2, 6);
+        var helpHost = new Panel { Dock = DockStyle.Fill, BackColor = Color.Transparent };
         var grid = new TableLayoutPanel
         {
-            Dock = DockStyle.Fill,
+            Anchor = AnchorStyles.Top | AnchorStyles.Bottom,
             ColumnCount = 2,
             RowCount = 1,
             BackColor = Color.Transparent,
@@ -293,7 +295,10 @@ internal sealed class ControlForm : Form
             "F5・F6 … 左右・上下 反転\n" +
             "左手 … Z X C V + T F G H + F7\n" +
             "右手 … U O P M + I J K L + F8"), 1, 0);
-        _help.Controls.Add(grid);
+        CenterContent(grid, helpHost, 1200);
+        helpHost.Resize += (_, _) => CenterContent(grid, helpHost, 1200);
+        helpHost.Controls.Add(grid);
+        _help.Controls.Add(helpHost);
 
         _viewPanel.Dock = DockStyle.Fill;
         _viewPanel.Receiver = _receiver;
@@ -348,6 +353,12 @@ internal sealed class ControlForm : Form
         ForeColor = Color.Gainsboro,
         Padding = new Padding(10, 2, 6, 2),
     };
+
+    private static void CenterContent(Control content, Control host, int maximumWidth)
+    {
+        int width = Math.Min(maximumWidth, Math.Max(0, host.ClientSize.Width));
+        content.SetBounds((host.ClientSize.Width - width) / 2, 0, width, host.ClientSize.Height);
+    }
 
     private void ToggleHelp()
     {
@@ -581,7 +592,6 @@ internal sealed class SettingsForm : Form
         var scroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Padding = new Padding(8) };
         var table = new TableLayoutPanel
         {
-            Dock = DockStyle.Top,
             AutoSize = true,
             ColumnCount = 2,
             CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
@@ -620,6 +630,17 @@ internal sealed class SettingsForm : Form
             table.Controls.Add(key);
         }
 
+        void LayoutTable()
+        {
+            int availableWidth = Math.Max(0, scroll.ClientSize.Width - scroll.Padding.Horizontal);
+            int width = Math.Min(960, availableWidth);
+            table.Width = width;
+            table.Left = scroll.Padding.Left + (availableWidth - width) / 2;
+            table.Top = scroll.Padding.Top;
+        }
+
+        LayoutTable();
+        scroll.Resize += (_, _) => LayoutTable();
         scroll.Controls.Add(table);
         tab.Controls.Add(scroll);
         return tab;
