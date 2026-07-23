@@ -161,6 +161,16 @@ internal sealed class ViewPanel : Panel
         Font = new Font("Yu Gothic UI", 14f, FontStyle.Bold);
     }
 
+    protected override void OnResize(EventArgs eventargs)
+    {
+        base.OnResize(eventargs);
+
+        // 最大化中は複数回に分けてサイズが変わり、既存の文字位置が通常の
+        // 無効領域から外れることがある。毎回全面を同期再描画して残像を防ぐ。
+        Invalidate(ClientRectangle);
+        Update();
+    }
+
     protected override void OnPaint(PaintEventArgs e)
     {
         e.Graphics.Clear(BackColor);
