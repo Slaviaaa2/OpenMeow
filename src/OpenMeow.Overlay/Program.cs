@@ -156,17 +156,21 @@ internal sealed class ViewPanel : Panel
     public ViewPanel()
     {
         DoubleBuffered = true;
+        ResizeRedraw = true;
         BackColor = Color.FromArgb(10, 11, 14);
+        Font = new Font("Yu Gothic UI", 14f, FontStyle.Bold);
     }
 
     protected override void OnPaint(PaintEventArgs e)
     {
-        base.OnPaint(e);
+        e.Graphics.Clear(BackColor);
         var frame = Receiver?.Frame;
         if (frame == null)
         {
-            TextRenderer.DrawText(e.Graphics, IdleText, Font, ClientRectangle, Color.DimGray,
-                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+            var textArea = Rectangle.Inflate(ClientRectangle, -32, -32);
+            TextRenderer.DrawText(e.Graphics, IdleText, Font, textArea, Color.Silver,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter |
+                TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);
             return;
         }
         double scale = Math.Min((double)ClientSize.Width / frame.Width, (double)ClientSize.Height / frame.Height);
@@ -219,6 +223,7 @@ internal sealed class ControlForm : Form
         TopMost = true;
         BackColor = Color.FromArgb(24, 26, 32);
         ForeColor = Color.Gainsboro;
+        Font = new Font("Yu Gothic UI", 10f);
         MinimumSize = new Size(620, 460);
         var wa = Screen.PrimaryScreen!.WorkingArea;
         Size = new Size(Math.Min(960, wa.Width - 32), Math.Min(760, wa.Height - 32));
@@ -226,7 +231,7 @@ internal sealed class ControlForm : Form
             Math.Max(wa.Top + 16, wa.Bottom - Height - 16));
 
         // ── ヘッダ(状態表示 + 起動/説明トグルボタン)──
-        var header = new Panel { Dock = DockStyle.Top, Height = 48, BackColor = Color.FromArgb(18, 20, 26) };
+        var header = new Panel { Dock = DockStyle.Top, Height = 56, BackColor = Color.FromArgb(18, 20, 26) };
 
         _launchBtn = MakeButton("SteamVR を起動", Color.FromArgb(59, 130, 246));
         _launchBtn.Click += (_, _) => LaunchSteamVr();
@@ -241,7 +246,7 @@ internal sealed class ControlForm : Form
             FlowDirection = FlowDirection.RightToLeft,
             AutoSize = true,
             WrapContents = false,
-            Padding = new Padding(0, 9, 8, 0),
+            Padding = new Padding(0, 10, 8, 0),
             BackColor = Color.Transparent,
         };
         bar.Controls.Add(_launchBtn);
@@ -249,7 +254,7 @@ internal sealed class ControlForm : Form
         bar.Controls.Add(_settingsBtn);
 
         _state.Dock = DockStyle.Fill;
-        _state.Font = new Font("Yu Gothic UI", 11f, FontStyle.Bold);
+        _state.Font = new Font("Yu Gothic UI", 12f, FontStyle.Bold);
         _state.ForeColor = Color.Orange;
         _state.TextAlign = ContentAlignment.MiddleLeft;
         _state.Padding = new Padding(12, 0, 0, 0);
@@ -259,7 +264,7 @@ internal sealed class ControlForm : Form
 
         // ── 操作説明(2カラムに整理)──
         _help.Dock = DockStyle.Bottom;
-        _help.Height = 176;
+        _help.Height = 216;
         _help.BackColor = Color.FromArgb(20, 22, 28);
         _help.Padding = new Padding(2, 6, 2, 6);
         var helpHost = new Panel { Dock = DockStyle.Fill, BackColor = Color.Transparent };
@@ -328,13 +333,13 @@ internal sealed class ControlForm : Form
         {
             Text = text,
             FlatStyle = FlatStyle.Flat,
-            Font = new Font("Yu Gothic UI", 9.5f, FontStyle.Bold),
+            Font = new Font("Yu Gothic UI", 10.5f, FontStyle.Bold),
             ForeColor = Color.White,
             BackColor = accent,
             AutoSize = true,
-            Height = 30,
+            Height = 36,
             Margin = new Padding(6, 0, 0, 0),
-            Padding = new Padding(12, 4, 12, 4),
+            Padding = new Padding(14, 5, 14, 5),
             Cursor = Cursors.Hand,
             UseVisualStyleBackColor = false,
             TabStop = false,
@@ -349,7 +354,7 @@ internal sealed class ControlForm : Form
     {
         Text = text,
         Dock = DockStyle.Fill,
-        Font = new Font("Yu Gothic UI", 9f),
+        Font = new Font("Yu Gothic UI", 10.5f),
         ForeColor = Color.Gainsboro,
         Padding = new Padding(10, 2, 6, 2),
     };
@@ -404,8 +409,8 @@ internal sealed class ControlForm : Form
 
     private void UpdateIdleText()
         => _viewPanel.IdleText = _steamVrRunning
-            ? "映像待機中… 数秒で映ります(映像をクリックで操作開始)"
-            : "右上の『SteamVR を起動』を押してください(起動後、映像が届いたらクリックで操作開始)";
+            ? "映像を待っています…\n映像が届いたらクリックして操作開始"
+            : "右上の『SteamVR を起動』を押してください\n起動後、映像が届いたらクリックして操作開始";
 
     private Point ViewCenterScreen()
         => _viewPanel.PointToScreen(new Point(_viewPanel.ClientSize.Width / 2, _viewPanel.ClientSize.Height / 2));
@@ -537,6 +542,7 @@ internal sealed class SettingsForm : Form
         Size = new Size(820, 680);
         BackColor = Color.FromArgb(24, 26, 32);
         ForeColor = Color.Gainsboro;
+        Font = new Font("Yu Gothic UI", 10f);
         KeyPreview = true;
         KeyDown += CaptureKey;
 
