@@ -398,7 +398,16 @@ internal sealed class ControlForm : Form
 
     private void ShowSettings()
     {
-        using var settings = new SettingsForm();
+        using var settings = new SettingsForm
+        {
+            // TopMost のメイン画面より背面に回らないよう、同じ前面レベルを引き継ぐ。
+            TopMost = TopMost,
+        };
+        settings.Shown += (_, _) =>
+        {
+            settings.Activate();
+            settings.BringToFront();
+        };
         settings.ShowDialog(this);
         if (settings.UninstallStarted) Close();
     }
