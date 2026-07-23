@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
@@ -181,6 +182,9 @@ internal sealed class ViewPanel : Panel
 /// </summary>
 internal sealed class ControlForm : Form
 {
+    // SteamVR の Steam アプリ ID(steam://rungameid で起動する)
+    private const int SteamVrAppId = 250820;
+
     [DllImport("user32.dll")] private static extern bool ClipCursor(ref RECT rect);
     [DllImport("user32.dll")] private static extern bool ClipCursor(IntPtr rect);
     [DllImport("user32.dll")] private static extern short GetAsyncKeyState(int vKey);
@@ -192,11 +196,15 @@ internal sealed class ControlForm : Form
     private readonly FrameReceiver _receiver = new();
     private readonly System.Windows.Forms.Timer _timer = new();
     private readonly Label _state = new();
-    private readonly Label _help = new();
+    private readonly Panel _help = new();
     private readonly ViewPanel _viewPanel = new();
+    private readonly Button _launchBtn;
+    private readonly Button _helpBtn;
 
     private bool _captured;
     private bool _invX, _invY;
+    private bool _steamVrRunning;
+    private DateTime _launchAt = DateTime.MinValue;
     private int _stateTick;
     private readonly string _statePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "OpenMeow", "state.txt");
@@ -209,54 +217,172 @@ internal sealed class ControlForm : Form
         TopMost = true;
         BackColor = Color.FromArgb(24, 26, 32);
         ForeColor = Color.Gainsboro;
-        MinimumSize = new Size(560, 420);
-        Size = new Size(960, 740);
+        MinimumSize = new Size(620, 460);
+        Size = new Size(960, 760);
         var wa = Screen.PrimaryScreen!.WorkingArea;
         Location = new Point(wa.Right - Width - 16, wa.Bottom - Height - 16);
 
-        _state.Dock = DockStyle.Top;
-        _state.Height = 30;
+        // ── ヘッダ(状態表示 + 起動/説明トグルボタン)──
+        var header = new Panel { Dock = DockStyle.Top, Height = 48, BackColor = Color.FromArgb(18, 20, 26) };
+
+        _launchBtn = MakeButton("SteamVR を起動", Color.FromArgb(59, 130, 246));
+        _launchBtn.Click += (_, _) => LaunchSteamVr();
+        _helpBtn = MakeButton("操作説明を隠す", Color.FromArgb(55, 58, 68));
+        _helpBtn.Click += (_, _) => ToggleHelp();
+
+        var bar = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Right,
+            FlowDirection = FlowDirection.RightToLeft,
+            AutoSize = true,
+            WrapContents = false,
+            Padding = new Padding(0, 9, 8, 0),
+            BackColor = Color.Transparent,
+        };
+        bar.Controls.Add(_launchBtn);
+        bar.Controls.Add(_helpBtn);
+
+        _state.Dock = DockStyle.Fill;
         _state.Font = new Font("Yu Gothic UI", 11f, FontStyle.Bold);
         _state.ForeColor = Color.Orange;
-        _state.Padding = new Padding(8, 6, 0, 0);
+        _state.TextAlign = ContentAlignment.MiddleLeft;
+        _state.Padding = new Padding(12, 0, 0, 0);
 
+        header.Controls.Add(_state);
+        header.Controls.Add(bar);
+
+        // ── 操作説明(2カラムに整理)──
         _help.Dock = DockStyle.Bottom;
-        _help.AutoSize = false;
-        _help.Height = 140;
-        _help.Font = new Font("Yu Gothic UI", 9f);
-        _help.Padding = new Padding(8, 4, 0, 0);
-        _help.Text =
-            "マウス 見回し(手は視線に自動照準)   左クリック トリガー   右クリック グリップ\n" +
-            "【右手】Space+マウス=位置(ホイール=奥行き)   中クリック+マウス=手首(ホイール=横倒し)\n" +
-            "【左手】サイド奥(X1)+マウス=位置   サイド手前(X2)+マウス=手首   ※Alt=X1 の代用\n" +
-            "左手系を押している間は 左/右クリック=左手のトリガー/グリップ\n" +
-            "【スティック】Tab+マウス=左パッド(歩行)   R+マウス=右パッド(旋回)   +左クリック=押し込み\n" +
-            "Y/B 右手/左手グリップ保持トグル   F5 左右反転   F6 上下反転\n" +
-            "WASD 移動  Q/E 昇降  矢印 頭の微回転  Shift 高速  Ctrl 低速  BackSpace リセット  ESC 解除\n" +
-            "左手キー: Z/X/C/V + T/F/G/H + F7    右手キー: U/O/P/M + I/J/K/L + F8";
+        _help.Height = 176;
+        _help.BackColor = Color.FromArgb(20, 22, 28);
+        _help.Padding = new Padding(2, 6, 2, 6);
+        var grid = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            ColumnCount = 2,
+            RowCount = 1,
+            BackColor = Color.Transparent,
+        };
+        grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
+        grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50f));
+        grid.Controls.Add(MakeHelpLabel(
+            "◆ 視点・トリガー\n" +
+            "マウス移動 … 見回し(手は視線へ自動照準)\n" +
+            "左クリック … トリガー / 右クリック … グリップ\n" +
+            "\n" +
+            "◆ 手の操作(押している間だけ有効)\n" +
+            "Space … 右手の位置(ホイール=奥行き)\n" +
+            "中クリック … 右手の手首(ホイール=横倒し)\n" +
+            "X1(または Alt) … 左手の位置 / X2 … 左手の手首\n" +
+            "Tab … 左パッド(歩行) / R … 右パッド(旋回)\n" +
+            "※ パッド系 +左クリックで押し込み"), 0, 0);
+        grid.Controls.Add(MakeHelpLabel(
+            "◆ 移動・視点\n" +
+            "WASD … 移動 / Q・E … 下降・上昇\n" +
+            "矢印 … 頭(手首ホールド中は手)の微回転\n" +
+            "Shift … 高速 / Ctrl … 低速\n" +
+            "BackSpace … リセット / ESC … 操作解除\n" +
+            "\n" +
+            "◆ ボタン・トグル\n" +
+            "Y・B … 右手・左手グリップ保持\n" +
+            "F5・F6 … 左右・上下 反転\n" +
+            "左手 … Z X C V + T F G H + F7\n" +
+            "右手 … U O P M + I J K L + F8"), 1, 0);
+        _help.Controls.Add(grid);
 
         _viewPanel.Dock = DockStyle.Fill;
         _viewPanel.Receiver = _receiver;
-        _viewPanel.IdleText = "映像待機中… SteamVR が起動していれば数秒で映ります(クリックで操作開始)";
         _viewPanel.Cursor = Cursors.Cross;
 
         Controls.Add(_viewPanel);
         Controls.Add(_help);
-        Controls.Add(_state);
+        Controls.Add(header);
 
         _viewPanel.MouseDown += (_, e) => { if (!_captured && e.Button == MouseButtons.Left) StartCapture(); };
-        _state.Click += (_, _) => { if (!_captured) StartCapture(); };
         _viewPanel.MouseWheel += (_, e) => { if (_captured) _channel.Wheel += e.Delta / 120.0; };
         MouseWheel += (_, e) => { if (_captured) _channel.Wheel += e.Delta / 120.0; };
         FormClosed += (_, _) => { ReleaseCapture(); _channel.Dispose(); _receiver.Dispose(); };
         Resize += (_, _) => { if (_captured) ClipToView(); };
 
+        UpdateIdleText();
         UpdateStateLabel();
 
         _timer.Interval = 8; // 入力ポンプ ~120Hz、描画はフレーム更新時のみ
         _timer.Tick += (_, _) => Pump();
         _timer.Start();
     }
+
+    private static Button MakeButton(string text, Color accent)
+    {
+        var b = new Button
+        {
+            Text = text,
+            FlatStyle = FlatStyle.Flat,
+            Font = new Font("Yu Gothic UI", 9.5f, FontStyle.Bold),
+            ForeColor = Color.White,
+            BackColor = accent,
+            AutoSize = true,
+            Height = 30,
+            Margin = new Padding(6, 0, 0, 0),
+            Padding = new Padding(12, 4, 12, 4),
+            Cursor = Cursors.Hand,
+            UseVisualStyleBackColor = false,
+            TabStop = false,
+        };
+        b.FlatAppearance.BorderSize = 0;
+        b.FlatAppearance.MouseOverBackColor = ControlPaint.Light(accent, 0.15f);
+        b.FlatAppearance.MouseDownBackColor = ControlPaint.Dark(accent, 0.1f);
+        return b;
+    }
+
+    private static Label MakeHelpLabel(string text) => new()
+    {
+        Text = text,
+        Dock = DockStyle.Fill,
+        Font = new Font("Yu Gothic UI", 9f),
+        ForeColor = Color.Gainsboro,
+        Padding = new Padding(10, 2, 6, 2),
+    };
+
+    private void ToggleHelp()
+    {
+        _help.Visible = !_help.Visible;
+        _helpBtn.Text = _help.Visible ? "操作説明を隠す" : "操作説明を表示";
+    }
+
+    private static bool IsSteamVrRunning()
+    {
+        foreach (string name in new[] { "vrmonitor", "vrserver" })
+        {
+            var procs = Process.GetProcessesByName(name);
+            try { if (procs.Length > 0) return true; }
+            finally { foreach (var p in procs) p.Dispose(); }
+        }
+        return false;
+    }
+
+    private void LaunchSteamVr()
+    {
+        if (IsSteamVrRunning()) return;
+        try
+        {
+            Process.Start(new ProcessStartInfo($"steam://rungameid/{SteamVrAppId}") { UseShellExecute = true });
+            _launchAt = DateTime.UtcNow;
+            _launchBtn.Enabled = false;
+            _launchBtn.Text = "起動中…";
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this,
+                "SteamVR を起動できませんでした。Steam がインストールされているか確認してください。\n\n" + ex.Message,
+                "OpenMeow", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+    }
+
+    private void UpdateIdleText()
+        => _viewPanel.IdleText = _steamVrRunning
+            ? "映像待機中… 数秒で映ります(映像をクリックで操作開始)"
+            : "右上の『SteamVR を起動』を押してください(起動後、映像が届いたらクリックで操作開始)";
 
     private Point ViewCenterScreen()
         => _viewPanel.PointToScreen(new Point(_viewPanel.ClientSize.Width / 2, _viewPanel.ClientSize.Height / 2));
@@ -314,7 +440,7 @@ internal sealed class ControlForm : Form
         }
         _channel.Flush();
 
-        if (++_stateTick >= 50) // ~400ms ごとに反転状態を反映
+        if (++_stateTick >= 50) // ~400ms ごとに反転状態と SteamVR 状態を反映
         {
             _stateTick = 0;
             try
@@ -328,6 +454,20 @@ internal sealed class ControlForm : Form
                 if (ix != _invX || iy != _invY) { _invX = ix; _invY = iy; UpdateStateLabel(); }
             }
             catch { }
+
+            // フレームが届いている = 確実に起動中。プロセスも併せて確認する。
+            // ボタンは毎回実状態へ追従させる(起動に失敗しても固まらないよう、
+            // クリック後 10 秒だけ「起動中…」表示にして以降は元へ戻す)。
+            bool vr = _receiver.Frame != null || IsSteamVrRunning();
+            bool launching = !vr && (DateTime.UtcNow - _launchAt) < TimeSpan.FromSeconds(10);
+            _launchBtn.Enabled = !vr && !launching;
+            _launchBtn.Text = vr ? "SteamVR 起動済み" : launching ? "起動中…" : "SteamVR を起動";
+            if (vr != _steamVrRunning)
+            {
+                _steamVrRunning = vr;
+                UpdateIdleText();
+                if (!_captured) _viewPanel.Invalidate();
+            }
         }
 
         if (_receiver.Poll()) _viewPanel.Invalidate();

@@ -15,4 +15,12 @@ $vrpathreg = $libraries |
 if (-not $vrpathreg) { throw "vrpathreg.exe が見つかりません。" }
 & $vrpathreg removedriver "$PSScriptRoot\dist\openmeow"
 & $vrpathreg show
+
+# スタートメニューのショートカットを削除
+$lnkPath = Join-Path ([Environment]::GetFolderPath("Programs")) "OpenMeow.lnk"
+if (Test-Path $lnkPath) {
+    Remove-Item -LiteralPath $lnkPath -Force -ErrorAction SilentlyContinue
+    Write-Host "スタートメニューの『OpenMeow』を削除しました。"
+}
+
 Write-Host "登録を解除しました。dist フォルダは残っています(不要なら手動で削除してください)。"
