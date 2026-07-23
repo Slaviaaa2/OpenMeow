@@ -27,6 +27,7 @@ internal static class VR
     // ETrackedDeviceClass
     public const int TrackedDeviceClass_HMD = 1;
     public const int TrackedDeviceClass_Controller = 2;
+    public const int TrackedDeviceClass_GenericTracker = 3;
 
     // ETrackedControllerRole
     public const int TrackedControllerRole_LeftHand = 1;
@@ -59,6 +60,7 @@ internal static class VR
     public const int Prop_DisplayDebugMode_Bool = 2044;
     public const int Prop_ControllerRoleHint_Int32 = 3007;
     public const int Prop_ControllerType_String = 7000;
+    public const int Prop_RegisteredDeviceType_String = 1036;
 
     // EPropertyWriteType
     public const int PropertyWrite_Set = 0;

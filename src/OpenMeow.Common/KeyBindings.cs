@@ -23,15 +23,15 @@ public sealed class KeyBindings
         new("TurnRight", "右旋回", "移動・視点", 0x27),
         new("LookUp", "上を見る", "移動・視点", 0x26),
         new("LookDown", "下を見る", "移動・視点", 0x28),
-        new("Fast", "高速移動", "移動・視点", 0xA0),
-        new("Slow", "低速移動", "移動・視点", 0xA2),
+        new("Fast", "高速移動", "移動・視点", 0xA1),
+        new("Slow", "低速移動", "移動・視点", 0xA3),
         new("Reset", "位置をリセット", "移動・視点", 0x08),
-        new("RightPosition", "右手の位置", "手・スティック", 0x20),
-        new("RightWrist", "右手の手首", "手・スティック", 0x04),
+        new("RightPosition", "右腕を選択", "手・スティック", 0xA0),
+        new("RightWrist", "右腕を傾ける", "手・スティック", 0x04),
         new("LeftPosition", "左手の位置", "手・スティック", 0x05),
-        new("LeftPositionAlt", "左手位置の代替", "手・スティック", 0xA4),
-        new("LeftWrist", "左手の手首", "手・スティック", 0x06),
-        new("LeftWristMouse", "左手首のマウス補助", "手・スティック", 0x04),
+        new("LeftPositionAlt", "左手を選択", "手・スティック", 0xA2),
+        new("LeftWrist", "左腕を傾ける", "手・スティック", 0x06),
+        new("LeftWristMouse", "腕傾けのマウス補助", "手・スティック", 0x04),
         new("LeftStick", "左パッド", "手・スティック", 0x09),
         new("RightStick", "右パッド", "手・スティック", 0x52),
         new("DepthForward", "手を近づける", "手・スティック", 0x21),
@@ -104,6 +104,23 @@ public sealed class KeyBindings
                 string id = line[..separator].Trim();
                 if (int.TryParse(line[(separator + 1)..].Trim(), NumberStyles.Integer,
                         CultureInfo.InvariantCulture, out int key)) result.Set(id, key);
+            }
+
+            // 旧デフォルトでは左 Ctrl が低速、左 Alt が左手操作だった。
+            // その組み合わせがそのままなら、新しい押しやすい配置へ自動移行する。
+            // どちらかを変更済みの場合はユーザー設定を優先して触らない。
+            if (result.Get("Slow") == 0xA2 && result.Get("LeftPositionAlt") == 0xA4)
+            {
+                result.Set("Slow", 0xA3);
+                result.Set("LeftPositionAlt", 0xA2);
+            }
+
+            // Space はゲーム側の表示切替などと衝突しやすいため右腕操作には使わない。
+            // 旧デフォルトの組み合わせだけを左 / 右 Shift へ移行する。
+            if (result.Get("Fast") == 0xA0 && result.Get("RightPosition") == 0x20)
+            {
+                result.Set("Fast", 0xA1);
+                result.Set("RightPosition", 0xA0);
             }
         }
         catch { }

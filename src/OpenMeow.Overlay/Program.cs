@@ -341,16 +341,17 @@ internal sealed class ControlForm : Form
             "左クリック … トリガー / 右クリック … グリップ\n" +
             "\n" +
             "◆ 手の操作(押している間だけ有効)\n" +
-            "Space … 右手の位置(ホイール=奥行き)\n" +
-            "中クリック … 右手の手首(ホイール=横倒し)\n" +
-            "X1(または Alt) … 左手の位置 / X2 … 左手の手首\n" +
+            "左Shift+マウス … 右腕の位置 / +中ドラッグ … 腕傾け\n" +
+            "左Ctrl+マウス … 左腕の位置 / +中ドラッグ … 腕傾け\n" +
+            "横ドラッグ … 腕を横倒し / 縦 … 腕を上下\n" +
+            "中ドラッグ単独 … 右腕 / X1・X2 … 左腕の直接操作\n" +
             "Tab … 左パッド(歩行) / R … 右パッド(旋回)\n" +
             "※ パッド系 +左クリックで押し込み");
         var rightHelp = MakeHelpLabel(
             "◆ 移動・視点\n" +
             "WASD … 移動 / Q・E … 下降・上昇\n" +
-            "矢印 … 頭(手首ホールド中は手)の微回転\n" +
-            "Shift … 高速 / Ctrl … 低速\n" +
+            "矢印 … 頭の微回転\n" +
+            "右Shift … 高速 / 右Ctrl … 低速\n" +
             "BackSpace … リセット / ESC … 操作解除\n" +
             "\n" +
             "◆ ボタン・トグル\n" +
@@ -642,8 +643,17 @@ internal sealed class ControlForm : Form
 internal sealed class SettingsForm : Form
 {
     private readonly KeyBindings _bindings = KeyBindings.LoadOrDefault();
+    private readonly DesktopMotionSettings _motion = DesktopMotionSettings.LoadOrDefault();
+    private readonly bool _initialBodyTrackers;
     private readonly Dictionary<string, Button> _keyButtons = new(StringComparer.Ordinal);
     private readonly Label _info = new();
+    private ComboBox? _presetSelector;
+    private Label? _motionHighlights;
+    private CheckBox? _bodyTrackersCheck;
+    private NumericUpDown? _bodyHeightInput;
+    private NumericUpDown? _strideInput;
+    private NumericUpDown? _stepHeightInput;
+    private NumericUpDown? _footPlantInput;
     private Button? _capturingButton;
     private string? _capturingId;
 
@@ -651,6 +661,7 @@ internal sealed class SettingsForm : Form
 
     public SettingsForm()
     {
+        _initialBodyTrackers = _motion.EnableBodyTrackers;
         Text = "OpenMeow 設定";
         StartPosition = FormStartPosition.CenterParent;
         MinimumSize = new Size(700, 560);
@@ -662,6 +673,7 @@ internal sealed class SettingsForm : Form
         KeyDown += CaptureKey;
 
         var tabs = new TabControl { Dock = DockStyle.Fill, Padding = new Point(12, 5) };
+        tabs.TabPages.Add(CreateMotionTab());
         foreach (string group in KeyBindings.Definitions.Select(x => x.Group).Distinct())
             tabs.TabPages.Add(CreateTab(group));
 
@@ -669,7 +681,7 @@ internal sealed class SettingsForm : Form
         {
             Dock = DockStyle.Top,
             Height = 42,
-            Text = "割り当てたいボタンを押してから、変更したいキーを押してください。保存後、約1秒で反映されます。",
+            Text = "キーまたは操作感を変更して保存してください。ドライバは約1秒ごとに設定を確認して反映します。",
             ForeColor = Color.LightGray,
             Padding = new Padding(12, 9, 12, 0),
         };
@@ -705,6 +717,153 @@ internal sealed class SettingsForm : Form
         Controls.Add(note);
         Controls.Add(actions);
         UpdateConflictInfo();
+    }
+
+    private TabPage CreateMotionTab()
+    {
+        var tab = new TabPage("操作感") { BackColor = Color.FromArgb(24, 26, 32), ForeColor = Color.Gainsboro };
+        var panel = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Padding = new Padding(18) };
+        var title = new Label
+        {
+            Text = "操作感プロファイル",
+            AutoSize = true,
+            Font = new Font(Font, FontStyle.Bold),
+            ForeColor = Color.White,
+            Location = new Point(20, 20),
+        };
+        var description = new Label
+        {
+            Text = "移動速度・マウス感度・手の追従をまとめて切り替えます。\nLegacy は従来の挙動です。その他は実験的な二次系スムージングを使います。",
+            AutoSize = true,
+            MaximumSize = new Size(700, 0),
+            ForeColor = Color.LightGray,
+            Location = new Point(20, 58),
+        };
+        var selector = new ComboBox
+        {
+            DropDownStyle = ComboBoxStyle.DropDownList,
+            Width = 260,
+            Location = new Point(20, 125),
+            BackColor = Color.FromArgb(55, 58, 68),
+            ForeColor = Color.White,
+        };
+        selector.Items.AddRange(DesktopMotionSettings.PresetNames.Cast<object>().ToArray());
+        selector.SelectedItem = _motion.Preset;
+        selector.SelectedIndexChanged += (_, _) =>
+        {
+            if (selector.SelectedItem is string name)
+            {
+                _motion.ApplyPreset(name);
+                RefreshGaitEditors();
+                UpdateMotionHighlights();
+            }
+        };
+        _presetSelector = selector;
+        _motionHighlights = new Label
+        {
+            AutoSize = true,
+            MaximumSize = new Size(700, 0),
+            ForeColor = Color.Khaki,
+            Location = new Point(20, 175),
+        };
+        var bodyCheck = new CheckBox
+        {
+            Text = "腰・両足トラッカー",
+            AutoSize = true,
+            Checked = _motion.EnableBodyTrackers,
+            ForeColor = Color.White,
+            Location = new Point(20, 275),
+        };
+        bodyCheck.CheckedChanged += (_, _) =>
+        {
+            _motion.EnableBodyTrackers = bodyCheck.Checked;
+            UpdateMotionHighlights();
+        };
+        _bodyTrackersCheck = bodyCheck;
+
+        var restartNote = new Label
+        {
+            Text = "SteamVRを再起動すると反映（腰 / Left Foot / Right Foot はManage Trackersで手動割当）",
+            AutoSize = true,
+            MaximumSize = new Size(700, 0),
+            ForeColor = Color.LightGray,
+            Location = new Point(20, 305),
+        };
+        var gaitControls = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            WrapContents = true,
+            FlowDirection = FlowDirection.LeftToRight,
+            Location = new Point(20, 335),
+            MaximumSize = new Size(700, 72),
+            Padding = new Padding(0),
+            Margin = new Padding(0),
+        };
+        _bodyHeightInput = AddGaitEditor(gaitControls, "身長(m)", 1.2m, 2.2m, 0.01m, (decimal)_motion.BodyHeightMeters);
+        _strideInput = AddGaitEditor(gaitControls, "歩幅(m)", 0.1m, 1.2m, 0.01m, (decimal)_motion.StrideLengthMeters);
+        _stepHeightInput = AddGaitEditor(gaitControls, "足上げ(m)", 0m, 0.3m, 0.01m, (decimal)_motion.StepHeightMeters);
+        _footPlantInput = AddGaitEditor(gaitControls, "接地(0-1)", 0m, 1m, 0.01m, (decimal)_motion.FootPlantStrength);
+        _bodyHeightInput.ValueChanged += (_, _) => _motion.BodyHeightMeters = (double)_bodyHeightInput.Value;
+        _strideInput.ValueChanged += (_, _) => _motion.StrideLengthMeters = (double)_strideInput.Value;
+        _stepHeightInput.ValueChanged += (_, _) => _motion.StepHeightMeters = (double)_stepHeightInput.Value;
+        _footPlantInput.ValueChanged += (_, _) => _motion.FootPlantStrength = (double)_footPlantInput.Value;
+        panel.Controls.Add(title);
+        panel.Controls.Add(description);
+        panel.Controls.Add(selector);
+        panel.Controls.Add(_motionHighlights);
+        panel.Controls.Add(bodyCheck);
+        panel.Controls.Add(restartNote);
+        panel.Controls.Add(gaitControls);
+        tab.Controls.Add(panel);
+        UpdateMotionHighlights();
+        return tab;
+    }
+
+    private void UpdateMotionHighlights()
+    {
+        if (_motionHighlights is null) return;
+        _motionHighlights.Text =
+            $"選択中: {_motion.Preset}\n" +
+            $"移動 {_motion.MovementSpeed:0.##} m/s   高速×{_motion.FastMultiplier:0.##}   低速×{_motion.SlowMultiplier:0.##}\n" +
+            $"旋回 {_motion.TurnDegreesPerSecond:0.#}°/s   視点感度 {_motion.MouseSensitivityDegreesPerPixel:0.###}°/px\n" +
+            $"手: {_motion.HandSmoothingMode} / {_motion.HandSpringHz:0.#} Hz / 減衰 {_motion.HandDamping:0.##} / 予測 {_motion.HandPredictionSeconds:0.###} s\n" +
+            $"身体: {(_motion.EnableBodyTrackers ? "有効" : "無効")} / 身長 {_motion.BodyHeightMeters:0.##} m / 歩幅 {_motion.StrideLengthMeters:0.##} m / 足上げ {_motion.StepHeightMeters:0.##} m / 接地 {_motion.FootPlantStrength:P0}";
+    }
+
+    private static NumericUpDown AddGaitEditor(FlowLayoutPanel panel, string label, decimal min,
+        decimal max, decimal increment, decimal value)
+    {
+        var box = new Panel { Width = 132, Height = 52, Margin = new Padding(0, 0, 6, 0) };
+        var text = new Label
+        {
+            Text = label,
+            AutoSize = true,
+            ForeColor = Color.Gainsboro,
+            Location = new Point(0, 0),
+        };
+        var input = new NumericUpDown
+        {
+            Minimum = min,
+            Maximum = max,
+            Increment = increment,
+            DecimalPlaces = 2,
+            Value = Math.Clamp(value, min, max),
+            Width = 92,
+            Location = new Point(0, 22),
+        };
+        box.Controls.Add(text);
+        box.Controls.Add(input);
+        panel.Controls.Add(box);
+        return input;
+    }
+
+    private void RefreshGaitEditors()
+    {
+        if (_bodyHeightInput is null || _strideInput is null || _stepHeightInput is null || _footPlantInput is null) return;
+        _bodyHeightInput.Value = Math.Clamp((decimal)_motion.BodyHeightMeters, _bodyHeightInput.Minimum, _bodyHeightInput.Maximum);
+        _strideInput.Value = Math.Clamp((decimal)_motion.StrideLengthMeters, _strideInput.Minimum, _strideInput.Maximum);
+        _stepHeightInput.Value = Math.Clamp((decimal)_motion.StepHeightMeters, _stepHeightInput.Minimum, _stepHeightInput.Maximum);
+        _footPlantInput.Value = Math.Clamp((decimal)_motion.FootPlantStrength, _footPlantInput.Minimum, _footPlantInput.Maximum);
     }
 
     private TabPage CreateTab(string group)
@@ -841,10 +1000,16 @@ internal sealed class SettingsForm : Form
 
     private void ResetDefaults()
     {
-        if (MessageBox.Show(this, "キー割り当てを初期設定に戻しますか?", "確認",
+        if (MessageBox.Show(this, "キー割り当てと操作感を初期設定に戻しますか?", "確認",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
         var defaults = KeyBindings.Defaults();
         foreach (var definition in KeyBindings.Definitions) _bindings.Set(definition.Id, defaults.Get(definition.Id));
+        _motion.ApplyPreset("Legacy");
+        _motion.EnableBodyTrackers = false;
+        if (_bodyTrackersCheck is not null) _bodyTrackersCheck.Checked = false;
+        RefreshGaitEditors();
+        if (_presetSelector is not null) _presetSelector.SelectedItem = "Legacy";
+        UpdateMotionHighlights();
         UpdateAllKeyButtons();
         UpdateConflictInfo();
     }
@@ -854,6 +1019,14 @@ internal sealed class SettingsForm : Form
         try
         {
             _bindings.Save();
+            _motion.Save();
+            bool bodyTopologyChanged = _motion.EnableBodyTrackers != _initialBodyTrackers;
+            if (bodyTopologyChanged)
+            {
+                MessageBox.Show(this,
+                    "腰・両足トラッカーの構成を変更しました。SteamVRを完全に終了して再起動すると反映されます。",
+                    "SteamVRの再起動が必要です", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             DialogResult = DialogResult.OK;
             Close();
         }

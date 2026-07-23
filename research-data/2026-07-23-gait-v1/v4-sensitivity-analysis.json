@@ -1,0 +1,603 @@
+{
+  "generatedAt": "2026-07-23T06:14:21.219Z",
+  "evaluatorVersion": 4,
+  "autotuneTopRecordCount": 80,
+  "crossValidatedProfiles": 77,
+  "score": {
+    "mean": 66.77130000000001,
+    "median": 66.787,
+    "min": 65.533,
+    "max": 67.557
+  },
+  "parameterPearsonScore": {
+    "bodyHeightMeters": 2.4359377941008835e-14,
+    "hipFollowTau": 0.225477387027625,
+    "hipLeanDegrees": -0.06466753855251628,
+    "footSpacingMeters": -2.4359377941008835e-14,
+    "strideLengthMeters": -0.1993794893938546,
+    "stepHeightMeters": 0.09110450133016322,
+    "gaitSmoothingTau": 0.040489757462950554,
+    "turnToeDegrees": 0.1503780660628637,
+    "footPlantStrength": 0.06392220458215397
+  },
+  "robustWinner": {
+    "profile": {
+      "bodyHeightMeters": 1.65,
+      "hipFollowTau": 0.14,
+      "hipLeanDegrees": 8,
+      "footSpacingMeters": 0.2,
+      "strideLengthMeters": 0.5,
+      "stepHeightMeters": 0.07,
+      "gaitSmoothingTau": 0.14,
+      "turnToeDegrees": 10,
+      "footPlantStrength": 0.9
+    },
+    "source": "v4-balanced-sweep",
+    "scores": {
+      "default": 66.302,
+      "stop-heavy": 64.627,
+      "turn-heavy": 65.85,
+      "transitions": 65.034,
+      "endurance": 81.546
+    },
+    "mean": 68.67179999999999,
+    "min": 64.627,
+    "stddev": 6.464016225227164,
+    "details": {
+      "stop-heavy": {
+        "score": 64.627,
+        "metrics": {
+          "elapsedSeconds": 12.49999999999996,
+          "plantedFootWorldSlipMetersPerSecond": 0.10570318596819461,
+          "plantedHeightErrorMeters": 0,
+          "swingClearanceMeters": 0.06999978089664502,
+          "waistPeakAcceleration": 3.0770634214490897,
+          "waistPeakJerk": 55.494840974036066,
+          "leftRightPhaseAsymmetry": 0.2016229712858925,
+          "stopSettlingSpeed": 0.10961493988072238,
+          "stopOvershootMeters": 0.3139269967768222,
+          "toeTurnAlignmentDegrees": 14.156738116967787,
+          "nonFinitePoseCount": 0,
+          "swingSteps": 9,
+          "commandedTravelMeters": 3.270968829644947,
+          "actualTravelMeters": 3.2709657637850214,
+          "turnDegrees": 71.99999999999997,
+          "movementSeconds": 3.999999999999988
+        },
+        "components": {
+          "planted_slip": 0.0488,
+          "planted_height": 1,
+          "swing_clearance": 1,
+          "waist_smoothness": 0.58973,
+          "phase_symmetry": 0.1629,
+          "stop_settling": 0.07012,
+          "toe_turn_alignment": 0.52546,
+          "movement_coverage": 1,
+          "stepping_coverage": 1,
+          "cadence_naturalness": 0.8825,
+          "anthropometric_shape": 0.99864,
+          "plant_compliance": 1,
+          "pose_finiteness": 1,
+          "evaluator_version": 4
+        },
+        "findings": [
+          "Planted feet slip in world space; increase foot plant strength.",
+          "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+          "Left/right gait phases are asymmetric.",
+          "Stop leaves residual speed or overshoot.",
+          "Turn-in-place toe yaw does not follow the turn direction."
+        ],
+        "version": 4
+      },
+      "turn-heavy": {
+        "score": 65.85,
+        "metrics": {
+          "elapsedSeconds": 7.999999999999974,
+          "plantedFootWorldSlipMetersPerSecond": 0.10273465724255998,
+          "plantedHeightErrorMeters": 0,
+          "swingClearanceMeters": 0.0699998175272095,
+          "waistPeakAcceleration": 3.9115621865609738,
+          "waistPeakJerk": 70.4878328720563,
+          "leftRightPhaseAsymmetry": 0.010204081632653053,
+          "stopSettlingSpeed": 0.20967983426575307,
+          "stopOvershootMeters": 0.3145196841504752,
+          "toeTurnAlignmentDegrees": 18.466516980709983,
+          "nonFinitePoseCount": 0,
+          "swingSteps": 10,
+          "commandedTravelMeters": 3.270968829644947,
+          "actualTravelMeters": 3.113923806767025,
+          "turnDegrees": 216.00000000000006,
+          "movementSeconds": 5.999999999999981
+        },
+        "components": {
+          "planted_slip": 0.05312,
+          "planted_height": 1,
+          "swing_clearance": 1,
+          "waist_smoothness": 0.5112,
+          "phase_symmetry": 0.91225,
+          "stop_settling": 0.03036,
+          "toe_turn_alignment": 0.43198,
+          "movement_coverage": 0.95199,
+          "stepping_coverage": 1,
+          "cadence_naturalness": 0.98909,
+          "anthropometric_shape": 0.99864,
+          "plant_compliance": 1,
+          "pose_finiteness": 1,
+          "evaluator_version": 4
+        },
+        "findings": [
+          "Planted feet slip in world space; increase foot plant strength.",
+          "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+          "Stop leaves residual speed or overshoot.",
+          "Turn-in-place toe yaw does not follow the turn direction."
+        ],
+        "version": 4
+      },
+      "transitions": {
+        "score": 65.034,
+        "metrics": {
+          "elapsedSeconds": 6.522222222222202,
+          "plantedFootWorldSlipMetersPerSecond": 0.1327302082803274,
+          "plantedHeightErrorMeters": 0,
+          "swingClearanceMeters": 0.06999978229025734,
+          "waistPeakAcceleration": 3.854339054791112,
+          "waistPeakJerk": 71.21277455447375,
+          "leftRightPhaseAsymmetry": 0.02955665024630539,
+          "stopSettlingSpeed": 0.2028426171266713,
+          "stopOvershootMeters": 0.3042635648261627,
+          "toeTurnAlignmentDegrees": 16.763663087681394,
+          "nonFinitePoseCount": 0,
+          "swingSteps": 8,
+          "commandedTravelMeters": 3.340287560176189,
+          "actualTravelMeters": 3.185321674093078,
+          "turnDegrees": 107.99999902470438,
+          "movementSeconds": 4.522222222222209
+        },
+        "components": {
+          "planted_slip": 0.02254,
+          "planted_height": 1,
+          "swing_clearance": 1,
+          "waist_smoothness": 0.51123,
+          "phase_symmetry": 0.76643,
+          "stop_settling": 0.03402,
+          "toe_turn_alignment": 0.46674,
+          "movement_coverage": 0.95361,
+          "stepping_coverage": 1,
+          "cadence_naturalness": 0.99941,
+          "anthropometric_shape": 0.99864,
+          "plant_compliance": 1,
+          "pose_finiteness": 1,
+          "evaluator_version": 4
+        },
+        "findings": [
+          "Planted feet slip in world space; increase foot plant strength.",
+          "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+          "Stop leaves residual speed or overshoot.",
+          "Turn-in-place toe yaw does not follow the turn direction."
+        ],
+        "version": 4
+      },
+      "endurance": {
+        "score": 81.546,
+        "metrics": {
+          "elapsedSeconds": 10.999999999999964,
+          "plantedFootWorldSlipMetersPerSecond": 0.016345959178210082,
+          "plantedHeightErrorMeters": 0,
+          "swingClearanceMeters": 0.0699995866707983,
+          "waistPeakAcceleration": 3.9197296842209006,
+          "waistPeakJerk": 70.33460823538108,
+          "leftRightPhaseAsymmetry": 0.05820757622420697,
+          "stopSettlingSpeed": 0.000021530281096201988,
+          "stopOvershootMeters": 0.000043060562193447826,
+          "toeTurnAlignmentDegrees": 16.491702619331807,
+          "nonFinitePoseCount": 0,
+          "swingSteps": 17,
+          "commandedTravelMeters": 7.691937659289803,
+          "actualTravelMeters": 7.5350620803006265,
+          "turnDegrees": 107.99999394803926,
+          "movementSeconds": 8.499999999999973
+        },
+        "components": {
+          "planted_slip": 0.62686,
+          "planted_height": 1,
+          "swing_clearance": 1,
+          "waist_smoothness": 0.51134,
+          "phase_symmetry": 0.59223,
+          "stop_settling": 0.99958,
+          "toe_turn_alignment": 0.47254,
+          "movement_coverage": 0.97961,
+          "stepping_coverage": 1,
+          "cadence_naturalness": 0.97561,
+          "anthropometric_shape": 0.99864,
+          "plant_compliance": 1,
+          "pose_finiteness": 1,
+          "evaluator_version": 4
+        },
+        "findings": [
+          "Planted feet slip in world space; increase foot plant strength.",
+          "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+          "Left/right gait phases are asymmetric.",
+          "Turn-in-place toe yaw does not follow the turn direction."
+        ],
+        "version": 4
+      }
+    }
+  },
+  "top15": [
+    {
+      "rank": 1,
+      "source": "v4-balanced-sweep",
+      "min": 64.627,
+      "mean": 68.67179999999999,
+      "stddev": 6.464016225227164,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.14,
+        "hipLeanDegrees": 8,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "gaitSmoothingTau": 0.14,
+        "turnToeDegrees": 10,
+        "footPlantStrength": 0.9
+      },
+      "scores": {
+        "default": 66.302,
+        "stop-heavy": 64.627,
+        "turn-heavy": 65.85,
+        "transitions": 65.034,
+        "endurance": 81.546
+      }
+    },
+    {
+      "rank": 2,
+      "source": "v4-natural-sweep",
+      "min": 64.617,
+      "mean": 68.5052,
+      "stddev": 6.2867677354901526,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.11989969164984539,
+        "hipLeanDegrees": 8.182463998059958,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5371440235640855,
+        "stepHeightMeters": 0.06226664851980976,
+        "gaitSmoothingTau": 0.15846093465371572,
+        "turnToeDegrees": 6.474937629175809,
+        "footPlantStrength": 0.8910962668392324
+      },
+      "scores": {
+        "default": 66.694,
+        "stop-heavy": 65.178,
+        "turn-heavy": 65.037,
+        "transitions": 64.617,
+        "endurance": 81
+      }
+    },
+    {
+      "rank": 3,
+      "source": "v4-balanced-sweep",
+      "min": 64.546,
+      "mean": 68.6316,
+      "stddev": 6.283072770547863,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.13783576779862972,
+        "hipLeanDegrees": 7.819012137511285,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5251136161682549,
+        "stepHeightMeters": 0.0667621997181822,
+        "gaitSmoothingTau": 0.21575382683193103,
+        "turnToeDegrees": 5.629432818679806,
+        "footPlantStrength": 0.8863514885987861
+      },
+      "scores": {
+        "default": 66.591,
+        "stop-heavy": 65.876,
+        "turn-heavy": 65.026,
+        "transitions": 64.546,
+        "endurance": 81.119
+      }
+    },
+    {
+      "rank": 4,
+      "source": "v4-natural-sweep",
+      "min": 64.404,
+      "mean": 68.9358,
+      "stddev": 7.100029814021912,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.24131270748039907,
+        "hipLeanDegrees": 8.480003711991014,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5167214163459088,
+        "stepHeightMeters": 0.09381921128501565,
+        "gaitSmoothingTau": 0.11405875660539189,
+        "turnToeDegrees": 9.158705707247698,
+        "footPlantStrength": 0.9107128277843412
+      },
+      "scores": {
+        "default": 67.336,
+        "stop-heavy": 64.664,
+        "turn-heavy": 65.289,
+        "transitions": 64.404,
+        "endurance": 82.986
+      }
+    },
+    {
+      "rank": 5,
+      "source": "v4-balanced-sweep",
+      "min": 64.303,
+      "mean": 68.77919999999999,
+      "stddev": 6.870388210283317,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.18210898703488979,
+        "hipLeanDegrees": 7.6559052656665,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5198195932307647,
+        "stepHeightMeters": 0.08893859505221766,
+        "gaitSmoothingTau": 0.11063997999197912,
+        "turnToeDegrees": 9.936797986708953,
+        "footPlantStrength": 0.9098531765536653
+      },
+      "scores": {
+        "default": 67.295,
+        "stop-heavy": 64.303,
+        "turn-heavy": 65.51,
+        "transitions": 64.436,
+        "endurance": 82.352
+      }
+    },
+    {
+      "rank": 6,
+      "source": "v4-natural-sweep",
+      "min": 64.282,
+      "mean": 68.6434,
+      "stddev": 6.3604460724071865,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.17051590937253255,
+        "hipLeanDegrees": 5.836759132257084,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5269985998269968,
+        "stepHeightMeters": 0.05218967333639092,
+        "gaitSmoothingTau": 0.1679146446264707,
+        "turnToeDegrees": 9.104421736255484,
+        "footPlantStrength": 0.9179499914208193
+      },
+      "scores": {
+        "default": 66.843,
+        "stop-heavy": 65.672,
+        "turn-heavy": 65.164,
+        "transitions": 64.282,
+        "endurance": 81.256
+      }
+    },
+    {
+      "rank": 7,
+      "source": "v4-balanced-sweep",
+      "min": 64.199,
+      "mean": 68.0274,
+      "stddev": 6.273004530526022,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.13136866676932252,
+        "hipLeanDegrees": 10.863277791935614,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5419616716130558,
+        "stepHeightMeters": 0.08415493505229718,
+        "gaitSmoothingTau": 0.11259564829720599,
+        "turnToeDegrees": 13.98159160929806,
+        "footPlantStrength": 0.921130438531344
+      },
+      "scores": {
+        "default": 66.433,
+        "stop-heavy": 64.49,
+        "turn-heavy": 64.542,
+        "transitions": 64.199,
+        "endurance": 80.473
+      }
+    },
+    {
+      "rank": 8,
+      "source": "v4-natural-sweep",
+      "min": 64.151,
+      "mean": 67.79940000000002,
+      "stddev": 6.155350245111972,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.15291558738458325,
+        "hipLeanDegrees": 9.87096168001693,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5407937620809967,
+        "stepHeightMeters": 0.0616948896668933,
+        "gaitSmoothingTau": 0.13934678359815938,
+        "turnToeDegrees": 3.2979423726433623,
+        "footPlantStrength": 0.8629933159253529
+      },
+      "scores": {
+        "default": 65.968,
+        "stop-heavy": 64.536,
+        "turn-heavy": 64.3,
+        "transitions": 64.151,
+        "endurance": 80.042
+      }
+    },
+    {
+      "rank": 9,
+      "source": "v4-balanced-sweep",
+      "min": 63.951,
+      "mean": 68.5038,
+      "stddev": 6.449166439160955,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.15742088142535485,
+        "hipLeanDegrees": 6.853341100669159,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5133871825535427,
+        "stepHeightMeters": 0.0834151916282449,
+        "gaitSmoothingTau": 0.13734367881637594,
+        "turnToeDegrees": 8.490044739325551,
+        "footPlantStrength": 0.8633268692173655
+      },
+      "scores": {
+        "default": 66.787,
+        "stop-heavy": 65.449,
+        "turn-heavy": 65.058,
+        "transitions": 63.951,
+        "endurance": 81.274
+      }
+    },
+    {
+      "rank": 10,
+      "source": "v4-natural-sweep",
+      "min": 63.907,
+      "mean": 68.3026,
+      "stddev": 6.2403082808463886,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.16468691556016216,
+        "hipLeanDegrees": 7.625850776967523,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.4954525810331166,
+        "stepHeightMeters": 0.11077027374992292,
+        "gaitSmoothingTau": 0.1720503705163698,
+        "turnToeDegrees": 3.3995992305686684,
+        "footPlantStrength": 0.9147365196490365
+      },
+      "scores": {
+        "default": 66.134,
+        "stop-heavy": 65.824,
+        "turn-heavy": 64.961,
+        "transitions": 63.907,
+        "endurance": 80.687
+      }
+    },
+    {
+      "rank": 11,
+      "source": "v4-natural-sweep",
+      "min": 63.803,
+      "mean": 68.3494,
+      "stddev": 6.7573365936587795,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.14638137661959602,
+        "hipLeanDegrees": 11.230265367417719,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5134803294185489,
+        "stepHeightMeters": 0.10238393080076486,
+        "gaitSmoothingTau": 0.12584667746662176,
+        "turnToeDegrees": 8.276921576949267,
+        "footPlantStrength": 0.8967472434401267
+      },
+      "scores": {
+        "default": 66.829,
+        "stop-heavy": 63.803,
+        "turn-heavy": 65.329,
+        "transitions": 64.092,
+        "endurance": 81.694
+      }
+    },
+    {
+      "rank": 12,
+      "source": "v4-natural-sweep",
+      "min": 63.756,
+      "mean": 68.57600000000001,
+      "stddev": 6.665623331692243,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.12976446117829013,
+        "hipLeanDegrees": 6.789940965729738,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5231881879489153,
+        "stepHeightMeters": 0.05136415371825506,
+        "gaitSmoothingTau": 0.13908180431731942,
+        "turnToeDegrees": 7.748638755524828,
+        "footPlantStrength": 0.8867325850141852
+      },
+      "scores": {
+        "default": 66.858,
+        "stop-heavy": 65.242,
+        "turn-heavy": 65.262,
+        "transitions": 63.756,
+        "endurance": 81.762
+      }
+    },
+    {
+      "rank": 13,
+      "source": "v4-balanced-sweep",
+      "min": 63.727,
+      "mean": 68.1316,
+      "stddev": 6.152364508057045,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.20652642396777957,
+        "hipLeanDegrees": 9.56583828691665,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5394746347228626,
+        "stepHeightMeters": 0.05911773520763251,
+        "gaitSmoothingTau": 0.0955180737135051,
+        "turnToeDegrees": 11.467783661311392,
+        "footPlantStrength": 0.8910706686186933
+      },
+      "scores": {
+        "default": 66.782,
+        "stop-heavy": 65.375,
+        "turn-heavy": 64.506,
+        "transitions": 63.727,
+        "endurance": 80.268
+      }
+    },
+    {
+      "rank": 14,
+      "source": "v4-balanced-sweep",
+      "min": 63.72,
+      "mean": 68.4176,
+      "stddev": 7.043992748434657,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.19196843643828465,
+        "hipLeanDegrees": 9.415808441311032,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5286445954972555,
+        "stepHeightMeters": 0.08012849948518118,
+        "gaitSmoothingTau": 0.09541645857812647,
+        "turnToeDegrees": 14.895605088628646,
+        "footPlantStrength": 0.9156809533460443
+      },
+      "scores": {
+        "default": 66.82,
+        "stop-heavy": 63.72,
+        "turn-heavy": 65.011,
+        "transitions": 64.191,
+        "endurance": 82.346
+      }
+    },
+    {
+      "rank": 15,
+      "source": "v4-balanced-sweep",
+      "min": 63.703,
+      "mean": 68.8126,
+      "stddev": 6.793202973561145,
+      "profile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.1437916776026237,
+        "hipLeanDegrees": 8.468928439295352,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5240518729426605,
+        "stepHeightMeters": 0.07750581754153522,
+        "gaitSmoothingTau": 0.14765185398247646,
+        "turnToeDegrees": 8.54636143359652,
+        "footPlantStrength": 0.8794464526229755
+      },
+      "scores": {
+        "default": 66.872,
+        "stop-heavy": 65.652,
+        "turn-heavy": 65.589,
+        "transitions": 63.703,
+        "endurance": 82.247
+      }
+    }
+  ]
+}

@@ -1,12 +1,14 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using OpenMeow;
 
 namespace OpenMeow.Driver;
 
 /// <summary>
 /// ドライバのエントリポイント。<c>HmdDriverFactory</c> をネイティブエクスポートし、
 /// <c>IServerTrackedDeviceProvider_004</c> を実装する(vrserver.exe から直接ロードされる)。
-/// Init でデバイス3台を登録し、90Hz のポーズ送信スレッドとコントロールパネルを起動する。
+/// Init で HMD/コントローラーを登録し、設定時のみ GenericTracker 3台を追加して、
+/// 90Hz のポーズ送信スレッドとコントロールパネルを起動する。
 /// </summary>
 internal static unsafe class Provider
 {
@@ -74,10 +76,29 @@ internal static unsafe class Provider
             return VR.VRInitError_Driver_Failed;
         }
 
+        // Topology is intentionally fixed for this SteamVR session. The overlay
+        // can edit numeric gait values while running, but enabling/disabling the
+        // three tracked devices takes effect only after a SteamVR restart.
+        DesktopMotionSettings settings = DesktopMotionSettings.LoadOrDefault();
+        Simulation.ConfigureBodyTrackers(settings);
+
         bool hmdAdded = DriverHost.TrackedDeviceAdded("OMEOW-HMD-001", VR.TrackedDeviceClass_HMD, Devices.Get(Devices.Hmd));
         bool leftAdded = DriverHost.TrackedDeviceAdded("OMEOW-CTL-L", VR.TrackedDeviceClass_Controller, Devices.Get(Devices.Left));
         bool rightAdded = DriverHost.TrackedDeviceAdded("OMEOW-CTL-R", VR.TrackedDeviceClass_Controller, Devices.Get(Devices.Right));
-        Log.Write($"TrackedDeviceAdded hmd={hmdAdded} left={leftAdded} right={rightAdded}");
+        bool bodyAdded = false;
+        if (settings.EnableBodyTrackers)
+        {
+            bool waistAdded = DriverHost.TrackedDeviceAdded("OMEOW-TRK-WAIST", VR.TrackedDeviceClass_GenericTracker, Devices.Get(Devices.Waist));
+            bool leftFootAdded = DriverHost.TrackedDeviceAdded("OMEOW-TRK-LEFT_FOOT", VR.TrackedDeviceClass_GenericTracker, Devices.Get(Devices.LeftFoot));
+            bool rightFootAdded = DriverHost.TrackedDeviceAdded("OMEOW-TRK-RIGHT_FOOT", VR.TrackedDeviceClass_GenericTracker, Devices.Get(Devices.RightFoot));
+            bodyAdded = waistAdded && leftFootAdded && rightFootAdded;
+            Log.Write($"GenericTracker topology enabled waist={waistAdded} leftFoot={leftFootAdded} rightFoot={rightFootAdded}");
+        }
+        else
+        {
+            Log.Write("GenericTracker topology disabled (EnableBodyTrackers=false; restart required to change)");
+        }
+        Log.Write($"TrackedDeviceAdded hmd={hmdAdded} left={leftAdded} right={rightAdded} body={bodyAdded}");
 
         _running = true;
         _poseThread = new Thread(PoseLoop) { IsBackground = true, Name = "OpenMeowPose" };
@@ -173,6 +194,9 @@ internal static unsafe class Provider
                 }
                 UpdateHand(Devices.Left, isLeft: true);
                 UpdateHand(Devices.Right, isLeft: false);
+                UpdateTracker(Devices.Waist);
+                UpdateTracker(Devices.LeftFoot);
+                UpdateTracker(Devices.RightFoot);
             }
             catch (Exception ex)
             {
@@ -202,6 +226,13 @@ internal static unsafe class Provider
         DriverInput.UpdateScalar(c.PadY, b.PadY);
         DriverInput.UpdateBoolean(c.PadClick, b.PadClick);
         DriverInput.UpdateBoolean(c.PadTouch, b.PadTouch);
+    }
+
+    private static void UpdateTracker(int id)
+    {
+        if (Devices.ObjectIds[id] == VR.InvalidTrackedDeviceIndex) return;
+        var pose = Simulation.TrackerPose(id);
+        DriverHost.TrackedDevicePoseUpdated(Devices.ObjectIds[id], ref pose);
     }
 
     [UnmanagedCallersOnly]

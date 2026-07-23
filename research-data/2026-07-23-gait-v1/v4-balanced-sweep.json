@@ -1,0 +1,2452 @@
+[
+  {
+    "request": {
+      "parallelism": 4,
+      "candidates": 128,
+      "baseline": {
+        "turnToeDegrees": 10,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "bodyHeightMeters": 1.65,
+        "gaitSmoothingTau": 0.14,
+        "hipLeanDegrees": 8,
+        "hipFollowTau": 0.14,
+        "footSpacingMeters": 0.2,
+        "footPlantStrength": 0.9
+      },
+      "seed": 6201
+    },
+    "result": {
+      "bestProfile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.14025281926577896,
+        "hipLeanDegrees": 9.24441841908005,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.44788692960854365,
+        "stepHeightMeters": 0.0559648895225437,
+        "gaitSmoothingTau": 0.2014524563868555,
+        "turnToeDegrees": 19.753755014275086,
+        "footPlantStrength": 0.9005086370559915
+      },
+      "bestScore": 67.175,
+      "candidatesEvaluated": 128,
+      "topResults": [
+        {
+          "score": 67.175,
+          "components": {
+            "planted_slip": 0.16875,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.60346,
+            "phase_symmetry": 0.80593,
+            "stop_settling": 0.01366,
+            "toe_turn_alignment": 0.47436,
+            "movement_coverage": 0.9717,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.91037,
+            "plant_compliance": 0.99997,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.14025281926577896,
+            "hipLeanDegrees": 9.24441841908005,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.44788692960854365,
+            "stepHeightMeters": 0.0559648895225437,
+            "gaitSmoothingTau": 0.2014524563868555,
+            "turnToeDegrees": 19.753755014275086,
+            "footPlantStrength": 0.9005086370559915
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.06227730433784097,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.05596391871859744,
+            "waistPeakAcceleration": 3.230042926151703,
+            "waistPeakJerk": 49.38548541894974,
+            "leftRightPhaseAsymmetry": 0.023972602739726012,
+            "stopSettlingSpeed": 0.2576044260199795,
+            "stopOvershootMeters": 0.3864066167757067,
+            "toeTurnAlignmentDegrees": 16.407397970227304,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.326325309163109,
+            "turnDegrees": 107.99999519414301,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.873,
+          "components": {
+            "planted_slip": 0.12656,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.62199,
+            "phase_symmetry": 0.96965,
+            "stop_settling": 0.01194,
+            "toe_turn_alignment": 0.53057,
+            "movement_coverage": 0.97118,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.76327,
+            "anthropometric_shape": 0.88339,
+            "plant_compliance": 0.99989,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.18645849059618932,
+            "hipLeanDegrees": 3.2800166794471517,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.3895103271690213,
+            "stepHeightMeters": 0.09839164002713706,
+            "gaitSmoothingTau": 0.1656057654547678,
+            "turnToeDegrees": 8.377780880954946,
+            "footPlantStrength": 0.9010152735565861
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.0723467504150699,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.09839164001752439,
+            "waistPeakAcceleration": 3.1196538475285016,
+            "waistPeakJerk": 45.36041813920167,
+            "leftRightPhaseAsymmetry": 0.003424657534246573,
+            "stopSettlingSpeed": 0.2656879876849682,
+            "stopOvershootMeters": 0.39853197328018575,
+            "toeTurnAlignmentDegrees": 13.943725776272364,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 16,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.3235005022954525,
+            "turnDegrees": 107.99999984356745,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.603,
+          "components": {
+            "planted_slip": 0.06761,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.45308,
+            "phase_symmetry": 0.83116,
+            "stop_settling": 0.04213,
+            "toe_turn_alignment": 0.46539,
+            "movement_coverage": 0.97913,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.9367,
+            "plant_compliance": 0.99601,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1484949113468648,
+            "hipLeanDegrees": 10.683351611571084,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5167683826563244,
+            "stepHeightMeters": 0.0492068098774204,
+            "gaitSmoothingTau": 0.10591035377506573,
+            "turnToeDegrees": 5.385848100011166,
+            "footPlantStrength": 0.8937377127230809
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.09429045412361417,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.049205264973758,
+            "waistPeakAcceleration": 4.336192664813756,
+            "waistPeakJerk": 86.75357477695667,
+            "leftRightPhaseAsymmetry": 0.020547945205479437,
+            "stopSettlingSpeed": 0.19002588557757102,
+            "stopOvershootMeters": 0.2850388283598141,
+            "toeTurnAlignmentDegrees": 16.827438624265913,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.367054777479516,
+            "turnDegrees": 107.99999999999636,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.46,
+          "components": {
+            "planted_slip": 0.13885,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.4628,
+            "phase_symmetry": 0.72352,
+            "stop_settling": 0.03918,
+            "toe_turn_alignment": 0.46515,
+            "movement_coverage": 0.97855,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.95914,
+            "plant_compliance": 0.97324,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.10446102291383606,
+            "hipLeanDegrees": 9.020346328625617,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5200885539297505,
+            "stepHeightMeters": 0.05285002214414202,
+            "gaitSmoothingTau": 0.15553683290504924,
+            "turnToeDegrees": 13.697587667823576,
+            "footPlantStrength": 0.9163027309702256
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.06910226866741133,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.05285002194560841,
+            "waistPeakAcceleration": 4.2487797331528725,
+            "waistPeakJerk": 84.05556891479745,
+            "leftRightPhaseAsymmetry": 0.03595890410958902,
+            "stopSettlingSpeed": 0.1943760400919737,
+            "stopOvershootMeters": 0.29156405991016504,
+            "toeTurnAlignmentDegrees": 16.838489559863273,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.363856422390756,
+            "turnDegrees": 107.99999995462207,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.335,
+          "components": {
+            "planted_slip": 0.10078,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.422,
+            "phase_symmetry": 0.88401,
+            "stop_settling": 0.05143,
+            "toe_turn_alignment": 0.42841,
+            "movement_coverage": 0.98051,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.97014,
+            "plant_compliance": 0.97308,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1317288099155704,
+            "hipLeanDegrees": 5.939076583338471,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.44413008723177044,
+            "stepHeightMeters": 0.06255133950748669,
+            "gaitSmoothingTau": 0.10729849811313179,
+            "turnToeDegrees": 11.73282487864272,
+            "footPlantStrength": 0.916352597706184
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.08031895979704068,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.0625504175979056,
+            "waistPeakAcceleration": 4.600851534767453,
+            "waistPeakJerk": 96.14159585254951,
+            "leftRightPhaseAsymmetry": 0.013698630136986292,
+            "stopSettlingSpeed": 0.17804660795272714,
+            "stopOvershootMeters": 0.26706991192651003,
+            "toeTurnAlignmentDegrees": 18.649049522713117,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.374625814070546,
+            "turnDegrees": 107.9999999999948,
+            "movementSeconds": 6.49999999999998
+          }
+        }
+      ]
+    }
+  },
+  {
+    "request": {
+      "parallelism": 4,
+      "candidates": 128,
+      "baseline": {
+        "turnToeDegrees": 10,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "bodyHeightMeters": 1.65,
+        "gaitSmoothingTau": 0.14,
+        "hipLeanDegrees": 8,
+        "hipFollowTau": 0.14,
+        "footSpacingMeters": 0.2,
+        "footPlantStrength": 0.9
+      },
+      "seed": 6202
+    },
+    "result": {
+      "bestProfile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.20652642396777957,
+        "hipLeanDegrees": 9.56583828691665,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5394746347228626,
+        "stepHeightMeters": 0.05911773520763251,
+        "gaitSmoothingTau": 0.0955180737135051,
+        "turnToeDegrees": 11.467783661311392,
+        "footPlantStrength": 0.8910706686186933
+      },
+      "bestScore": 66.782,
+      "candidatesEvaluated": 128,
+      "topResults": [
+        {
+          "score": 66.782,
+          "components": {
+            "planted_slip": 0.12869,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.52109,
+            "phase_symmetry": 0.74617,
+            "stop_settling": 0.02281,
+            "toe_turn_alignment": 0.44629,
+            "movement_coverage": 0.97426,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.97095,
+            "plant_compliance": 0.9919,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.20652642396777957,
+            "hipLeanDegrees": 9.56583828691665,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5394746347228626,
+            "stepHeightMeters": 0.05911773520763251,
+            "gaitSmoothingTau": 0.0955180737135051,
+            "turnToeDegrees": 11.467783661311392,
+            "footPlantStrength": 0.8910706686186933
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.07176243174684438,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.05911741866907859,
+            "waistPeakAcceleration": 3.7202564035642522,
+            "waistPeakJerk": 69.4982061786416,
+            "leftRightPhaseAsymmetry": 0.03253424657534244,
+            "stopSettlingSpeed": 0.2268400596288683,
+            "stopOvershootMeters": 0.34026008940490715,
+            "toeTurnAlignmentDegrees": 17.749105085422308,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.340371668584394,
+            "turnDegrees": 107.99999999999967,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.53,
+          "components": {
+            "planted_slip": 0.09064,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.49754,
+            "phase_symmetry": 0.78147,
+            "stop_settling": 0.03251,
+            "toe_turn_alignment": 0.47146,
+            "movement_coverage": 0.97758,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.94329,
+            "plant_compliance": 0.94113,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1533620830887303,
+            "hipLeanDegrees": 6.079699349161098,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5220477659149588,
+            "stepHeightMeters": 0.1007328358500983,
+            "gaitSmoothingTau": 0.1210038090629592,
+            "turnToeDegrees": 6.601215650607467,
+            "footPlantStrength": 0.875615629914969
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.08403181010729001,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.10073145027986229,
+            "waistPeakAcceleration": 4.010892556597674,
+            "waistPeakJerk": 74.08424070188263,
+            "leftRightPhaseAsymmetry": 0.027397260273972584,
+            "stopSettlingSpeed": 0.20557027279955697,
+            "stopOvershootMeters": 0.3083554091478944,
+            "toeTurnAlignmentDegrees": 16.5421167654626,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.358567503470036,
+            "turnDegrees": 107.99999999985789,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.433,
+          "components": {
+            "planted_slip": 0.19981,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.43456,
+            "phase_symmetry": 0.71245,
+            "stop_settling": 0.04824,
+            "toe_turn_alignment": 0.4356,
+            "movement_coverage": 0.98013,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.95979,
+            "plant_compliance": 0.95546,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.13136866676932252,
+            "hipLeanDegrees": 10.863277791935614,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5419616716130558,
+            "stepHeightMeters": 0.08415493505229718,
+            "gaitSmoothingTau": 0.11259564829720599,
+            "turnToeDegrees": 13.98159160929806,
+            "footPlantStrength": 0.921130438531344
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05636439844271568,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.0841529726829162,
+            "waistPeakAcceleration": 4.506066387259403,
+            "waistPeakJerk": 92.07950224922028,
+            "leftRightPhaseAsymmetry": 0.037671232876712306,
+            "stopSettlingSpeed": 0.18189536027953715,
+            "stopOvershootMeters": 0.2728430404140448,
+            "toeTurnAlignmentDegrees": 18.282473748839134,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.372562138711079,
+            "turnDegrees": 107.99999999997931,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.331,
+          "components": {
+            "planted_slip": 0.1351,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.63613,
+            "phase_symmetry": 0.91168,
+            "stop_settling": 0.01034,
+            "toe_turn_alignment": 0.52938,
+            "movement_coverage": 0.97022,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.76327,
+            "anthropometric_shape": 0.86897,
+            "plant_compliance": 0.98316,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1752774433585332,
+            "hipLeanDegrees": 9.77345545346544,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.3886747922696126,
+            "stepHeightMeters": 0.11334875270907013,
+            "gaitSmoothingTau": 0.1880627435718814,
+            "turnToeDegrees": 9.994949814861151,
+            "footPlantStrength": 0.887099470266653
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.07006067289308526,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.11334802151015716,
+            "waistPeakAcceleration": 3.0211032481362907,
+            "waistPeakJerk": 42.58159152164318,
+            "leftRightPhaseAsymmetry": 0.010273972602739719,
+            "stopSettlingSpeed": 0.27432397788467194,
+            "stopOvershootMeters": 0.41148594123694543,
+            "toeTurnAlignmentDegrees": 13.992914905203476,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 16,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.3182232554856315,
+            "turnDegrees": 107.99999844877634,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.302,
+          "components": {
+            "planted_slip": 0.21478,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.51134,
+            "phase_symmetry": 0.58797,
+            "stop_settling": 0.03022,
+            "toe_turn_alignment": 0.42094,
+            "movement_coverage": 0.97721,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.97561,
+            "anthropometric_shape": 0.99864,
+            "plant_compliance": 1,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.14,
+            "hipLeanDegrees": 8,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5,
+            "stepHeightMeters": 0.07,
+            "gaitSmoothingTau": 0.14,
+            "turnToeDegrees": 10,
+            "footPlantStrength": 0.9
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05383528193102406,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06999993604866252,
+            "waistPeakAcceleration": 3.919708095627238,
+            "waistPeakJerk": 70.3349700714739,
+            "leftRightPhaseAsymmetry": 0.0590094836670179,
+            "stopSettlingSpeed": 0.20996394146233519,
+            "stopOvershootMeters": 0.31494591197959776,
+            "toeTurnAlignmentDegrees": 19.035985045113833,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 13,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.356532261297558,
+            "turnDegrees": 107.99999999521617,
+            "movementSeconds": 6.49999999999998
+          }
+        }
+      ]
+    }
+  },
+  {
+    "request": {
+      "parallelism": 4,
+      "candidates": 128,
+      "baseline": {
+        "turnToeDegrees": 10,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "bodyHeightMeters": 1.65,
+        "gaitSmoothingTau": 0.14,
+        "hipLeanDegrees": 8,
+        "hipFollowTau": 0.14,
+        "footSpacingMeters": 0.2,
+        "footPlantStrength": 0.9
+      },
+      "seed": 6203
+    },
+    "result": {
+      "bestProfile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.1347943107262555,
+        "hipLeanDegrees": 8.318655187878132,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.4671018800843003,
+        "stepHeightMeters": 0.06745256859317744,
+        "gaitSmoothingTau": 0.10074086914244518,
+        "turnToeDegrees": 6.844274302406364,
+        "footPlantStrength": 0.9144235839761904
+      },
+      "bestScore": 67.406,
+      "candidatesEvaluated": 128,
+      "topResults": [
+        {
+          "score": 67.406,
+          "components": {
+            "planted_slip": 0.25777,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.41124,
+            "phase_symmetry": 0.79361,
+            "stop_settling": 0.05382,
+            "toe_turn_alignment": 0.48503,
+            "movement_coverage": 0.98073,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.98613,
+            "plant_compliance": 0.979,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1347943107262555,
+            "hipLeanDegrees": 8.318655187878132,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.4671018800843003,
+            "stepHeightMeters": 0.06745256859317744,
+            "gaitSmoothingTau": 0.10074086914244518,
+            "turnToeDegrees": 6.844274302406364,
+            "footPlantStrength": 0.9144235839761904
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.04744966302343253,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06745255691220553,
+            "waistPeakAcceleration": 4.675013123298932,
+            "waistPeakJerk": 99.83471631195698,
+            "leftRightPhaseAsymmetry": 0.025684931506849296,
+            "stopSettlingSpeed": 0.17532384979083449,
+            "stopOvershootMeters": 0.2629857746849785,
+            "toeTurnAlignmentDegrees": 15.91790898861974,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.37583756259845,
+            "turnDegrees": 107.9999999999993,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 67.118,
+          "components": {
+            "planted_slip": 0.18214,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.55689,
+            "phase_symmetry": 0.81845,
+            "stop_settling": 0.01765,
+            "toe_turn_alignment": 0.4564,
+            "movement_coverage": 0.97263,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.9476,
+            "plant_compliance": 0.98863,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.21731425269174975,
+            "hipLeanDegrees": 4.961255819518703,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.46709876716918364,
+            "stepHeightMeters": 0.06317389801435244,
+            "gaitSmoothingTau": 0.10474640553761601,
+            "turnToeDegrees": 16.45158326088059,
+            "footPlantStrength": 0.9105844042499477
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.059604621495624226,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06317280948060186,
+            "waistPeakAcceleration": 3.4809702635873228,
+            "waistPeakJerk": 60.61461150128208,
+            "leftRightPhaseAsymmetry": 0.022260273972602725,
+            "stopSettlingSpeed": 0.24222894025151623,
+            "stopOvershootMeters": 0.3633434102377336,
+            "toeTurnAlignmentDegrees": 17.256585713679893,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.331409347627542,
+            "turnDegrees": 107.99999999999739,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 67.105,
+          "components": {
+            "planted_slip": 0.13937,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.63941,
+            "phase_symmetry": 0.81845,
+            "stop_settling": 0.00981,
+            "toe_turn_alignment": 0.51795,
+            "movement_coverage": 0.96979,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.92888,
+            "plant_compliance": 0.85915,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.20340368107673584,
+            "hipLeanDegrees": 11.197765107358697,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.45228034593339944,
+            "stepHeightMeters": 0.0807192381814576,
+            "gaitSmoothingTau": 0.1641588732063819,
+            "turnToeDegrees": 1.5451616428537118,
+            "footPlantStrength": 0.9385719988674727
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.06897142465819758,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08071917710580817,
+            "waistPeakAcceleration": 2.9910458567155347,
+            "waistPeakJerk": 42.040913854142666,
+            "leftRightPhaseAsymmetry": 0.022260273972602725,
+            "stopSettlingSpeed": 0.27747589288002267,
+            "stopOvershootMeters": 0.41621382813018853,
+            "toeTurnAlignmentDegrees": 14.473198733869156,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.315844287117531,
+            "turnDegrees": 107.99999986785613,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.513,
+          "components": {
+            "planted_slip": 0.18899,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.51732,
+            "phase_symmetry": 0.79361,
+            "stop_settling": 0.02864,
+            "toe_turn_alignment": 0.47979,
+            "movement_coverage": 0.97679,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.9622,
+            "plant_compliance": 0.83002,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1293044062080045,
+            "hipLeanDegrees": 4.526927687938757,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.45674318933805313,
+            "stepHeightMeters": 0.06733546899923086,
+            "gaitSmoothingTau": 0.15482933583015548,
+            "turnToeDegrees": 13.724914180918091,
+            "footPlantStrength": 0.8572700381825074
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.058311834826133925,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06733478151933345,
+            "waistPeakAcceleration": 3.8688093038965614,
+            "waistPeakJerk": 68.89466094994232,
+            "leftRightPhaseAsymmetry": 0.025684931506849296,
+            "stopSettlingSpeed": 0.21317124640349439,
+            "stopOvershootMeters": 0.31975686902333433,
+            "toeTurnAlignmentDegrees": 16.157107521300404,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.354229484086779,
+            "turnDegrees": 107.99999995864592,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.302,
+          "components": {
+            "planted_slip": 0.21478,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.51134,
+            "phase_symmetry": 0.58797,
+            "stop_settling": 0.03022,
+            "toe_turn_alignment": 0.42094,
+            "movement_coverage": 0.97721,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.97561,
+            "anthropometric_shape": 0.99864,
+            "plant_compliance": 1,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.14,
+            "hipLeanDegrees": 8,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5,
+            "stepHeightMeters": 0.07,
+            "gaitSmoothingTau": 0.14,
+            "turnToeDegrees": 10,
+            "footPlantStrength": 0.9
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05383528193102406,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06999993604866252,
+            "waistPeakAcceleration": 3.919708095627238,
+            "waistPeakJerk": 70.3349700714739,
+            "leftRightPhaseAsymmetry": 0.0590094836670179,
+            "stopSettlingSpeed": 0.20996394146233519,
+            "stopOvershootMeters": 0.31494591197959776,
+            "toeTurnAlignmentDegrees": 19.035985045113833,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 13,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.356532261297558,
+            "turnDegrees": 107.99999999521617,
+            "movementSeconds": 6.49999999999998
+          }
+        }
+      ]
+    }
+  },
+  {
+    "request": {
+      "parallelism": 4,
+      "candidates": 128,
+      "baseline": {
+        "turnToeDegrees": 10,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "bodyHeightMeters": 1.65,
+        "gaitSmoothingTau": 0.14,
+        "hipLeanDegrees": 8,
+        "hipFollowTau": 0.14,
+        "footSpacingMeters": 0.2,
+        "footPlantStrength": 0.9
+      },
+      "seed": 6204
+    },
+    "result": {
+      "bestProfile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.1437916776026237,
+        "hipLeanDegrees": 8.468928439295352,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.5240518729426605,
+        "stepHeightMeters": 0.07750581754153522,
+        "gaitSmoothingTau": 0.14765185398247646,
+        "turnToeDegrees": 8.54636143359652,
+        "footPlantStrength": 0.8794464526229755
+      },
+      "bestScore": 66.872,
+      "candidatesEvaluated": 128,
+      "topResults": [
+        {
+          "score": 66.872,
+          "components": {
+            "planted_slip": 0.11649,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.53209,
+            "phase_symmetry": 0.69083,
+            "stop_settling": 0.02605,
+            "toe_turn_alignment": 0.47802,
+            "movement_coverage": 0.97626,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.99316,
+            "plant_compliance": 0.95781,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1437916776026237,
+            "hipLeanDegrees": 8.468928439295352,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5240518729426605,
+            "stepHeightMeters": 0.07750581754153522,
+            "gaitSmoothingTau": 0.14765185398247646,
+            "turnToeDegrees": 8.54636143359652,
+            "footPlantStrength": 0.8794464526229755
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.07524686140937521,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.07750571363763409,
+            "waistPeakAcceleration": 3.7674603093046612,
+            "waistPeakJerk": 65.13079430819101,
+            "leftRightPhaseAsymmetry": 0.041095890410958874,
+            "stopSettlingSpeed": 0.2188614354158985,
+            "stopOvershootMeters": 0.3282921525997013,
+            "toeTurnAlignmentDegrees": 16.238122678643133,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.351340898817681,
+            "turnDegrees": 107.99999998465088,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.787,
+          "components": {
+            "planted_slip": 0.06329,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.53701,
+            "phase_symmetry": 0.79361,
+            "stop_settling": 0.02496,
+            "toe_turn_alignment": 0.47326,
+            "movement_coverage": 0.97596,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.98937,
+            "plant_compliance": 0.87176,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.15742088142535485,
+            "hipLeanDegrees": 6.853341100669159,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5133871825535427,
+            "stepHeightMeters": 0.0834151916282449,
+            "gaitSmoothingTau": 0.13734367881637594,
+            "turnToeDegrees": 8.490044739325551,
+            "footPlantStrength": 0.8633268692173655
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.09660227483669899,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08341516736277767,
+            "waistPeakAcceleration": 3.7273504408023674,
+            "waistPeakJerk": 63.99016084967266,
+            "leftRightPhaseAsymmetry": 0.025684931506849296,
+            "stopSettlingSpeed": 0.22143562481428386,
+            "stopOvershootMeters": 0.3321534368855899,
+            "toeTurnAlignmentDegrees": 16.458412878545513,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.349705181330696,
+            "turnDegrees": 107.99999999690151,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.737,
+          "components": {
+            "planted_slip": 0.20139,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.33299,
+            "phase_symmetry": 0.89774,
+            "stop_settling": 0.07993,
+            "toe_turn_alignment": 0.45967,
+            "movement_coverage": 0.98327,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.98722,
+            "plant_compliance": 0.89035,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.11436454034345137,
+            "hipLeanDegrees": 9.250810332713094,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.45852200149855976,
+            "stepHeightMeters": 0.07846799090163095,
+            "gaitSmoothingTau": 0.09073777264440491,
+            "turnToeDegrees": 11.887361952982545,
+            "footPlantStrength": 0.8662636042229196
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05608859152229581,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.07846621896612337,
+            "waistPeakAcceleration": 5.367447464966051,
+            "waistPeakJerk": 128.92594258776117,
+            "leftRightPhaseAsymmetry": 0.011986301369863006,
+            "stopSettlingSpeed": 0.15159558746408244,
+            "stopOvershootMeters": 0.22739338119608266,
+            "toeTurnAlignmentDegrees": 17.099644805243408,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.389774228244291,
+            "turnDegrees": 108.00000000000004,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.376,
+          "components": {
+            "planted_slip": 0.20037,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.49503,
+            "phase_symmetry": 0.80593,
+            "stop_settling": 0.0323,
+            "toe_turn_alignment": 0.47882,
+            "movement_coverage": 0.97737,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.96126,
+            "plant_compliance": 0.80327,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.11358622238351604,
+            "hipLeanDegrees": 11.075058361550354,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.4563231960321614,
+            "stepHeightMeters": 0.08082680958293512,
+            "gaitSmoothingTau": 0.16130645144990044,
+            "turnToeDegrees": 14.608244111113365,
+            "footPlantStrength": 0.8536666335694802
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.056266053676472534,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08082673712114025,
+            "waistPeakAcceleration": 4.014741772086182,
+            "waistPeakJerk": 74.94629504014614,
+            "leftRightPhaseAsymmetry": 0.023972602739726012,
+            "stopSettlingSpeed": 0.20596773275695396,
+            "stopOvershootMeters": 0.3089515985688444,
+            "toeTurnAlignmentDegrees": 16.20160400743247,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.357407103964046,
+            "turnDegrees": 107.99999990606406,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.302,
+          "components": {
+            "planted_slip": 0.21478,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.51134,
+            "phase_symmetry": 0.58797,
+            "stop_settling": 0.03022,
+            "toe_turn_alignment": 0.42094,
+            "movement_coverage": 0.97721,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.97561,
+            "anthropometric_shape": 0.99864,
+            "plant_compliance": 1,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.14,
+            "hipLeanDegrees": 8,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5,
+            "stepHeightMeters": 0.07,
+            "gaitSmoothingTau": 0.14,
+            "turnToeDegrees": 10,
+            "footPlantStrength": 0.9
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05383528193102406,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06999993604866252,
+            "waistPeakAcceleration": 3.919708095627238,
+            "waistPeakJerk": 70.3349700714739,
+            "leftRightPhaseAsymmetry": 0.0590094836670179,
+            "stopSettlingSpeed": 0.20996394146233519,
+            "stopOvershootMeters": 0.31494591197959776,
+            "toeTurnAlignmentDegrees": 19.035985045113833,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 13,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.356532261297558,
+            "turnDegrees": 107.99999999521617,
+            "movementSeconds": 6.49999999999998
+          }
+        }
+      ]
+    }
+  },
+  {
+    "request": {
+      "parallelism": 4,
+      "candidates": 128,
+      "baseline": {
+        "turnToeDegrees": 10,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "bodyHeightMeters": 1.65,
+        "gaitSmoothingTau": 0.14,
+        "hipLeanDegrees": 8,
+        "hipFollowTau": 0.14,
+        "footSpacingMeters": 0.2,
+        "footPlantStrength": 0.9
+      },
+      "seed": 6205
+    },
+    "result": {
+      "bestProfile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.17456402237222135,
+        "hipLeanDegrees": 6.448040337976087,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.4609991027363384,
+        "stepHeightMeters": 0.05444840205105209,
+        "gaitSmoothingTau": 0.1727594470175969,
+        "turnToeDegrees": 10.820853826972122,
+        "footPlantStrength": 0.8784715949643737
+      },
+      "bestScore": 67.554,
+      "candidatesEvaluated": 128,
+      "topResults": [
+        {
+          "score": 67.554,
+          "components": {
+            "planted_slip": 0.18651,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.61658,
+            "phase_symmetry": 0.75775,
+            "stop_settling": 0.01268,
+            "toe_turn_alignment": 0.49453,
+            "movement_coverage": 0.97161,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.96682,
+            "plant_compliance": 0.95381,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.17456402237222135,
+            "hipLeanDegrees": 6.448040337976087,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.4609991027363384,
+            "stepHeightMeters": 0.05444840205105209,
+            "gaitSmoothingTau": 0.1727594470175969,
+            "turnToeDegrees": 10.820853826972122,
+            "footPlantStrength": 0.8784715949643737
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05877451389907386,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.054448392012235385,
+            "waistPeakAcceleration": 3.1598371751564818,
+            "waistPeakJerk": 46.41487093456508,
+            "leftRightPhaseAsymmetry": 0.030821917808219156,
+            "stopSettlingSpeed": 0.2620681048988524,
+            "stopOvershootMeters": 0.39310214751336203,
+            "toeTurnAlignmentDegrees": 15.491428876660475,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.325821694615804,
+            "turnDegrees": 107.9999996540166,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 67.249,
+          "components": {
+            "planted_slip": 0.22008,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.55792,
+            "phase_symmetry": 0.81845,
+            "stop_settling": 0.02033,
+            "toe_turn_alignment": 0.51941,
+            "movement_coverage": 0.97434,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.96573,
+            "plant_compliance": 0.78187,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.12724953847466125,
+            "hipLeanDegrees": 9.396758224068563,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.4544326634965987,
+            "stepHeightMeters": 0.08591233395199503,
+            "gaitSmoothingTau": 0.1834688243919975,
+            "turnToeDegrees": 5.329585133739554,
+            "footPlantStrength": 0.9491064424296406
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05298174731679437,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08591221054904845,
+            "waistPeakAcceleration": 3.552088351296564,
+            "waistPeakJerk": 59.36773655890874,
+            "leftRightPhaseAsymmetry": 0.022260273972602725,
+            "stopSettlingSpeed": 0.23374651115054113,
+            "stopOvershootMeters": 0.3506197616216264,
+            "toeTurnAlignmentDegrees": 14.411538046596728,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.340776810256236,
+            "turnDegrees": 107.99999898569932,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.606,
+          "components": {
+            "planted_slip": 0.04306,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.51943,
+            "phase_symmetry": 0.92584,
+            "stop_settling": 0.02564,
+            "toe_turn_alignment": 0.4541,
+            "movement_coverage": 0.9755,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.95866,
+            "anthropometric_shape": 0.90866,
+            "plant_compliance": 0.97537,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.10720306441896287,
+            "hipLeanDegrees": 3.949395699868629,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5976305227514748,
+            "stepHeightMeters": 0.09242707142332393,
+            "gaitSmoothingTau": 0.18559781518376664,
+            "turnToeDegrees": 10.775738791923848,
+            "footPlantStrength": 0.8843669892029683
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.11008196970479142,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.09242703514227875,
+            "waistPeakAcceleration": 3.7936990239563375,
+            "waistPeakJerk": 69.12668701223667,
+            "leftRightPhaseAsymmetry": 0.008561643835616433,
+            "stopSettlingSpeed": 0.21981597752125573,
+            "stopOvershootMeters": 0.3297239633066916,
+            "toeTurnAlignmentDegrees": 17.36747620735634,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 10,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.347166962272672,
+            "turnDegrees": 107.99999876183773,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.591,
+          "components": {
+            "planted_slip": 0.13908,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.61602,
+            "phase_symmetry": 0.56541,
+            "stop_settling": 0.01176,
+            "toe_turn_alignment": 0.50013,
+            "movement_coverage": 0.97048,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.97896,
+            "plant_compliance": 0.98117,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.13783576779862972,
+            "hipLeanDegrees": 7.819012137511285,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5251136161682549,
+            "stepHeightMeters": 0.0667621997181822,
+            "gaitSmoothingTau": 0.21575382683193103,
+            "turnToeDegrees": 5.629432818679806,
+            "footPlantStrength": 0.8863514885987861
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.0690454872091232,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06676199846301359,
+            "waistPeakAcceleration": 3.1290291650695483,
+            "waistPeakJerk": 46.975044384597496,
+            "leftRightPhaseAsymmetry": 0.0633561643835616,
+            "stopSettlingSpeed": 0.26659549117956755,
+            "stopOvershootMeters": 0.39989319364988113,
+            "toeTurnAlignmentDegrees": 15.243637369240705,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.31964307218184,
+            "turnDegrees": 107.99998616769707,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.53,
+          "components": {
+            "planted_slip": 0.09766,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.6313,
+            "phase_symmetry": 0.66986,
+            "stop_settling": 0.01061,
+            "toe_turn_alignment": 0.5135,
+            "movement_coverage": 0.97018,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.89513,
+            "plant_compliance": 0.9848,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1575796347620911,
+            "hipLeanDegrees": 3.7401690356154784,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5134851944354383,
+            "stepHeightMeters": 0.043711790462054714,
+            "gaitSmoothingTau": 0.20385309846893007,
+            "turnToeDegrees": 3.6641341278628135,
+            "footPlantStrength": 0.9122500567940297
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.08141764075960244,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.043711188965051086,
+            "waistPeakAcceleration": 3.045357431136361,
+            "waistPeakJerk": 43.640596046782136,
+            "leftRightPhaseAsymmetry": 0.04452054794520545,
+            "stopSettlingSpeed": 0.272767400736157,
+            "stopOvershootMeters": 0.40915106158024894,
+            "toeTurnAlignmentDegrees": 14.662958333605584,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.318020548102804,
+            "turnDegrees": 107.99999420307728,
+            "movementSeconds": 6.49999999999998
+          }
+        }
+      ]
+    }
+  },
+  {
+    "request": {
+      "parallelism": 4,
+      "candidates": 128,
+      "baseline": {
+        "turnToeDegrees": 10,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "bodyHeightMeters": 1.65,
+        "gaitSmoothingTau": 0.14,
+        "hipLeanDegrees": 8,
+        "hipFollowTau": 0.14,
+        "footSpacingMeters": 0.2,
+        "footPlantStrength": 0.9
+      },
+      "seed": 6206
+    },
+    "result": {
+      "bestProfile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.13052429863720377,
+        "hipLeanDegrees": 6.068973176679096,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.45058490984164057,
+        "stepHeightMeters": 0.08665420460692923,
+        "gaitSmoothingTau": 0.13909845342419458,
+        "turnToeDegrees": 4.3025740535476125,
+        "footPlantStrength": 0.8837300722970302
+      },
+      "bestScore": 67.481,
+      "candidatesEvaluated": 128,
+      "topResults": [
+        {
+          "score": 67.481,
+          "components": {
+            "planted_slip": 0.16272,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.49092,
+            "phase_symmetry": 0.87049,
+            "stop_settling": 0.03457,
+            "toe_turn_alignment": 0.49249,
+            "movement_coverage": 0.97805,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.95362,
+            "plant_compliance": 0.97335,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.13052429863720377,
+            "hipLeanDegrees": 6.068973176679096,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.45058490984164057,
+            "stepHeightMeters": 0.08665420460692923,
+            "gaitSmoothingTau": 0.13909845342419458,
+            "turnToeDegrees": 4.3025740535476125,
+            "footPlantStrength": 0.8837300722970302
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.0635505275828542,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08665405156565857,
+            "waistPeakAcceleration": 4.07322672492136,
+            "waistPeakJerk": 75.69525213016541,
+            "leftRightPhaseAsymmetry": 0.015410958904109578,
+            "stopSettlingSpeed": 0.20188669030484932,
+            "stopOvershootMeters": 0.302830035328344,
+            "toeTurnAlignmentDegrees": 15.582363852064498,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.361144826337453,
+            "turnDegrees": 107.99999999586412,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 67.041,
+          "components": {
+            "planted_slip": 0.07463,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.69132,
+            "phase_symmetry": 0.94022,
+            "stop_settling": 0.00527,
+            "toe_turn_alignment": 0.5446,
+            "movement_coverage": 0.96555,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.76327,
+            "anthropometric_shape": 0.92915,
+            "plant_compliance": 0.98991,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.21811614153788142,
+            "hipLeanDegrees": 9.30585162728366,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.38070681308910137,
+            "stepHeightMeters": 0.07356667957050056,
+            "gaitSmoothingTau": 0.19892157466133956,
+            "turnToeDegrees": 14.108167260004285,
+            "footPlantStrength": 0.8900309406919549
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.09083030691244465,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.07356667838931379,
+            "waistPeakAcceleration": 2.631795012336552,
+            "waistPeakJerk": 32.61106815900732,
+            "leftRightPhaseAsymmetry": 0.006849315068493146,
+            "stopSettlingSpeed": 0.3147652867235355,
+            "stopOvershootMeters": 0.47214782592382903,
+            "toeTurnAlignmentDegrees": 13.369398266551391,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 16,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.29264159563046,
+            "turnDegrees": 107.9999960747812,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.82,
+          "components": {
+            "planted_slip": 0.09645,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.49995,
+            "phase_symmetry": 0.80593,
+            "stop_settling": 0.02752,
+            "toe_turn_alignment": 0.442,
+            "movement_coverage": 0.97572,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.97297,
+            "plant_compliance": 0.97522,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.19196843643828465,
+            "hipLeanDegrees": 9.415808441311032,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5286445954972555,
+            "stepHeightMeters": 0.08012849948518118,
+            "gaitSmoothingTau": 0.09541645857812647,
+            "turnToeDegrees": 14.895605088628646,
+            "footPlantStrength": 0.9156809533460443
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.0818572501252823,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08012822449244753,
+            "waistPeakAcceleration": 3.896026809069762,
+            "waistPeakJerk": 74.69146767374112,
+            "leftRightPhaseAsymmetry": 0.023972602739726012,
+            "stopSettlingSpeed": 0.21557044849768262,
+            "stopOvershootMeters": 0.3233556727258666,
+            "toeTurnAlignmentDegrees": 17.961690298177277,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.348350528267874,
+            "turnDegrees": 107.9999999999998,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.528,
+          "components": {
+            "planted_slip": 0.16376,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.50451,
+            "phase_symmetry": 0.70156,
+            "stop_settling": 0.03068,
+            "toe_turn_alignment": 0.47152,
+            "movement_coverage": 0.97715,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.94078,
+            "plant_compliance": 0.95084,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1600261603913553,
+            "hipLeanDegrees": 12.265082222067324,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5372486026105043,
+            "stepHeightMeters": 0.08946055811213459,
+            "gaitSmoothingTau": 0.11881334142655745,
+            "turnToeDegrees": 6.204237009493745,
+            "footPlantStrength": 0.9222252937509796
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.06332738990887121,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08946013850667038,
+            "waistPeakAcceleration": 3.9507381160380546,
+            "waistPeakJerk": 72.35572667973564,
+            "leftRightPhaseAsymmetry": 0.039383561643835586,
+            "stopSettlingSpeed": 0.2090433056124897,
+            "stopOvershootMeters": 0.3135649583627739,
+            "toeTurnAlignmentDegrees": 16.539315821680994,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.356220002711125,
+            "turnDegrees": 107.99999999991165,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.302,
+          "components": {
+            "planted_slip": 0.21478,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.51134,
+            "phase_symmetry": 0.58797,
+            "stop_settling": 0.03022,
+            "toe_turn_alignment": 0.42094,
+            "movement_coverage": 0.97721,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.97561,
+            "anthropometric_shape": 0.99864,
+            "plant_compliance": 1,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.14,
+            "hipLeanDegrees": 8,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5,
+            "stepHeightMeters": 0.07,
+            "gaitSmoothingTau": 0.14,
+            "turnToeDegrees": 10,
+            "footPlantStrength": 0.9
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05383528193102406,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06999993604866252,
+            "waistPeakAcceleration": 3.919708095627238,
+            "waistPeakJerk": 70.3349700714739,
+            "leftRightPhaseAsymmetry": 0.0590094836670179,
+            "stopSettlingSpeed": 0.20996394146233519,
+            "stopOvershootMeters": 0.31494591197959776,
+            "toeTurnAlignmentDegrees": 19.035985045113833,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 13,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.356532261297558,
+            "turnDegrees": 107.99999999521617,
+            "movementSeconds": 6.49999999999998
+          }
+        }
+      ]
+    }
+  },
+  {
+    "request": {
+      "parallelism": 4,
+      "candidates": 128,
+      "baseline": {
+        "turnToeDegrees": 10,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "bodyHeightMeters": 1.65,
+        "gaitSmoothingTau": 0.14,
+        "hipLeanDegrees": 8,
+        "hipFollowTau": 0.14,
+        "footSpacingMeters": 0.2,
+        "footPlantStrength": 0.9
+      },
+      "seed": 6207
+    },
+    "result": {
+      "bestProfile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.2177421655653315,
+        "hipLeanDegrees": 5.606169848053796,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.4961640783968738,
+        "stepHeightMeters": 0.0854613201516382,
+        "gaitSmoothingTau": 0.20255073837090196,
+        "turnToeDegrees": 18.85786106756789,
+        "footPlantStrength": 0.8851258712192652
+      },
+      "bestScore": 67.545,
+      "candidatesEvaluated": 128,
+      "topResults": [
+        {
+          "score": 67.545,
+          "components": {
+            "planted_slip": 0.03269,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.69431,
+            "phase_symmetry": 0.81845,
+            "stop_settling": 0.00506,
+            "toe_turn_alignment": 0.47734,
+            "movement_coverage": 0.96527,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.93573,
+            "plant_compliance": 0.97768,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.2177421655653315,
+            "hipLeanDegrees": 5.606169848053796,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.4961640783968738,
+            "stepHeightMeters": 0.0854613201516382,
+            "gaitSmoothingTau": 0.20255073837090196,
+            "turnToeDegrees": 18.85786106756789,
+            "footPlantStrength": 0.8851258712192652
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.11972638388336626,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08546083558268266,
+            "waistPeakAcceleration": 2.611179266452891,
+            "waistPeakJerk": 32.09703879050842,
+            "leftRightPhaseAsymmetry": 0.022260273972602725,
+            "stopSettlingSpeed": 0.317186983193608,
+            "stopOvershootMeters": 0.47578035201652735,
+            "toeTurnAlignmentDegrees": 16.269713204307635,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.291084863461158,
+            "turnDegrees": 107.99999476091607,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 67.297,
+          "components": {
+            "planted_slip": 0.02777,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.67527,
+            "phase_symmetry": 0.92584,
+            "stop_settling": 0.00646,
+            "toe_turn_alignment": 0.4435,
+            "movement_coverage": 0.96696,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.95866,
+            "anthropometric_shape": 0.91064,
+            "plant_compliance": 0.96213,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.21708443399160285,
+            "hipLeanDegrees": 5.851792612509705,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5986497108452189,
+            "stepHeightMeters": 0.09093730680960244,
+            "gaitSmoothingTau": 0.18356190943389283,
+            "turnToeDegrees": 15.143472326520584,
+            "footPlantStrength": 0.880548916077497
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.1254367727315271,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.09093730460621421,
+            "waistPeakAcceleration": 2.742313413120856,
+            "waistPeakJerk": 35.41788295216398,
+            "leftRightPhaseAsymmetry": 0.008561643835616433,
+            "stopSettlingSpeed": 0.3024931227069878,
+            "stopOvershootMeters": 0.45373963721043725,
+            "toeTurnAlignmentDegrees": 17.88734981909702,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 10,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.300329173001383,
+            "turnDegrees": 107.99999897672006,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 67.295,
+          "components": {
+            "planted_slip": 0.07386,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.52197,
+            "phase_symmetry": 0.81845,
+            "stop_settling": 0.02565,
+            "toe_turn_alignment": 0.46032,
+            "movement_coverage": 0.9757,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.98354,
+            "plant_compliance": 0.99014,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.18210898703488979,
+            "hipLeanDegrees": 7.6559052656665,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5198195932307647,
+            "stepHeightMeters": 0.08893859505221766,
+            "gaitSmoothingTau": 0.11063997999197912,
+            "turnToeDegrees": 9.936797986708953,
+            "footPlantStrength": 0.9098531765536653
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.0911948016041421,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08893849750475404,
+            "waistPeakAcceleration": 3.787422392652767,
+            "waistPeakJerk": 68.33172925725391,
+            "leftRightPhaseAsymmetry": 0.022260273972602725,
+            "stopSettlingSpeed": 0.21979560659941275,
+            "stopOvershootMeters": 0.32969340983378936,
+            "toeTurnAlignmentDegrees": 17.06845413977385,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.348227377817037,
+            "turnDegrees": 107.99999999998722,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.778,
+          "components": {
+            "planted_slip": 0.04011,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.62624,
+            "phase_symmetry": 0.91168,
+            "stop_settling": 0.01081,
+            "toe_turn_alignment": 0.45163,
+            "movement_coverage": 0.97004,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.95866,
+            "anthropometric_shape": 0.87111,
+            "plant_compliance": 0.98214,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.14549818711465823,
+            "hipLeanDegrees": 3.7234087543205394,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5957189879359404,
+            "stepHeightMeters": 0.04518066184341688,
+            "gaitSmoothingTau": 0.21465508055902627,
+            "turnToeDegrees": 13.870080315447451,
+            "footPlantStrength": 0.8867097023812633
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.11256754139991233,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.04518007839455123,
+            "waistPeakAcceleration": 3.0665654870151875,
+            "waistPeakJerk": 44.81746736853392,
+            "leftRightPhaseAsymmetry": 0.010273972602739719,
+            "stopSettlingSpeed": 0.2716596875554336,
+            "stopOvershootMeters": 0.40748948142021085,
+            "toeTurnAlignmentDegrees": 17.48756783564634,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 10,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.31725461450371,
+            "turnDegrees": 107.99998718485128,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.517,
+          "components": {
+            "planted_slip": 0.13864,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.53678,
+            "phase_symmetry": 0.70156,
+            "stop_settling": 0.0239,
+            "toe_turn_alignment": 0.45439,
+            "movement_coverage": 0.97545,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.95753,
+            "plant_compliance": 0.94818,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.17672409167270695,
+            "hipLeanDegrees": 3.240818527639293,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5368228396716,
+            "stepHeightMeters": 0.07166367349609772,
+            "gaitSmoothingTau": 0.12144812481880818,
+            "turnToeDegrees": 11.061840230162181,
+            "footPlantStrength": 0.8771653736276391
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.06915679442605784,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.07166365058423377,
+            "waistPeakAcceleration": 3.7036536377035607,
+            "waistPeakJerk": 64.37088427111708,
+            "leftRightPhaseAsymmetry": 0.039383561643835586,
+            "stopSettlingSpeed": 0.22403515051428285,
+            "stopOvershootMeters": 0.33605272561686667,
+            "toeTurnAlignmentDegrees": 17.35358901314108,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.346863055669813,
+            "turnDegrees": 107.99999999984371,
+            "movementSeconds": 6.49999999999998
+          }
+        }
+      ]
+    }
+  },
+  {
+    "request": {
+      "parallelism": 4,
+      "candidates": 128,
+      "baseline": {
+        "turnToeDegrees": 10,
+        "strideLengthMeters": 0.5,
+        "stepHeightMeters": 0.07,
+        "bodyHeightMeters": 1.65,
+        "gaitSmoothingTau": 0.14,
+        "hipLeanDegrees": 8,
+        "hipFollowTau": 0.14,
+        "footSpacingMeters": 0.2,
+        "footPlantStrength": 0.9
+      },
+      "seed": 6208
+    },
+    "result": {
+      "bestProfile": {
+        "bodyHeightMeters": 1.65,
+        "hipFollowTau": 0.1401001992682877,
+        "hipLeanDegrees": 10.90739393695602,
+        "footSpacingMeters": 0.2,
+        "strideLengthMeters": 0.4555362870502202,
+        "stepHeightMeters": 0.08213396379690355,
+        "gaitSmoothingTau": 0.1631925503689382,
+        "turnToeDegrees": 16.850950697833184,
+        "footPlantStrength": 0.9072991742972747
+      },
+      "bestScore": 67.482,
+      "candidatesEvaluated": 128,
+      "topResults": [
+        {
+          "score": 67.482,
+          "components": {
+            "planted_slip": 0.20048,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.55124,
+            "phase_symmetry": 0.80593,
+            "stop_settling": 0.02235,
+            "toe_turn_alignment": 0.47216,
+            "movement_coverage": 0.97522,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.94539,
+            "plant_compliance": 0.99458,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1401001992682877,
+            "hipLeanDegrees": 10.90739393695602,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.4555362870502202,
+            "stepHeightMeters": 0.08213396379690355,
+            "gaitSmoothingTau": 0.1631925503689382,
+            "turnToeDegrees": 16.850950697833184,
+            "footPlantStrength": 0.9072991742972747
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.05624559418222357,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.08213396350128238,
+            "waistPeakAcceleration": 3.622083947466378,
+            "waistPeakJerk": 60.635077452539996,
+            "leftRightPhaseAsymmetry": 0.023972602739726012,
+            "stopSettlingSpeed": 0.2280516091589822,
+            "stopOvershootMeters": 0.34207741198180347,
+            "toeTurnAlignmentDegrees": 16.509745629769284,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.34563108647168,
+            "turnDegrees": 107.99999988213055,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.51,
+          "components": {
+            "planted_slip": 0.06353,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.65624,
+            "phase_symmetry": 0.92584,
+            "stop_settling": 0.00824,
+            "toe_turn_alignment": 0.52835,
+            "movement_coverage": 0.96869,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.76327,
+            "anthropometric_shape": 0.93101,
+            "plant_compliance": 0.97038,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.18428365073357375,
+            "hipLeanDegrees": 7.228869850853863,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.3761975945571211,
+            "stepHeightMeters": 0.068271191496247,
+            "gaitSmoothingTau": 0.19690331082267196,
+            "turnToeDegrees": 7.23118739539347,
+            "footPlantStrength": 0.8828340332875186
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.09647122648740024,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06826199508456492,
+            "waistPeakAcceleration": 2.879826297905179,
+            "waistPeakJerk": 38.79476249845493,
+            "leftRightPhaseAsymmetry": 0.008561643835616433,
+            "stopSettlingSpeed": 0.2878954459588157,
+            "stopOvershootMeters": 0.43184311847771084,
+            "toeTurnAlignmentDegrees": 14.035926161840642,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 16,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.309819208891463,
+            "turnDegrees": 107.99999667193535,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.507,
+          "components": {
+            "planted_slip": 0.19945,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.39035,
+            "phase_symmetry": 0.72352,
+            "stop_settling": 0.06151,
+            "toe_turn_alignment": 0.45141,
+            "movement_coverage": 0.9817,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.96962,
+            "plant_compliance": 0.9585,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.11364364701894888,
+            "hipLeanDegrees": 10.563792805915602,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5368397830017407,
+            "stepHeightMeters": 0.06172927354329389,
+            "gaitSmoothingTau": 0.11161186963839197,
+            "turnToeDegrees": 11.68257212810338,
+            "footPlantStrength": 0.9203801491206419
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.056426582849072524,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06172822203273443,
+            "waistPeakAcceleration": 4.875775426428726,
+            "waistPeakJerk": 106.63842598670848,
+            "leftRightPhaseAsymmetry": 0.03595890410958902,
+            "stopSettlingSpeed": 0.16730949027919975,
+            "stopOvershootMeters": 0.25096423541741836,
+            "toeTurnAlignmentDegrees": 17.49823411887729,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.381131665950006,
+            "turnDegrees": 107.99999999998379,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.453,
+          "components": {
+            "planted_slip": 0.09898,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.62142,
+            "phase_symmetry": 0.66986,
+            "stop_settling": 0.0118,
+            "toe_turn_alignment": 0.51362,
+            "movement_coverage": 0.97094,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.99869,
+            "anthropometric_shape": 0.95037,
+            "plant_compliance": 0.86516,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Left/right gait phases are asymmetric.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.1557322290530252,
+            "hipLeanDegrees": 11.12060883181198,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.5131996610222236,
+            "stepHeightMeters": 0.0708317980025094,
+            "gaitSmoothingTau": 0.19728747066930832,
+            "turnToeDegrees": 2.8587035009910835,
+            "footPlantStrength": 0.9376755713846887
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.08095009591571578,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.0708315319838849,
+            "waistPeakAcceleration": 3.116376909856243,
+            "waistPeakJerk": 45.566988133492295,
+            "leftRightPhaseAsymmetry": 0.04452054794520545,
+            "stopSettlingSpeed": 0.26635931481310554,
+            "stopOvershootMeters": 0.3995389455493897,
+            "toeTurnAlignmentDegrees": 14.657781020786064,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 12,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.322158037479146,
+            "turnDegrees": 107.99999656486715,
+            "movementSeconds": 6.49999999999998
+          }
+        },
+        {
+          "score": 66.345,
+          "components": {
+            "planted_slip": 0.16962,
+            "planted_height": 1,
+            "swing_clearance": 1,
+            "waist_smoothness": 0.38925,
+            "phase_symmetry": 0.85718,
+            "stop_settling": 0.06051,
+            "toe_turn_alignment": 0.4825,
+            "movement_coverage": 0.98147,
+            "stepping_coverage": 1,
+            "cadence_naturalness": 0.92562,
+            "anthropometric_shape": 0.97199,
+            "plant_compliance": 0.85972,
+            "pose_finiteness": 1,
+            "evaluator_version": 4
+          },
+          "findings": [
+            "Planted feet slip in world space; increase foot plant strength.",
+            "Waist acceleration or jerk is abrupt; increase gait smoothing.",
+            "Stop leaves residual speed or overshoot.",
+            "Turn-in-place toe yaw does not follow the turn direction."
+          ],
+          "profile": {
+            "bodyHeightMeters": 1.65,
+            "hipFollowTau": 0.09783900110195141,
+            "hipLeanDegrees": 6.753984050710678,
+            "footSpacingMeters": 0.2,
+            "strideLengthMeters": 0.44691324644386654,
+            "stepHeightMeters": 0.06712878594737218,
+            "gaitSmoothingTau": 0.1286794087327708,
+            "turnToeDegrees": 5.985380479127812,
+            "footPlantStrength": 0.9384876524836233
+          },
+          "metrics": {
+            "elapsedSeconds": 8.999999999999972,
+            "plantedFootWorldSlipMetersPerSecond": 0.062097384407311586,
+            "plantedHeightErrorMeters": 0,
+            "swingClearanceMeters": 0.06712876216349367,
+            "waistPeakAcceleration": 4.863975473458787,
+            "waistPeakJerk": 107.30054127214454,
+            "leftRightPhaseAsymmetry": 0.017123287671232865,
+            "stopSettlingSpeed": 0.16829469025724314,
+            "stopOvershootMeters": 0.2524420353788942,
+            "toeTurnAlignmentDegrees": 16.033152783872726,
+            "nonFinitePoseCount": 0,
+            "swingSteps": 14,
+            "commandedTravelMeters": 5.481453244467349,
+            "actualTravelMeters": 5.379862325535042,
+            "turnDegrees": 107.999999999335,
+            "movementSeconds": 6.49999999999998
+          }
+        }
+      ]
+    }
+  }
+]

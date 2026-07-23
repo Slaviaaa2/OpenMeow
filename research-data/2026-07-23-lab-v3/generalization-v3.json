@@ -1,0 +1,3068 @@
+{
+  "schema": "openmeow-lab-v3-generalization-2026-07-23",
+  "endpoint": "http://127.0.0.1:17890",
+  "evaluatorVersion": 3,
+  "profiles": [
+    {
+      "name": "v1-soft",
+      "positionSpringHz": 6.0,
+      "dampingRatio": 1.1,
+      "maxSpeed": 1.5,
+      "maxAcceleration": 14.0,
+      "contactCompliance": 0.78,
+      "predictionSeconds": 0.02,
+      "handRadius": 0.075
+    },
+    {
+      "name": "natural-current",
+      "positionSpringHz": 6.5,
+      "dampingRatio": 1.2,
+      "maxSpeed": 1.7,
+      "maxAcceleration": 18.0,
+      "contactCompliance": 0.8,
+      "predictionSeconds": 0.03,
+      "handRadius": 0.075
+    },
+    {
+      "name": "hand-limp-recommendation",
+      "positionSpringHz": 7.0,
+      "dampingRatio": 1.2,
+      "maxSpeed": 1.3,
+      "maxAcceleration": 9.0,
+      "contactCompliance": 0.95,
+      "predictionSeconds": 0.015,
+      "handRadius": 0.075
+    },
+    {
+      "name": "task-specific-v2-like",
+      "positionSpringHz": 8.5,
+      "dampingRatio": 1.2,
+      "maxSpeed": 1.9,
+      "maxAcceleration": 20.0,
+      "contactCompliance": 0.82,
+      "predictionSeconds": 0.03,
+      "handRadius": 0.075
+    },
+    {
+      "name": "aggressive-control",
+      "positionSpringHz": 10.0,
+      "dampingRatio": 0.85,
+      "maxSpeed": 2.8,
+      "maxAcceleration": 28.0,
+      "contactCompliance": 0.4,
+      "predictionSeconds": 0.04,
+      "handRadius": 0.075
+    }
+  ],
+  "tasks": [
+    "head_petting",
+    "cheek_nuzzle",
+    "limp_support",
+    "hand_hold"
+  ],
+  "autotune": [
+    {
+      "task": "head_petting",
+      "seed": 424242,
+      "result": {
+        "bestProfile": {
+          "name": "candidate-012",
+          "positionSpringHz": 4.432785605162193,
+          "dampingRatio": 0.968435320165296,
+          "maxSpeed": 2.129235303973768,
+          "maxAcceleration": 27.23838310820585,
+          "contactCompliance": 0.7595179482174655,
+          "predictionSeconds": 0,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        },
+        "bestScore": 69.379,
+        "candidatesEvaluated": 24,
+        "topResults": [
+          {
+            "experimentId": "ed09dee6-1417-40d7-8aa0-4add4ef006c0",
+            "revision": 1,
+            "score": 69.379,
+            "components": {
+              "target_coverage": 0.44355,
+              "force_comfort": 0.72098,
+              "smoothness": 0.98145,
+              "penetration_safety": 0.82149,
+              "contact_continuity": 1,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99864,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.97705,
+              "target_force_fit": 0.73791,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.1653,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-012",
+              "positionSpringHz": 4.432785605162193,
+              "dampingRatio": 0.968435320165296,
+              "maxSpeed": 2.129235303973768,
+              "maxAcceleration": 27.23838310820585,
+              "contactCompliance": 0.7595179482174655,
+              "predictionSeconds": 0,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "c013678a-464f-42cc-bccb-89c23c7a3a02",
+            "revision": 1,
+            "score": 64.626,
+            "components": {
+              "target_coverage": 0.55352,
+              "force_comfort": 0.67802,
+              "smoothness": 0.97784,
+              "penetration_safety": 0.81582,
+              "contact_continuity": 1,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99874,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.88677,
+              "target_force_fit": 0.76459,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.316,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-016",
+              "positionSpringHz": 5.029472794471066,
+              "dampingRatio": 1.815379772932695,
+              "maxSpeed": 1.9330081214967316,
+              "maxAcceleration": 29.50519456399727,
+              "contactCompliance": 0.8004052066991131,
+              "predictionSeconds": 0.02204850593211525,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "e77e6cc8-fc1c-49c2-8bb0-f90de07f6867",
+            "revision": 1,
+            "score": 54.01,
+            "components": {
+              "target_coverage": 0.45455,
+              "force_comfort": 0.51371,
+              "smoothness": 0.97646,
+              "penetration_safety": 0.79585,
+              "contact_continuity": 1,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99822,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.80346,
+              "target_force_fit": 0.63937,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.316,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Target contact is too firm; increase compliance or reduce approach speed.",
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-007",
+              "positionSpringHz": 7.229848259424291,
+              "dampingRatio": 1.5471995421326152,
+              "maxSpeed": 1.8703569590266402,
+              "maxAcceleration": 27.07494830235445,
+              "contactCompliance": 0.7263452808402224,
+              "predictionSeconds": 0.01051880297275204,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "a832375a-f36b-4693-8e8a-a0709eb64579",
+            "revision": 1,
+            "score": 52.931,
+            "components": {
+              "target_coverage": 0.40689,
+              "force_comfort": 0.41148,
+              "smoothness": 0.97227,
+              "penetration_safety": 0.83289,
+              "contact_continuity": 0.67273,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.9981,
+              "peak_force_safety": 0.9721,
+              "target_force_gate": 0.86646,
+              "target_force_fit": 0.4749,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 1,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Target contact is too firm; increase compliance or reduce approach speed.",
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-013",
+              "positionSpringHz": 4.444164001884771,
+              "dampingRatio": 0.9334002276676239,
+              "maxSpeed": 1.7340625307448234,
+              "maxAcceleration": 25.687409477478365,
+              "contactCompliance": 0.6323443744854743,
+              "predictionSeconds": 0.055604455501588275,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "e3de0301-b6a7-4f04-ac78-d2e41e49af33",
+            "revision": 1,
+            "score": 51.756,
+            "components": {
+              "target_coverage": 0.38856,
+              "force_comfort": 0.39844,
+              "smoothness": 0.97824,
+              "penetration_safety": 0.78006,
+              "contact_continuity": 0.83636,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99835,
+              "peak_force_safety": 0.88969,
+              "target_force_gate": 0.84599,
+              "target_force_fit": 0.47097,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.74976,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Target contact is too firm; increase compliance or reduce approach speed.",
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-020",
+              "positionSpringHz": 5.757546589498579,
+              "dampingRatio": 1.3232425428728354,
+              "maxSpeed": 1.6690532905435804,
+              "maxAcceleration": 21.34386424970279,
+              "contactCompliance": 0.7920056173354414,
+              "predictionSeconds": 0.06811892986210014,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "seed": 230723,
+      "result": {
+        "bestProfile": {
+          "name": "candidate-021",
+          "positionSpringHz": 5.424182765793261,
+          "dampingRatio": 0.8782335125334491,
+          "maxSpeed": 1.6509875136056378,
+          "maxAcceleration": 19.155503995914955,
+          "contactCompliance": 0.977354175996666,
+          "predictionSeconds": 0,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        },
+        "bestScore": 64.443,
+        "candidatesEvaluated": 24,
+        "topResults": [
+          {
+            "experimentId": "cd001edd-3fbe-437e-a0b8-68d4d035508c",
+            "revision": 1,
+            "score": 64.443,
+            "components": {
+              "target_coverage": 0.61584,
+              "force_comfort": 0.63932,
+              "smoothness": 0.98555,
+              "penetration_safety": 0.65188,
+              "contact_continuity": 0.50909,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99823,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.95765,
+              "target_force_fit": 0.6676,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.44933,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-021",
+              "positionSpringHz": 5.424182765793261,
+              "dampingRatio": 0.8782335125334491,
+              "maxSpeed": 1.6509875136056378,
+              "maxAcceleration": 19.155503995914955,
+              "contactCompliance": 0.977354175996666,
+              "predictionSeconds": 0,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "e51f3377-03a8-42a7-bdd3-c6be414572c3",
+            "revision": 1,
+            "score": 62.701,
+            "components": {
+              "target_coverage": 0.56085,
+              "force_comfort": 0.6225,
+              "smoothness": 0.97711,
+              "penetration_safety": 0.61764,
+              "contact_continuity": 0.50909,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99832,
+              "peak_force_safety": 0.99165,
+              "target_force_gate": 0.96293,
+              "target_force_fit": 0.64647,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.81873,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-002",
+              "positionSpringHz": 9.998283387527374,
+              "dampingRatio": 1.2755102955510123,
+              "maxSpeed": 1.345072127796856,
+              "maxAcceleration": 20.840497765258192,
+              "contactCompliance": 1,
+              "predictionSeconds": 0.009699990982050072,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "bd4a8fb7-df73-4c67-8ecb-d76939b2c84f",
+            "revision": 1,
+            "score": 62.144,
+            "components": {
+              "target_coverage": 0.57185,
+              "force_comfort": 0.58965,
+              "smoothness": 0.9795,
+              "penetration_safety": 0.63317,
+              "contact_continuity": 0.50909,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99832,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.95565,
+              "target_force_fit": 0.61701,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.44933,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-017",
+              "positionSpringHz": 8.375837493694744,
+              "dampingRatio": 1.0297442758635493,
+              "maxSpeed": 1.2114558658640495,
+              "maxAcceleration": 27.029536064244837,
+              "contactCompliance": 1,
+              "predictionSeconds": 0.004303916773900348,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "fe89cc5c-f244-44ed-a7e5-7a57b6ede922",
+            "revision": 1,
+            "score": 61.425,
+            "components": {
+              "target_coverage": 0.50953,
+              "force_comfort": 0.45395,
+              "smoothness": 0.98228,
+              "penetration_safety": 0.74279,
+              "contact_continuity": 0.50909,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99725,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.98829,
+              "target_force_fit": 0.45933,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 1,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Target contact is too firm; increase compliance or reduce approach speed.",
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-015",
+              "positionSpringHz": 5.822101855340019,
+              "dampingRatio": 1.0174939041301938,
+              "maxSpeed": 1.2202711346207769,
+              "maxAcceleration": 19.500575264767864,
+              "contactCompliance": 0.8417504993834303,
+              "predictionSeconds": 0.03697404077601342,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "d85c6b51-dd60-4fa6-80cf-33b14d681840",
+            "revision": 1,
+            "score": 60.651,
+            "components": {
+              "target_coverage": 0.52053,
+              "force_comfort": 0.52589,
+              "smoothness": 0.98818,
+              "penetration_safety": 0.72987,
+              "contact_continuity": 0.50909,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99774,
+              "peak_force_safety": 0.97479,
+              "target_force_gate": 0.95431,
+              "target_force_fit": 0.55107,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 1,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Target contact is too light; move slightly deeper or reduce compliance.",
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-011",
+              "positionSpringHz": 5.802315165912762,
+              "dampingRatio": 1.1001333595085647,
+              "maxSpeed": 1.4410688973100132,
+              "maxAcceleration": 12.995725944826956,
+              "contactCompliance": 0.8839986996557558,
+              "predictionSeconds": 0.030316681880651355,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "task": "limp_support",
+      "seed": 230724,
+      "result": {
+        "bestProfile": {
+          "name": "candidate-021",
+          "positionSpringHz": 5.059203699982591,
+          "dampingRatio": 1.021752934321446,
+          "maxSpeed": 1.4034213501077382,
+          "maxAcceleration": 21.359046891089807,
+          "contactCompliance": 0.8304714622304177,
+          "predictionSeconds": 0.01880583060384068,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        },
+        "bestScore": 70.78,
+        "candidatesEvaluated": 24,
+        "topResults": [
+          {
+            "experimentId": "09bdcf65-1f3f-48c0-9f59-b1613af657bd",
+            "revision": 1,
+            "score": 70.78,
+            "components": {
+              "target_coverage": 0.71848,
+              "force_comfort": 0.70534,
+              "smoothness": 0.98562,
+              "penetration_safety": 0.62109,
+              "contact_continuity": 0.75455,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99584,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.96731,
+              "target_force_fit": 0.72918,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.93053,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-021",
+              "positionSpringHz": 5.059203699982591,
+              "dampingRatio": 1.021752934321446,
+              "maxSpeed": 1.4034213501077382,
+              "maxAcceleration": 21.359046891089807,
+              "contactCompliance": 0.8304714622304177,
+              "predictionSeconds": 0.01880583060384068,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "733662ec-4fe5-4b50-8b94-0f90214d038e",
+            "revision": 1,
+            "score": 67.68,
+            "components": {
+              "target_coverage": 0.79545,
+              "force_comfort": 0.46151,
+              "smoothness": 0.96882,
+              "penetration_safety": 0.64894,
+              "contact_continuity": 0.75455,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99765,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.95636,
+              "target_force_fit": 0.48258,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.316,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Target contact is too light; move slightly deeper or reduce compliance.",
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-017",
+              "positionSpringHz": 8.872341541120461,
+              "dampingRatio": 1.2744232843169618,
+              "maxSpeed": 1.3571860508734446,
+              "maxAcceleration": 28.680965947836043,
+              "contactCompliance": 0.7908488112459187,
+              "predictionSeconds": 0.05853118869873285,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "3ca6bf0c-def8-48f9-b566-da04d1360313",
+            "revision": 1,
+            "score": 67.277,
+            "components": {
+              "target_coverage": 0.70015,
+              "force_comfort": 0.72844,
+              "smoothness": 0.97402,
+              "penetration_safety": 0.70569,
+              "contact_continuity": 0.75455,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99467,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.91161,
+              "target_force_fit": 0.79907,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.93053,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-016",
+              "positionSpringHz": 9.583785114999618,
+              "dampingRatio": 1.2346207698820575,
+              "maxSpeed": 1.7336099576910755,
+              "maxAcceleration": 23.695451918926167,
+              "contactCompliance": 0.7126685964468256,
+              "predictionSeconds": 0.002757519452254064,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "1ec3db68-8912-4efc-a802-3ec58becdd9d",
+            "revision": 1,
+            "score": 66.844,
+            "components": {
+              "target_coverage": 0.71114,
+              "force_comfort": 0.56691,
+              "smoothness": 0.97099,
+              "penetration_safety": 0.67207,
+              "contact_continuity": 0.75455,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99602,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.94408,
+              "target_force_fit": 0.60049,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.00997,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-020",
+              "positionSpringHz": 9.039243888966102,
+              "dampingRatio": 0.8021628369504169,
+              "maxSpeed": 1.7705989256974677,
+              "maxAcceleration": 28.364006078077487,
+              "contactCompliance": 0.7625737659272616,
+              "predictionSeconds": 0.024199776814412224,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "54217ff8-8ab1-4e66-8076-2516247f2524",
+            "revision": 1,
+            "score": 66.507,
+            "components": {
+              "target_coverage": 0.72214,
+              "force_comfort": 0.6438,
+              "smoothness": 0.98729,
+              "penetration_safety": 0.64532,
+              "contact_continuity": 0.75455,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99653,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.91826,
+              "target_force_fit": 0.70111,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.93053,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-008",
+              "positionSpringHz": 4.1580270278471065,
+              "dampingRatio": 1.7139160059426695,
+              "maxSpeed": 2.5381141195197006,
+              "maxAcceleration": 19.300506448008203,
+              "contactCompliance": 0.8360192605834544,
+              "predictionSeconds": 0.06641052119266733,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "task": "hand_hold",
+      "seed": 230725,
+      "result": {
+        "bestProfile": {
+          "name": "candidate-018",
+          "positionSpringHz": 6.39297233945308,
+          "dampingRatio": 1.1641264035765566,
+          "maxSpeed": 1.404916686604999,
+          "maxAcceleration": 27.38243959539186,
+          "contactCompliance": 0.9012292110087486,
+          "predictionSeconds": 0.03650472631980885,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        },
+        "bestScore": 63.292,
+        "candidatesEvaluated": 24,
+        "topResults": [
+          {
+            "experimentId": "17bcc500-2e2e-47b5-a8d1-8f8600d06fe8",
+            "revision": 1,
+            "score": 63.292,
+            "components": {
+              "target_coverage": 0.32156,
+              "force_comfort": 0.76161,
+              "smoothness": 0.98368,
+              "penetration_safety": 0.60274,
+              "contact_continuity": 1,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99461,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.95186,
+              "target_force_fit": 0.80013,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.00075,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-018",
+              "positionSpringHz": 6.39297233945308,
+              "dampingRatio": 1.1641264035765566,
+              "maxSpeed": 1.404916686604999,
+              "maxAcceleration": 27.38243959539186,
+              "contactCompliance": 0.9012292110087486,
+              "predictionSeconds": 0.03650472631980885,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "ca630cb1-46df-4b17-a850-173d916f3311",
+            "revision": 1,
+            "score": 63.074,
+            "components": {
+              "target_coverage": 0.52062,
+              "force_comfort": 0.59915,
+              "smoothness": 0.97758,
+              "penetration_safety": 0.73879,
+              "contact_continuity": 0.88608,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99349,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.91852,
+              "target_force_fit": 0.65231,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-003",
+              "positionSpringHz": 8.827187455235743,
+              "dampingRatio": 1.0727134969844818,
+              "maxSpeed": 2.77735328787817,
+              "maxAcceleration": 20.40852056697401,
+              "contactCompliance": 0.636944169456579,
+              "predictionSeconds": 0.01720653378740257,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "c3533ce0-f306-4cf0-b626-db99be6733c0",
+            "revision": 1,
+            "score": 63.016,
+            "components": {
+              "target_coverage": 0.45427,
+              "force_comfort": 0.6888,
+              "smoothness": 0.97215,
+              "penetration_safety": 0.76963,
+              "contact_continuity": 0.88608,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99501,
+              "peak_force_safety": 0.96942,
+              "target_force_gate": 0.91701,
+              "target_force_fit": 0.75113,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 1,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Stroke speed is outside the preferred natural range for this task."
+            ],
+            "profile": {
+              "name": "candidate-020",
+              "positionSpringHz": 5.245920300378083,
+              "dampingRatio": 0.9253203445295239,
+              "maxSpeed": 2.405727500632745,
+              "maxAcceleration": 31.02184115524117,
+              "contactCompliance": 0.55491282189028,
+              "predictionSeconds": 0.030687462296657014,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "594aa1e3-44da-4851-89ba-12e7be899572",
+            "revision": 1,
+            "score": 59.762,
+            "components": {
+              "target_coverage": 0.29094,
+              "force_comfort": 0.68997,
+              "smoothness": 0.97171,
+              "penetration_safety": 0.58076,
+              "contact_continuity": 1,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99504,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.93298,
+              "target_force_fit": 0.73953,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "candidate-022",
+              "positionSpringHz": 10.401570698188817,
+              "dampingRatio": 1.5276316242420143,
+              "maxSpeed": 1.3528508502989172,
+              "maxAcceleration": 28.26392839704838,
+              "contactCompliance": 1,
+              "predictionSeconds": 0.04329369752355558,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          },
+          {
+            "experimentId": "d13fc7df-5df9-4e09-af79-7b820110d4d2",
+            "revision": 1,
+            "score": 55.107,
+            "components": {
+              "target_coverage": 0.43385,
+              "force_comfort": 0.42221,
+              "smoothness": 0.98288,
+              "penetration_safety": 0.64766,
+              "contact_continuity": 1,
+              "stroke_naturalness": 0,
+              "reaction_settling": 0.99461,
+              "peak_force_safety": 1,
+              "target_force_gate": 0.86606,
+              "target_force_fit": 0.4875,
+              "target_speed_naturalness": 0,
+              "direction_reversal_naturalness": 0.00075,
+              "post_contact_measurement": 1,
+              "evaluator_version": 3
+            },
+            "findings": [
+              "The hand is not maintaining contact with the requested target.",
+              "Target contact is too firm; increase compliance or reduce approach speed.",
+              "Stroke speed is outside the preferred natural range for this task.",
+              "Stroke direction reversals do not match the task's natural rhythm."
+            ],
+            "profile": {
+              "name": "baseline",
+              "positionSpringHz": 6.5,
+              "dampingRatio": 1.2,
+              "maxSpeed": 1.7,
+              "maxAcceleration": 18,
+              "contactCompliance": 0.8,
+              "predictionSeconds": 0.03,
+              "handRadius": 0.075,
+              "bindings": {
+                "look": "Mouse",
+                "right_hand_move": "LeftShift+Mouse",
+                "right_arm_tilt": "LeftShift+MiddleMouse",
+                "left_hand_move": "LeftCtrl+Mouse",
+                "left_arm_tilt": "LeftCtrl+MiddleMouse",
+                "grip": "RightMouse",
+                "touch": "LeftMouse"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "trials": [
+    {
+      "task": "head_petting",
+      "profile": "v1-soft",
+      "metrics": {
+        "elapsedSeconds": 4.833333333333319,
+        "contactSeconds": 2.2222222222222165,
+        "targetContactSeconds": 1.1888888888888867,
+        "meanForce": 0.678200536719103,
+        "peakForce": 1.26114864196644,
+        "meanJerk": 62.52672822324547,
+        "meanPenetration": 0.013611549529567946,
+        "strokeTravel": 0.5227884933424386,
+        "contactTransitions": 2,
+        "meanTargetForce": 0.7213973532057714,
+        "targetForceRmsRelativeError": 0.5869064580391181,
+        "meanTargetContactSpeed": 0.656000514039173,
+        "peakTargetContactSpeed": 1.499234489627263,
+        "directionReversals": 1,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0006315610702271369,
+        "postContactPeakSubjectSpeed": 0.0015018247703458803,
+        "peakTargetForce": 1.1202215743950066,
+        "peakJerk": 13.650913574348746
+      },
+      "evaluation": {
+        "experimentId": "91ce90d1-ac78-47cd-87c4-12809cb3c181",
+        "revision": 1,
+        "score": 55.449,
+        "components": {
+          "target_coverage": 0.39674,
+          "force_comfort": 0.40718,
+          "smoothness": 0.98495,
+          "penetration_safety": 0.78076,
+          "contact_continuity": 1,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99809,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.86876,
+          "target_force_fit": 0.46869,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.316,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Target contact is too firm; increase compliance or reduce approach speed.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "v1-soft",
+          "positionSpringHz": 6,
+          "dampingRatio": 1.1,
+          "maxSpeed": 1.5,
+          "maxAcceleration": 14,
+          "contactCompliance": 0.78,
+          "predictionSeconds": 0.02,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -2.25,
+          "y": 1.76,
+          "z": -0.32
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "head_petting",
+      "profile": "natural-current",
+      "metrics": {
+        "elapsedSeconds": 4.833333333333319,
+        "contactSeconds": 2.3777777777777716,
+        "targetContactSeconds": 1.1555555555555534,
+        "meanForce": 0.8097034245540772,
+        "peakForce": 1.588329617146579,
+        "meanJerk": 89.13356414882027,
+        "meanPenetration": 0.016893995010317183,
+        "strokeTravel": 0.5287798453572068,
+        "contactTransitions": 2,
+        "meanTargetForce": 0.8819734877055213,
+        "targetForceRmsRelativeError": 0.7016219933189709,
+        "meanTargetContactSpeed": 0.6854051738596427,
+        "peakTargetContactSpeed": 1.699360406104142,
+        "directionReversals": 2,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0007022227276917614,
+        "postContactPeakSubjectSpeed": 0.001670932831233124,
+        "peakTargetForce": 1.588329617146579,
+        "peakJerk": 13.724275229063604
+      },
+      "evaluation": {
+        "experimentId": "db782b59-2980-4844-b64a-0bcab60119cf",
+        "revision": 1,
+        "score": 39.606,
+        "components": {
+          "target_coverage": 0.38561,
+          "force_comfort": 0.22425,
+          "smoothness": 0.98487,
+          "penetration_safety": 0.73553,
+          "contact_continuity": 1,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99788,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.66232,
+          "target_force_fit": 0.33858,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.52309,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Target contact is too firm; increase compliance or reduce approach speed.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "natural-current",
+          "positionSpringHz": 6.5,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.7,
+          "maxAcceleration": 18,
+          "contactCompliance": 0.8,
+          "predictionSeconds": 0.03,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -2.25,
+          "y": 1.76,
+          "z": -0.32
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "head_petting",
+      "profile": "hand-limp-recommendation",
+      "metrics": {
+        "elapsedSeconds": 4.833333333333319,
+        "contactSeconds": 1.9777777777777727,
+        "targetContactSeconds": 1.0111111111111095,
+        "meanForce": 0.6379913210755136,
+        "peakForce": 1.1149236883882205,
+        "meanJerk": 22.622013661917872,
+        "meanPenetration": 0.021032900370106838,
+        "strokeTravel": 0.5415650505777414,
+        "contactTransitions": 2,
+        "meanTargetForce": 0.7480915459581456,
+        "targetForceRmsRelativeError": 0.4057870180598237,
+        "meanTargetContactSpeed": 0.808129573960207,
+        "peakTargetContactSpeed": 1.2991201365678762,
+        "directionReversals": 1,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0005166566850242491,
+        "postContactPeakSubjectSpeed": 0.0012429476846120317,
+        "peakTargetForce": 1.1149236883882205,
+        "peakJerk": 8.89076998777761
+      },
+      "evaluation": {
+        "experimentId": "808e1f96-901a-4924-803c-567ab83b1dca",
+        "revision": 1,
+        "score": 53.326,
+        "components": {
+          "target_coverage": 0.33741,
+          "force_comfort": 0.57579,
+          "smoothness": 0.99017,
+          "penetration_safety": 0.68221,
+          "contact_continuity": 1,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99843,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.82717,
+          "target_force_fit": 0.6961,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.316,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "hand-limp-recommendation",
+          "positionSpringHz": 7,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.3,
+          "maxAcceleration": 9,
+          "contactCompliance": 0.95,
+          "predictionSeconds": 0.015,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -2.25,
+          "y": 1.76,
+          "z": -0.32
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "head_petting",
+      "profile": "task-specific-v2-like",
+      "metrics": {
+        "elapsedSeconds": 4.833333333333319,
+        "contactSeconds": 2.477777777777771,
+        "targetContactSeconds": 1.233333333333331,
+        "meanForce": 0.777497927585638,
+        "peakForce": 1.5354355146692902,
+        "meanJerk": 105.77962769493065,
+        "meanPenetration": 0.017016554949611903,
+        "strokeTravel": 0.7559633259443428,
+        "contactTransitions": 6,
+        "meanTargetForce": 0.9574971133928059,
+        "targetForceRmsRelativeError": 0.8798584510059279,
+        "meanTargetContactSpeed": 0.9449813308849773,
+        "peakTargetContactSpeed": 1.895675685012806,
+        "directionReversals": 3,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0008424430283764297,
+        "postContactPeakSubjectSpeed": 0.001997449994915341,
+        "peakTargetForce": 1.534686209930789,
+        "peakJerk": 19.99999950431124
+      },
+      "evaluation": {
+        "experimentId": "127e3246-4fb6-484c-956f-4baf8bc7f5ca",
+        "revision": 1,
+        "score": 33.542,
+        "components": {
+          "target_coverage": 0.41157,
+          "force_comfort": 0.10795,
+          "smoothness": 0.97802,
+          "penetration_safety": 0.73389,
+          "contact_continuity": 0.83448,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99746,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.59279,
+          "target_force_fit": 0.18211,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.74976,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Target contact is too firm; increase compliance or reduce approach speed.",
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "task-specific-v2-like",
+          "positionSpringHz": 8.5,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.9,
+          "maxAcceleration": 20,
+          "contactCompliance": 0.82,
+          "predictionSeconds": 0.03,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -2.25,
+          "y": 1.76,
+          "z": -0.32
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "head_petting",
+      "profile": "aggressive-control",
+      "metrics": {
+        "elapsedSeconds": 4.833333333333319,
+        "contactSeconds": 0.6111111111111109,
+        "targetContactSeconds": 0.17777777777777773,
+        "meanForce": 0.5234170969852922,
+        "peakForce": 3.004177469196453,
+        "meanJerk": 125.16888261644105,
+        "meanPenetration": 0.0038712008939155037,
+        "strokeTravel": 0.18326228275621947,
+        "contactTransitions": 20,
+        "meanTargetForce": 0.36974057906749336,
+        "targetForceRmsRelativeError": 0.9668166915037297,
+        "meanTargetContactSpeed": 1.479053390972422,
+        "peakTargetContactSpeed": 2.7633583156012795,
+        "directionReversals": 0,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 8.460766927969099E-05,
+        "postContactPeakSubjectSpeed": 0.00034947172982964666,
+        "peakTargetForce": 2.2593851095538113,
+        "peakJerk": 14.000000000000002
+      },
+      "evaluation": {
+        "experimentId": "f6cf804d-c836-43aa-bf4e-76519e42d486",
+        "revision": 1,
+        "score": 19.833,
+        "components": {
+          "target_coverage": 0.05933,
+          "force_comfort": 0.05972,
+          "smoothness": 0.98456,
+          "penetration_safety": 0.93203,
+          "contact_continuity": 0.25517,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99969,
+          "peak_force_safety": 0.85334,
+          "target_force_gate": 0.4669,
+          "target_force_fit": 0.12791,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.1653,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "aggressive-control",
+          "positionSpringHz": 10,
+          "dampingRatio": 0.85,
+          "maxSpeed": 2.8,
+          "maxAcceleration": 28,
+          "contactCompliance": 0.4,
+          "predictionSeconds": 0.04,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -2.25,
+          "y": 1.76,
+          "z": -0.32
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "profile": "v1-soft",
+      "metrics": {
+        "elapsedSeconds": 5.122222222222207,
+        "contactSeconds": 2.9555555555555473,
+        "targetContactSeconds": 2.9555555555555473,
+        "meanForce": 0.5650162764851993,
+        "peakForce": 1.7853996792844806,
+        "meanJerk": 61.137519327676635,
+        "meanPenetration": 0.012359332055658073,
+        "strokeTravel": 0.4850505869831791,
+        "contactTransitions": 8,
+        "meanTargetForce": 0.5650162764851993,
+        "targetForceRmsRelativeError": 0.5454358603664387,
+        "meanTargetContactSpeed": 0.29608262003701746,
+        "peakTargetContactSpeed": 1.501043914234959,
+        "directionReversals": 3,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0006446830670944751,
+        "postContactPeakSubjectSpeed": 0.0021838620915444413,
+        "peakTargetForce": 1.7853996792844806,
+        "peakJerk": 9.302784871375126
+      },
+      "evaluation": {
+        "experimentId": "8f43fdd4-f5fb-4d02-901e-abc267f5e7a3",
+        "revision": 1,
+        "score": 62.315,
+        "components": {
+          "target_coverage": 0.93066,
+          "force_comfort": 0.43013,
+          "smoothness": 0.98972,
+          "penetration_safety": 0.79874,
+          "contact_continuity": 0.76573,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99782,
+          "peak_force_safety": 0.96069,
+          "target_force_gate": 0.82765,
+          "target_force_fit": 0.5197,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 1,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "v1-soft",
+          "positionSpringHz": 6,
+          "dampingRatio": 1.1,
+          "maxSpeed": 1.5,
+          "maxAcceleration": 14,
+          "contactCompliance": 0.78,
+          "predictionSeconds": 0.02,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -1.22,
+          "y": 1.74,
+          "z": -0.055
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "profile": "natural-current",
+      "metrics": {
+        "elapsedSeconds": 5.122222222222207,
+        "contactSeconds": 2.944444444444436,
+        "targetContactSeconds": 2.944444444444436,
+        "meanForce": 0.6033296569583398,
+        "peakForce": 1.5110067408607026,
+        "meanJerk": 91.26812947508164,
+        "meanPenetration": 0.013953364453862653,
+        "strokeTravel": 0.6101444439150794,
+        "contactTransitions": 8,
+        "meanTargetForce": 0.6033296569583398,
+        "targetForceRmsRelativeError": 0.564805450825477,
+        "meanTargetContactSpeed": 0.3471935134694534,
+        "peakTargetContactSpeed": 1.6999003887250834,
+        "directionReversals": 5,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0007593678178318104,
+        "postContactPeakSubjectSpeed": 0.0024360051694812925,
+        "peakTargetForce": 1.5110067408607026,
+        "peakJerk": 14.852464172851858
+      },
+      "evaluation": {
+        "experimentId": "4144870b-9726-40d5-b170-fd73f8829949",
+        "revision": 1,
+        "score": 68.193,
+        "components": {
+          "target_coverage": 0.92716,
+          "force_comfort": 0.44825,
+          "smoothness": 0.98363,
+          "penetration_safety": 0.77593,
+          "contact_continuity": 0.76573,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99748,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.90431,
+          "target_force_fit": 0.49569,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.44933,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "natural-current",
+          "positionSpringHz": 6.5,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.7,
+          "maxAcceleration": 18,
+          "contactCompliance": 0.8,
+          "predictionSeconds": 0.03,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -1.22,
+          "y": 1.74,
+          "z": -0.055
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "profile": "hand-limp-recommendation",
+      "metrics": {
+        "elapsedSeconds": 5.122222222222207,
+        "contactSeconds": 2.7111111111111037,
+        "targetContactSeconds": 2.7111111111111037,
+        "meanForce": 0.5441406351493971,
+        "peakForce": 1.54295953212975,
+        "meanJerk": 42.82999241128548,
+        "meanPenetration": 0.02053050448720639,
+        "strokeTravel": 0.5370190812199032,
+        "contactTransitions": 8,
+        "meanTargetForce": 0.5441406351493971,
+        "targetForceRmsRelativeError": 0.45968224871528146,
+        "meanTargetContactSpeed": 0.33788022028157727,
+        "peakTargetContactSpeed": 1.3016425979499753,
+        "directionReversals": 3,
+        "postContactSampledSeconds": 0.8666666666666656,
+        "postContactRmsSubjectSpeed": 0.0005179037261649342,
+        "postContactPeakSubjectSpeed": 0.0016038280476769816,
+        "peakTargetForce": 1.54295953212975,
+        "peakJerk": 8.924698542946311
+      },
+      "evaluation": {
+        "experimentId": "3ec58771-eb50-45b2-a407-298d7b14932d",
+        "revision": 1,
+        "score": 57.916,
+        "components": {
+          "target_coverage": 0.85368,
+          "force_comfort": 0.49418,
+          "smoothness": 0.99013,
+          "penetration_safety": 0.68847,
+          "contact_continuity": 0.76573,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.9983,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.78664,
+          "target_force_fit": 0.62821,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 1,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "hand-limp-recommendation",
+          "positionSpringHz": 7,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.3,
+          "maxAcceleration": 9,
+          "contactCompliance": 0.95,
+          "predictionSeconds": 0.015,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -1.22,
+          "y": 1.74,
+          "z": -0.055
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "profile": "task-specific-v2-like",
+      "metrics": {
+        "elapsedSeconds": 5.122222222222207,
+        "contactSeconds": 2.577777777777771,
+        "targetContactSeconds": 2.5333333333333266,
+        "meanForce": 0.6943763467199164,
+        "peakForce": 2.480928107126583,
+        "meanJerk": 133.90560611992962,
+        "meanPenetration": 0.016402569615297864,
+        "strokeTravel": 0.8342082913091564,
+        "contactTransitions": 14,
+        "meanTargetForce": 0.7024959177518572,
+        "targetForceRmsRelativeError": 0.6831497758408962,
+        "meanTargetContactSpeed": 0.5131288459158269,
+        "peakTargetContactSpeed": 1.9032442996612828,
+        "directionReversals": 14,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0009066595154413683,
+        "postContactPeakSubjectSpeed": 0.002888271861968716,
+        "peakTargetForce": 2.480928107126583,
+        "peakJerk": 19.919226757953766
+      },
+      "evaluation": {
+        "experimentId": "8b933081-ce09-4cf7-a9f1-75d2686a93c9",
+        "revision": 1,
+        "score": 59.596,
+        "components": {
+          "target_coverage": 0.7977,
+          "force_comfort": 0.32252,
+          "smoothness": 0.97811,
+          "penetration_safety": 0.74213,
+          "contact_continuity": 0.53145,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.997,
+          "peak_force_safety": 0.80736,
+          "target_force_gate": 0.90046,
+          "target_force_fit": 0.35818,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Target contact is too firm; increase compliance or reduce approach speed.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "task-specific-v2-like",
+          "positionSpringHz": 8.5,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.9,
+          "maxAcceleration": 20,
+          "contactCompliance": 0.82,
+          "predictionSeconds": 0.03,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -1.22,
+          "y": 1.74,
+          "z": -0.055
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "profile": "aggressive-control",
+      "metrics": {
+        "elapsedSeconds": 5.122222222222207,
+        "contactSeconds": 0.8777777777777767,
+        "targetContactSeconds": 0.3333333333333333,
+        "meanForce": 0.5678431029659983,
+        "peakForce": 2.8504506629582824,
+        "meanJerk": 154.1616708615086,
+        "meanPenetration": 0.004411945036641358,
+        "strokeTravel": 0.2475541874782946,
+        "contactTransitions": 38,
+        "meanTargetForce": 0.6705152519785227,
+        "targetForceRmsRelativeError": 1.211637159778785,
+        "meanTargetContactSpeed": 1.1756767402272674,
+        "peakTargetContactSpeed": 2.770067993580237,
+        "directionReversals": 1,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0002790516650385209,
+        "postContactPeakSubjectSpeed": 0.0013447402254802448,
+        "peakTargetForce": 2.8504506629582824,
+        "peakJerk": 28
+      },
+      "evaluation": {
+        "experimentId": "c163c2a8-1aa6-4ce3-8a1c-f776028d1b85",
+        "revision": 1,
+        "score": 38.143,
+        "components": {
+          "target_coverage": 0.10496,
+          "force_comfort": 0.03794,
+          "smoothness": 0.96937,
+          "penetration_safety": 0.92292,
+          "contact_continuity": 0,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99892,
+          "peak_force_safety": 0.73612,
+          "target_force_gate": 0.95892,
+          "target_force_fit": 0.03957,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.44933,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Target contact is too firm; increase compliance or reduce approach speed.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "aggressive-control",
+          "positionSpringHz": 10,
+          "dampingRatio": 0.85,
+          "maxSpeed": 2.8,
+          "maxAcceleration": 28,
+          "contactCompliance": 0.4,
+          "predictionSeconds": 0.04,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -1.22,
+          "y": 1.74,
+          "z": -0.055
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "limp_support",
+      "profile": "v1-soft",
+      "metrics": {
+        "elapsedSeconds": 5.322222222222206,
+        "contactSeconds": 2.6555555555555483,
+        "targetContactSeconds": 2.6555555555555483,
+        "meanForce": 1.0722028465626936,
+        "peakForce": 2.0464006631062506,
+        "meanJerk": 58.73852458996486,
+        "meanPenetration": 0.017778336275353825,
+        "strokeTravel": 0.6670222978033683,
+        "contactTransitions": 8,
+        "meanTargetForce": 1.0722028465626936,
+        "targetForceRmsRelativeError": 0.34393205631749957,
+        "meanTargetContactSpeed": 0.5666783896465447,
+        "peakTargetContactSpeed": 1.508568778647314,
+        "directionReversals": 4,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.001434665083177998,
+        "postContactPeakSubjectSpeed": 0.0038478180710365874,
+        "peakTargetForce": 2.0464006631062506,
+        "peakJerk": 11.843525281307278
+      },
+      "evaluation": {
+        "experimentId": "0a9f111c-5277-4c29-991e-3ddf79f0ad65",
+        "revision": 1,
+        "score": 51.311,
+        "components": {
+          "target_coverage": 0.80477,
+          "force_comfort": 0.53775,
+          "smoothness": 0.98693,
+          "penetration_safety": 0.7238,
+          "contact_continuity": 0.77453,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99551,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.69759,
+          "target_force_fit": 0.77087,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.93053,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "v1-soft",
+          "positionSpringHz": 6,
+          "dampingRatio": 1.1,
+          "maxSpeed": 1.5,
+          "maxAcceleration": 14,
+          "contactCompliance": 0.78,
+          "predictionSeconds": 0.02,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 0.27,
+          "y": 1.12,
+          "z": -0.235
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "limp_support",
+      "profile": "natural-current",
+      "metrics": {
+        "elapsedSeconds": 5.322222222222206,
+        "contactSeconds": 2.622222222222215,
+        "targetContactSeconds": 2.622222222222215,
+        "meanForce": 1.2893226278917516,
+        "peakForce": 2.5395182897285027,
+        "meanJerk": 89.27849852125752,
+        "meanPenetration": 0.022347482618622006,
+        "strokeTravel": 0.6604531200700272,
+        "contactTransitions": 8,
+        "meanTargetForce": 1.2893226278917516,
+        "targetForceRmsRelativeError": 0.29255414835309884,
+        "meanTargetContactSpeed": 0.6098444336554715,
+        "peakTargetContactSpeed": 1.7122065566270033,
+        "directionReversals": 4,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0015964742579455897,
+        "postContactPeakSubjectSpeed": 0.004290109647007396,
+        "peakTargetForce": 2.5395182897285027,
+        "peakJerk": 16.101380006047805
+      },
+      "evaluation": {
+        "experimentId": "5067cf47-0b4d-456b-8f39-f40786cfabc3",
+        "revision": 1,
+        "score": 68.286,
+        "components": {
+          "target_coverage": 0.79467,
+          "force_comfort": 0.74121,
+          "smoothness": 0.98227,
+          "penetration_safety": 0.6661,
+          "contact_continuity": 0.77453,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99501,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.89478,
+          "target_force_fit": 0.82837,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.93053,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "natural-current",
+          "positionSpringHz": 6.5,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.7,
+          "maxAcceleration": 18,
+          "contactCompliance": 0.8,
+          "predictionSeconds": 0.03,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 0.27,
+          "y": 1.12,
+          "z": -0.235
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "limp_support",
+      "profile": "hand-limp-recommendation",
+      "metrics": {
+        "elapsedSeconds": 5.322222222222206,
+        "contactSeconds": 2.6444444444444373,
+        "targetContactSeconds": 2.6444444444444373,
+        "meanForce": 1.3966391077837188,
+        "peakForce": 2.7592145607529273,
+        "meanJerk": 36.10727451510382,
+        "meanPenetration": 0.034277508052415015,
+        "strokeTravel": 0.6896041546859176,
+        "contactTransitions": 8,
+        "meanTargetForce": 1.3966391077837188,
+        "targetForceRmsRelativeError": 0.39802454992215724,
+        "meanTargetContactSpeed": 0.5151905829497611,
+        "peakTargetContactSpeed": 1.321640338391001,
+        "directionReversals": 6,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0012769349820587908,
+        "postContactPeakSubjectSpeed": 0.003469353878161738,
+        "peakTargetForce": 2.7592145607529273,
+        "peakJerk": 8.999999999999986
+      },
+      "evaluation": {
+        "experimentId": "15121783-8a59-42d5-93ae-7e4c1c20182c",
+        "revision": 1,
+        "score": 74.383,
+        "components": {
+          "target_coverage": 0.8014,
+          "force_comfort": 0.70344,
+          "smoothness": 0.99005,
+          "penetration_safety": 0.53621,
+          "contact_continuity": 0.77453,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99599,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.99676,
+          "target_force_fit": 0.70572,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.93053,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "hand-limp-recommendation",
+          "positionSpringHz": 7,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.3,
+          "maxAcceleration": 9,
+          "contactCompliance": 0.95,
+          "predictionSeconds": 0.015,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 0.27,
+          "y": 1.12,
+          "z": -0.235
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "limp_support",
+      "profile": "task-specific-v2-like",
+      "metrics": {
+        "elapsedSeconds": 5.322222222222206,
+        "contactSeconds": 2.633333333333326,
+        "targetContactSeconds": 2.633333333333326,
+        "meanForce": 1.3673948646448955,
+        "peakForce": 3.122137180317002,
+        "meanJerk": 121.67961170086639,
+        "meanPenetration": 0.024662246150343722,
+        "strokeTravel": 0.9077876770950877,
+        "contactTransitions": 8,
+        "meanTargetForce": 1.3673948646448955,
+        "targetForceRmsRelativeError": 0.39709382296986795,
+        "meanTargetContactSpeed": 0.7192190646073321,
+        "peakTargetContactSpeed": 1.9160947661690644,
+        "directionReversals": 8,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0019151415299914975,
+        "postContactPeakSubjectSpeed": 0.005109717290216266,
+        "peakTargetForce": 3.122137180317002,
+        "peakJerk": 20
+      },
+      "evaluation": {
+        "experimentId": "eed81891-f030-46b4-81a1-5a76d625aec2",
+        "revision": 1,
+        "score": 72.691,
+        "components": {
+          "target_coverage": 0.79803,
+          "force_comfort": 0.68474,
+          "smoothness": 0.97802,
+          "penetration_safety": 0.63865,
+          "contact_continuity": 0.77453,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99403,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.96869,
+          "target_force_fit": 0.70687,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.52309,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "task-specific-v2-like",
+          "positionSpringHz": 8.5,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.9,
+          "maxAcceleration": 20,
+          "contactCompliance": 0.82,
+          "predictionSeconds": 0.03,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 0.27,
+          "y": 1.12,
+          "z": -0.235
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "limp_support",
+      "profile": "aggressive-control",
+      "metrics": {
+        "elapsedSeconds": 5.322222222222206,
+        "contactSeconds": 0.6999999999999995,
+        "targetContactSeconds": 0.5444444444444445,
+        "meanForce": 0.8462857846938739,
+        "peakForce": 4.477798891739358,
+        "meanJerk": 154.205852573881,
+        "meanPenetration": 0.007477558182324003,
+        "strokeTravel": 0.402447886486942,
+        "contactTransitions": 24,
+        "meanTargetForce": 0.8399117172725156,
+        "targetForceRmsRelativeError": 0.8171890326821432,
+        "meanTargetContactSpeed": 1.133294712932347,
+        "peakTargetContactSpeed": 2.2075086208777837,
+        "directionReversals": 1,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0002456976370539122,
+        "postContactPeakSubjectSpeed": 0.0009389908344186053,
+        "peakTargetForce": 4.477798891739358,
+        "peakJerk": 28
+      },
+      "evaluation": {
+        "experimentId": "ae7f42e8-2ec8-442c-9fc3-1348634a7ce3",
+        "revision": 1,
+        "score": 22.146,
+        "components": {
+          "target_coverage": 0.16499,
+          "force_comfort": 0.11545,
+          "smoothness": 0.96937,
+          "penetration_safety": 0.87288,
+          "contact_continuity": 0.17328,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99913,
+          "peak_force_safety": 0.78314,
+          "target_force_gate": 0.5017,
+          "target_force_fit": 0.23012,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.316,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "aggressive-control",
+          "positionSpringHz": 10,
+          "dampingRatio": 0.85,
+          "maxSpeed": 2.8,
+          "maxAcceleration": 28,
+          "contactCompliance": 0.4,
+          "predictionSeconds": 0.04,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 0.27,
+          "y": 1.12,
+          "z": -0.235
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "hand_hold",
+      "profile": "v1-soft",
+      "metrics": {
+        "elapsedSeconds": 4.1555555555555435,
+        "contactSeconds": 1.1666666666666645,
+        "targetContactSeconds": 1.1666666666666645,
+        "meanForce": 1.2423121009803495,
+        "peakForce": 2.3700584941357494,
+        "meanJerk": 26.181382621823175,
+        "meanPenetration": 0.018022333342684917,
+        "strokeTravel": 0.12323398265881524,
+        "contactTransitions": 4,
+        "meanTargetForce": 1.2423121009803495,
+        "targetForceRmsRelativeError": 0.3241111167143201,
+        "meanTargetContactSpeed": 0.28001482999577115,
+        "peakTargetContactSpeed": 0.414442185303119,
+        "directionReversals": 2,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.001481454042103909,
+        "postContactPeakSubjectSpeed": 0.004655904253608483,
+        "peakTargetForce": 2.3700584941357494,
+        "peakJerk": 10.799042573483824
+      },
+      "evaluation": {
+        "experimentId": "70fe6076-56f1-4689-bb6f-5b721ef5c13d",
+        "revision": 1,
+        "score": 58.3,
+        "components": {
+          "target_coverage": 0.45282,
+          "force_comfort": 0.67542,
+          "smoothness": 0.98807,
+          "penetration_safety": 0.72059,
+          "contact_continuity": 0.90374,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99513,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.85102,
+          "target_force_fit": 0.79366,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.1653,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "v1-soft",
+          "positionSpringHz": 6,
+          "dampingRatio": 1.1,
+          "maxSpeed": 1.5,
+          "maxAcceleration": 14,
+          "contactCompliance": 0.78,
+          "predictionSeconds": 0.02,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 2.76,
+          "y": 0.91,
+          "z": -0.3
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "hand_hold",
+      "profile": "natural-current",
+      "metrics": {
+        "elapsedSeconds": 4.1555555555555435,
+        "contactSeconds": 1.3222222222222195,
+        "targetContactSeconds": 1.3222222222222195,
+        "meanForce": 1.6077396100264871,
+        "peakForce": 2.85211891754963,
+        "meanJerk": 39.32737390520202,
+        "meanPenetration": 0.024424547615219165,
+        "strokeTravel": 0.1633573377429967,
+        "contactTransitions": 4,
+        "meanTargetForce": 1.6077396100264871,
+        "targetForceRmsRelativeError": 0.4111471896332717,
+        "meanTargetContactSpeed": 0.3697973855418514,
+        "peakTargetContactSpeed": 0.5956732696467674,
+        "directionReversals": 2,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0016398492084321596,
+        "postContactPeakSubjectSpeed": 0.005178442787493429,
+        "peakTargetForce": 2.85211891754963,
+        "peakJerk": 16.095633869965454
+      },
+      "evaluation": {
+        "experimentId": "db3517d5-e098-49fd-97b4-458eabcdab4d",
+        "revision": 1,
+        "score": 55.813,
+        "components": {
+          "target_coverage": 0.5132,
+          "force_comfort": 0.57197,
+          "smoothness": 0.98227,
+          "penetration_safety": 0.64141,
+          "contact_continuity": 0.90374,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.9946,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.82962,
+          "target_force_fit": 0.68943,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.1653,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "natural-current",
+          "positionSpringHz": 6.5,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.7,
+          "maxAcceleration": 18,
+          "contactCompliance": 0.8,
+          "predictionSeconds": 0.03,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 2.76,
+          "y": 0.91,
+          "z": -0.3
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "hand_hold",
+      "profile": "hand-limp-recommendation",
+      "metrics": {
+        "elapsedSeconds": 4.1555555555555435,
+        "contactSeconds": 0.9888888888888874,
+        "targetContactSeconds": 0.9888888888888874,
+        "meanForce": 1.1220377309773002,
+        "peakForce": 1.5478168904453835,
+        "meanJerk": 17.890568462703975,
+        "meanPenetration": 0.02556068340564731,
+        "strokeTravel": 0.07963512187515852,
+        "contactTransitions": 4,
+        "meanTargetForce": 1.1220377309773002,
+        "targetForceRmsRelativeError": 0.2952697627181476,
+        "meanTargetContactSpeed": 0.1603680541578943,
+        "peakTargetContactSpeed": 0.5638483937350266,
+        "directionReversals": 1,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0012375576278354035,
+        "postContactPeakSubjectSpeed": 0.004037955312871282,
+        "peakTargetForce": 1.5478168904453835,
+        "peakJerk": 8.765279855631704
+      },
+      "evaluation": {
+        "experimentId": "ced62870-43f6-462f-a9c6-feb758ed78e6",
+        "revision": 1,
+        "score": 48.033,
+        "components": {
+          "target_coverage": 0.38382,
+          "force_comfort": 0.61226,
+          "smoothness": 0.99031,
+          "penetration_safety": 0.6283,
+          "contact_continuity": 0.90374,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99588,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.74172,
+          "target_force_fit": 0.82547,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 1,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "hand-limp-recommendation",
+          "positionSpringHz": 7,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.3,
+          "maxAcceleration": 9,
+          "contactCompliance": 0.95,
+          "predictionSeconds": 0.015,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 2.76,
+          "y": 0.91,
+          "z": -0.3
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "hand_hold",
+      "profile": "task-specific-v2-like",
+      "metrics": {
+        "elapsedSeconds": 4.1555555555555435,
+        "contactSeconds": 1.4777777777777745,
+        "targetContactSeconds": 1.4777777777777745,
+        "meanForce": 1.7618536547747599,
+        "peakForce": 2.5774417920917227,
+        "meanJerk": 76.06880917077585,
+        "meanPenetration": 0.02804298413407263,
+        "strokeTravel": 0.28171240426218125,
+        "contactTransitions": 4,
+        "meanTargetForce": 1.7618536547747599,
+        "targetForceRmsRelativeError": 0.42972458231761484,
+        "meanTargetContactSpeed": 0.3909347540799456,
+        "peakTargetContactSpeed": 0.6887344653269334,
+        "directionReversals": 4,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0019520832016140031,
+        "postContactPeakSubjectSpeed": 0.00609833313984294,
+        "peakTargetForce": 2.5774417920917227,
+        "peakJerk": 20
+      },
+      "evaluation": {
+        "experimentId": "363b04be-a9ac-456e-97b9-1710daf02d99",
+        "revision": 1,
+        "score": 48.978,
+        "components": {
+          "target_coverage": 0.57357,
+          "force_comfort": 0.4884,
+          "smoothness": 0.97802,
+          "penetration_safety": 0.60057,
+          "contact_continuity": 0.90374,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.9936,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.73319,
+          "target_force_fit": 0.66614,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Target contact is too firm; increase compliance or reduce approach speed.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "task-specific-v2-like",
+          "positionSpringHz": 8.5,
+          "dampingRatio": 1.2,
+          "maxSpeed": 1.9,
+          "maxAcceleration": 20,
+          "contactCompliance": 0.82,
+          "predictionSeconds": 0.03,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 2.76,
+          "y": 0.91,
+          "z": -0.3
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "hand_hold",
+      "profile": "aggressive-control",
+      "metrics": {
+        "elapsedSeconds": 4.1555555555555435,
+        "contactSeconds": 0.7999999999999992,
+        "targetContactSeconds": 0.7999999999999992,
+        "meanForce": 0.9612325384766423,
+        "peakForce": 4.068627982827767,
+        "meanJerk": 136.9247249283197,
+        "meanPenetration": 0.007371804268440613,
+        "strokeTravel": 0.4571811921705895,
+        "contactTransitions": 14,
+        "meanTargetForce": 0.9612325384766423,
+        "targetForceRmsRelativeError": 0.7166159254006345,
+        "meanTargetContactSpeed": 0.8401761346854625,
+        "peakTargetContactSpeed": 1.6596171280608134,
+        "directionReversals": 3,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0004351609253147957,
+        "postContactPeakSubjectSpeed": 0.001210956606429278,
+        "peakTargetForce": 4.068627982827767,
+        "peakJerk": 22.729384083332366
+      },
+      "evaluation": {
+        "experimentId": "ca045527-b290-428b-918e-d20ac8d35509",
+        "revision": 1,
+        "score": 31.426,
+        "components": {
+          "target_coverage": 0.31051,
+          "force_comfort": 0.19449,
+          "smoothness": 0.97506,
+          "penetration_safety": 0.87456,
+          "contact_continuity": 0.42246,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99862,
+          "peak_force_safety": 0.86749,
+          "target_force_gate": 0.60193,
+          "target_force_fit": 0.3231,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.00075,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "aggressive-control",
+          "positionSpringHz": 10,
+          "dampingRatio": 0.85,
+          "maxSpeed": 2.8,
+          "maxAcceleration": 28,
+          "contactCompliance": 0.4,
+          "predictionSeconds": 0.04,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 2.76,
+          "y": 0.91,
+          "z": -0.3
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    }
+  ],
+  "finalRetreat": [
+    {
+      "task": "head_petting",
+      "profile": "v1-soft",
+      "metrics": {
+        "elapsedSeconds": 4.833333333333319,
+        "contactSeconds": 2.2222222222222165,
+        "targetContactSeconds": 1.1888888888888867,
+        "meanForce": 0.678200536719103,
+        "peakForce": 1.26114864196644,
+        "meanJerk": 62.52672822324547,
+        "meanPenetration": 0.013611549529567946,
+        "strokeTravel": 0.5227884933424386,
+        "contactTransitions": 2,
+        "meanTargetForce": 0.7213973532057714,
+        "targetForceRmsRelativeError": 0.5869064580391181,
+        "meanTargetContactSpeed": 0.656000514039173,
+        "peakTargetContactSpeed": 1.499234489627263,
+        "directionReversals": 1,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0006315610702271369,
+        "postContactPeakSubjectSpeed": 0.0015018247703458803,
+        "peakTargetForce": 1.1202215743950066,
+        "peakJerk": 13.650913574348746
+      },
+      "evaluation": {
+        "experimentId": "44097f1e-eb64-4162-ae3c-85ade25198aa",
+        "revision": 1,
+        "score": 55.449,
+        "components": {
+          "target_coverage": 0.39674,
+          "force_comfort": 0.40718,
+          "smoothness": 0.98495,
+          "penetration_safety": 0.78076,
+          "contact_continuity": 1,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99809,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.86876,
+          "target_force_fit": 0.46869,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.316,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Target contact is too firm; increase compliance or reduce approach speed.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "v1-soft",
+          "positionSpringHz": 6,
+          "dampingRatio": 1.1,
+          "maxSpeed": 1.5,
+          "maxAcceleration": 14,
+          "contactCompliance": 0.78,
+          "predictionSeconds": 0.02,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -2.25,
+          "y": 1.76,
+          "z": -0.32
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "profile": "v1-soft",
+      "metrics": {
+        "elapsedSeconds": 5.122222222222207,
+        "contactSeconds": 2.9555555555555473,
+        "targetContactSeconds": 2.9555555555555473,
+        "meanForce": 0.5650162764851993,
+        "peakForce": 1.7853996792844806,
+        "meanJerk": 61.137519327676635,
+        "meanPenetration": 0.012359332055658073,
+        "strokeTravel": 0.4850505869831791,
+        "contactTransitions": 8,
+        "meanTargetForce": 0.5650162764851993,
+        "targetForceRmsRelativeError": 0.5454358603664387,
+        "meanTargetContactSpeed": 0.29608262003701746,
+        "peakTargetContactSpeed": 1.501043914234959,
+        "directionReversals": 3,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0006446830670944751,
+        "postContactPeakSubjectSpeed": 0.0021838620915444413,
+        "peakTargetForce": 1.7853996792844806,
+        "peakJerk": 9.302784871375126
+      },
+      "evaluation": {
+        "experimentId": "2adf90f0-1694-41da-810a-862bb6077b4a",
+        "revision": 1,
+        "score": 62.315,
+        "components": {
+          "target_coverage": 0.93066,
+          "force_comfort": 0.43013,
+          "smoothness": 0.98972,
+          "penetration_safety": 0.79874,
+          "contact_continuity": 0.76573,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99782,
+          "peak_force_safety": 0.96069,
+          "target_force_gate": 0.82765,
+          "target_force_fit": 0.5197,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 1,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "v1-soft",
+          "positionSpringHz": 6,
+          "dampingRatio": 1.1,
+          "maxSpeed": 1.5,
+          "maxAcceleration": 14,
+          "contactCompliance": 0.78,
+          "predictionSeconds": 0.02,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": -1.22,
+          "y": 1.74,
+          "z": -0.055
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "limp_support",
+      "profile": "v1-soft",
+      "metrics": {
+        "elapsedSeconds": 5.322222222222206,
+        "contactSeconds": 2.6555555555555483,
+        "targetContactSeconds": 2.6555555555555483,
+        "meanForce": 1.0722028465626936,
+        "peakForce": 2.0464006631062506,
+        "meanJerk": 58.73852458996486,
+        "meanPenetration": 0.017778336275353825,
+        "strokeTravel": 0.6670222978033683,
+        "contactTransitions": 8,
+        "meanTargetForce": 1.0722028465626936,
+        "targetForceRmsRelativeError": 0.34393205631749957,
+        "meanTargetContactSpeed": 0.5666783896465447,
+        "peakTargetContactSpeed": 1.508568778647314,
+        "directionReversals": 4,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.001434665083177998,
+        "postContactPeakSubjectSpeed": 0.0038478180710365874,
+        "peakTargetForce": 2.0464006631062506,
+        "peakJerk": 11.843525281307278
+      },
+      "evaluation": {
+        "experimentId": "b15e6e0b-0401-4d9b-9c25-a3236f6d272a",
+        "revision": 1,
+        "score": 51.311,
+        "components": {
+          "target_coverage": 0.80477,
+          "force_comfort": 0.53775,
+          "smoothness": 0.98693,
+          "penetration_safety": 0.7238,
+          "contact_continuity": 0.77453,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99551,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.69759,
+          "target_force_fit": 0.77087,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.93053,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "Target contact is too light; move slightly deeper or reduce compliance.",
+          "Stroke speed is outside the preferred natural range for this task."
+        ],
+        "profile": {
+          "name": "v1-soft",
+          "positionSpringHz": 6,
+          "dampingRatio": 1.1,
+          "maxSpeed": 1.5,
+          "maxAcceleration": 14,
+          "contactCompliance": 0.78,
+          "predictionSeconds": 0.02,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 0.27,
+          "y": 1.12,
+          "z": -0.235
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    },
+    {
+      "task": "hand_hold",
+      "profile": "v1-soft",
+      "metrics": {
+        "elapsedSeconds": 4.1555555555555435,
+        "contactSeconds": 1.1666666666666645,
+        "targetContactSeconds": 1.1666666666666645,
+        "meanForce": 1.2423121009803495,
+        "peakForce": 2.3700584941357494,
+        "meanJerk": 26.181382621823175,
+        "meanPenetration": 0.018022333342684917,
+        "strokeTravel": 0.12323398265881524,
+        "contactTransitions": 4,
+        "meanTargetForce": 1.2423121009803495,
+        "targetForceRmsRelativeError": 0.3241111167143201,
+        "meanTargetContactSpeed": 0.28001482999577115,
+        "peakTargetContactSpeed": 0.414442185303119,
+        "directionReversals": 2,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.001481454042103909,
+        "postContactPeakSubjectSpeed": 0.004655904253608483,
+        "peakTargetForce": 2.3700584941357494,
+        "peakJerk": 10.799042573483824
+      },
+      "evaluation": {
+        "experimentId": "0432840a-1714-4a3b-99a1-c9e5c415f587",
+        "revision": 1,
+        "score": 58.3,
+        "components": {
+          "target_coverage": 0.45282,
+          "force_comfort": 0.67542,
+          "smoothness": 0.98807,
+          "penetration_safety": 0.72059,
+          "contact_continuity": 0.90374,
+          "stroke_naturalness": 0,
+          "reaction_settling": 0.99513,
+          "peak_force_safety": 1,
+          "target_force_gate": 0.85102,
+          "target_force_fit": 0.79366,
+          "target_speed_naturalness": 0,
+          "direction_reversal_naturalness": 0.1653,
+          "post_contact_measurement": 1,
+          "evaluator_version": 3
+        },
+        "findings": [
+          "The hand is not maintaining contact with the requested target.",
+          "Stroke speed is outside the preferred natural range for this task.",
+          "Stroke direction reversals do not match the task's natural rhythm."
+        ],
+        "profile": {
+          "name": "v1-soft",
+          "positionSpringHz": 6,
+          "dampingRatio": 1.1,
+          "maxSpeed": 1.5,
+          "maxAcceleration": 14,
+          "contactCompliance": 0.78,
+          "predictionSeconds": 0.02,
+          "handRadius": 0.075,
+          "bindings": {
+            "look": "Mouse",
+            "right_hand_move": "LeftShift+Mouse",
+            "right_arm_tilt": "LeftShift+MiddleMouse",
+            "left_hand_move": "LeftCtrl+Mouse",
+            "left_arm_tilt": "LeftCtrl+MiddleMouse",
+            "grip": "RightMouse",
+            "touch": "LeftMouse"
+          }
+        }
+      },
+      "retreat": {
+        "hand": "Right",
+        "target": {
+          "x": 2.76,
+          "y": 0.91,
+          "z": -0.3
+        },
+        "durationSeconds": 1.0,
+        "grip": false,
+        "measureSettling": true,
+        "label": "retreat"
+      }
+    }
+  ],
+  "remainingExperiments": [],
+  "chosenCommonProfile": "v1-soft",
+  "driverProfilePreview": {
+    "basePreset": "Natural",
+    "profileName": "v1-soft",
+    "settings": {
+      "preset": "Natural",
+      "movementSpeed": 0.9,
+      "fastMultiplier": 2.25,
+      "slowMultiplier": 0.25,
+      "turnDegreesPerSecond": 60,
+      "movementSmoothTau": 0.18,
+      "mouseSensitivityDegreesPerPixel": 0.14,
+      "armSensitivityDegreesPerPixel": 0.2,
+      "handPositionSensitivity": 0.001,
+      "wheelDepthStep": 0.045,
+      "wheelYawDegreesPerNotch": 9,
+      "stickSensitivity": 0.01,
+      "stickReleaseTau": 0.08,
+      "handPoseTau": 0.09,
+      "handSmoothingMode": "secondOrder",
+      "handSpringHz": 6,
+      "handDamping": 1.1,
+      "handMaxSpeed": 1.5,
+      "handMaxAcceleration": 14,
+      "handPredictionSeconds": 0.02
+    },
+    "configPath": "C:\\Users\\zeros\\AppData\\Local\\OpenMeow\\motion-profile.cfg",
+    "applied": false
+  }
+}

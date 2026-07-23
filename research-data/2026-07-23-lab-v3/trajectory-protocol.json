@@ -1,0 +1,69 @@
+{
+  "date": "2026-07-23",
+  "subjectId": "default_mew",
+  "evaluatorVersion": 3,
+  "protocol": {
+    "targetTrajectory": "smoothstep interpolation over durationSeconds",
+    "strokeSpeed": "absolute target-relative velocity projected onto task strokeAxis",
+    "benchmarkTiming": "stroke distance divided by preferredStrokeSpeed",
+    "explicitSettlingSeconds": 0.9
+  },
+  "autotune": [
+    {
+      "task": "head_petting",
+      "seed": 9201,
+      "candidates": 64,
+      "score": 74.333,
+      "profile": { "positionSpringHz": 11.17368127897567, "dampingRatio": 1.2979239568648249, "maxSpeed": 1.3594708641247835, "maxAcceleration": 7.408768769906626, "contactCompliance": 0.733631021638229, "predictionSeconds": 0.04035968588914708 },
+      "components": { "targetForceGate": 0.98249, "targetSpeedNaturalness": 1.0, "strokeNaturalness": 0.1653, "reactionSettling": 0.95681 }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "seed": 9202,
+      "candidates": 64,
+      "score": 83.556,
+      "profile": { "positionSpringHz": 11.63092585935318, "dampingRatio": 0.6237103960621228, "maxSpeed": 1.6236822907812232, "maxAcceleration": 13.092409100198589, "contactCompliance": 0.6629224713532824, "predictionSeconds": 0.01227180634498215 },
+      "components": { "targetForceGate": 0.98869, "targetSpeedNaturalness": 0.90447, "strokeNaturalness": 0.40641, "reactionSettling": 0.94112 }
+    },
+    {
+      "task": "limp_support",
+      "seed": 9203,
+      "candidates": 64,
+      "score": 78.732,
+      "profile": { "positionSpringHz": 6.7523392839702705, "dampingRatio": 1.2134947396706992, "maxSpeed": 1.9126697653937694, "maxAcceleration": 15.22963835691943, "contactCompliance": 0.8982688329360768, "predictionSeconds": 0.016258930424814546 },
+      "components": { "targetForceGate": 0.98963, "targetSpeedNaturalness": 0.43804, "strokeNaturalness": 0.40761, "reactionSettling": 0.90778 }
+    },
+    {
+      "task": "hand_hold",
+      "seed": 9204,
+      "candidates": 64,
+      "score": 72.947,
+      "profile": { "positionSpringHz": 10.818112632180435, "dampingRatio": 0.6846928852594838, "maxSpeed": 2.328276675300696, "maxAcceleration": 19.194509943024617, "contactCompliance": 0.6278497941269772, "predictionSeconds": 0.027967881389412978 },
+      "components": { "targetForceGate": 0.97899, "targetSpeedNaturalness": 0.0, "strokeNaturalness": 0.0, "reactionSettling": 0.86126 }
+    }
+  ],
+  "fixedProfileRanking": [
+    {
+      "name": "v1-pilot-soft",
+      "driverMapping": { "handSpringHz": 6.0, "handDamping": 1.1, "handMaxSpeed": 1.5, "handMaxAcceleration": 14.0, "handPredictionSeconds": 0.02 },
+      "researchCompliance": 0.78,
+      "scores": { "head_petting": 66.347, "cheek_nuzzle": 51.046, "limp_support": 65.454, "hand_hold": 51.565 },
+      "mean": 58.603,
+      "worst": 51.046
+    },
+    {
+      "name": "hand-limp-specialist",
+      "scores": { "head_petting": 67.493, "cheek_nuzzle": 42.475, "limp_support": 74.528, "hand_hold": 23.065 },
+      "mean": 51.89,
+      "worst": 23.065
+    },
+    {
+      "name": "previous-natural",
+      "scores": { "head_petting": 69.053, "cheek_nuzzle": 51.921, "limp_support": 68.735, "hand_hold": 32.04 },
+      "mean": 55.437,
+      "worst": 32.04
+    }
+  ],
+  "selectedDesktopNatural": "v1-pilot-soft",
+  "driverProfileAppliedDuringResearch": false
+}

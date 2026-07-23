@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace OpenMeow.Driver;
 
 /// <summary>
-/// 仮想デバイス3台(HMD / 左手 / 右手)の <c>ITrackedDeviceServerDriver_005</c> 実装。
+/// 仮想デバイス(HMD / 左手 / 右手、および任意の腰・両足トラッカー)の <c>ITrackedDeviceServerDriver_005</c> 実装。
 /// あわせて HMD 用の <c>IVRDisplayComponent_003</c> と <c>IVRVirtualDisplay_002</c> を提供する。
 /// C++ 仮想クラスをエミュレートするため、vtable とオブジェクトはアンマネージドメモリに
 /// 手動構築する。デバイスオブジェクトの配置は [vtable ポインタ][int デバイス ID]。
@@ -13,9 +13,17 @@ internal static unsafe class Devices
     public const int Hmd = 0;
     public const int Left = 1;
     public const int Right = 2;
+    public const int Waist = 3;
+    public const int LeftFoot = 4;
+    public const int RightFoot = 5;
+    public const int TrackerCount = 3;
 
     /// <summary>Activate で SteamVR から割り当てられるデバイスインデックス(未割当 = Invalid)。</summary>
-    public static readonly uint[] ObjectIds = { VR.InvalidTrackedDeviceIndex, VR.InvalidTrackedDeviceIndex, VR.InvalidTrackedDeviceIndex };
+    public static readonly uint[] ObjectIds =
+    {
+        VR.InvalidTrackedDeviceIndex, VR.InvalidTrackedDeviceIndex, VR.InvalidTrackedDeviceIndex,
+        VR.InvalidTrackedDeviceIndex, VR.InvalidTrackedDeviceIndex, VR.InvalidTrackedDeviceIndex,
+    };
 
     /// <summary>片手分の入力コンポーネントハンドル(IVRDriverInput で作成)。</summary>
     public struct HandComponents
@@ -37,7 +45,7 @@ internal static unsafe class Devices
     private static IntPtr _deviceVtable;
     private static IntPtr _displayObject;
     private static IntPtr _virtualDisplayObject;
-    private static readonly IntPtr[] _objects = new IntPtr[3];
+    private static readonly IntPtr[] _objects = new IntPtr[6];
 
     // 仮想ディスプレイの論理サイズ。IVRVirtualDisplay を提供するため、
     // デスクトップ上にヘッドセットウィンドウは作られない(拡張モードは
@@ -103,6 +111,30 @@ internal static unsafe class Devices
             DriverHost.SetDisplayEyeToHead(objectId,
                 HmdMatrix34.Translation(-ipd / 2, 0, 0),
                 HmdMatrix34.Translation(+ipd / 2, 0, 0));
+        }
+        else if (id is Waist or LeftFoot or RightFoot)
+        {
+            string suffix = id switch
+            {
+                Waist => "waist",
+                LeftFoot => "left_foot",
+                _ => "right_foot",
+            };
+            string label = id switch
+            {
+                Waist => "Waist",
+                LeftFoot => "Left Foot",
+                _ => "Right Foot",
+            };
+            // Generic trackers deliberately have no controller role hint and no
+            // hand input components. SteamVR's Manage Trackers UI assigns their
+            // waist/foot roles from the stable registered device type.
+            Properties.SetString(container, VR.Prop_ModelNumber_String, $"OpenMeow {label} Tracker");
+            Properties.SetString(container, VR.Prop_SerialNumber_String, $"OMEOW-TRK-{suffix.ToUpperInvariant()}");
+            Properties.SetString(container, VR.Prop_RenderModelName_String, "generic_tracker");
+            Properties.SetString(container, VR.Prop_ControllerType_String, "openmeow_tracker");
+            Properties.SetString(container, VR.Prop_RegisteredDeviceType_String, $"openmeow_tracker_{suffix}");
+            Properties.SetString(container, VR.Prop_InputProfilePath_String, "{openmeow}/input/openmeow_tracker_profile.json");
         }
         else
         {

@@ -1,0 +1,10 @@
+{
+  "jsonid": "input_profile",
+  "controller_type": "openmeow_tracker",
+  "device_class": "generic_tracker",
+  "input_source": {
+    "/pose/raw": {
+      "type": "pose"
+    }
+  }
+}

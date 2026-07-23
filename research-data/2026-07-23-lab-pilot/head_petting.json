@@ -1,0 +1,54 @@
+{
+  "task": "head_petting",
+  "subject": "default_mew",
+  "agentIdPrefix": "head-agent",
+  "observed": {
+    "headPosition": { "x": -2.25, "y": 1.76, "z": 0.15 },
+    "headRadius": 0.17,
+    "baselineHandRadius": 0.075,
+    "benchmarkContactTarget": { "x": -2.25, "y": 1.76, "z": -0.06 },
+    "benchmarkApproachTarget": { "x": -2.25, "y": 1.76, "z": -0.30 },
+    "strokeAxis": { "x": 1, "y": 0, "z": 0 }
+  },
+  "baseline": {
+    "request": { "subjectId": "default_mew", "taskId": "head_petting", "agentId": "head-agent-baseline", "seed": 424242 },
+    "profile": { "name": "balanced", "positionSpringHz": 7.5, "dampingRatio": 0.92, "maxSpeed": 1.8, "maxAcceleration": 12, "contactCompliance": 0.62, "predictionSeconds": 0.035, "handRadius": 0.075 },
+    "sequence": "Right hand: approach (-2.25,1.76,-0.30) 0.55s; contact (-2.25,1.76,-0.06) 0.55s; six alternating x=-2.36/-2.14 crown strokes at 0.34s each; settle at (-2.25,1.76,-0.06) 0.65s.",
+    "metrics": { "elapsedSeconds": 3.833333333333322, "contactSeconds": 1.3444444444444417, "targetContactSeconds": 0.4444444444444446, "meanForce": 0.22636356273418365, "peakForce": 1.3909619719240611, "meanJerk": 33.46440305004487, "meanPenetration": 0.0028115144881559633, "strokeTravel": 0.5362031505887138, "contactTransitions": 25 },
+    "score": 53.724,
+    "components": { "target_coverage": 0.187, "force_comfort": 0.17024, "smoothness": 0.9635, "penetration_safety": 0.95017, "contact_continuity": 0, "stroke_naturalness": 1, "reaction_settling": 0.99939, "peak_force_safety": 1 }
+  },
+  "autoTune": {
+    "request": { "taskId": "head_petting", "subjectId": "default_mew", "seed": 424242, "candidates": 32, "parallelism": 4 },
+    "candidatesEvaluated": 32,
+    "bestProfile": { "name": "candidate-016", "positionSpringHz": 5.803237839774307, "dampingRatio": 1.3917911592483996, "maxSpeed": 2.046714481584775, "maxAcceleration": 19.670129709331515, "contactCompliance": 0.620405206699113, "predictionSeconds": 0.027048505932115254, "handRadius": 0.075 },
+    "bestScore": 72.725,
+    "topResults": [
+      { "profile": "candidate-016", "score": 72.725, "components": { "target_coverage": 0.51893, "force_comfort": 0.3197, "smoothness": 0.89, "penetration_safety": 0.85367, "contact_continuity": 1, "stroke_naturalness": 1, "reaction_settling": 1, "peak_force_safety": 1 } },
+      { "profile": "candidate-012", "score": 72.464, "components": { "target_coverage": 0.52361, "force_comfort": 0.28297, "smoothness": 0.89169, "penetration_safety": 0.87965, "contact_continuity": 1, "stroke_naturalness": 1, "reaction_settling": 0.99999, "peak_force_safety": 1 } },
+      { "profile": "candidate-023", "score": 71.213, "components": { "target_coverage": 0.50491, "force_comfort": 0.35445, "smoothness": 0.87643, "penetration_safety": 0.74687, "contact_continuity": 0.94783, "stroke_naturalness": 1, "reaction_settling": 0.99936, "peak_force_safety": 1 } },
+      { "profile": "candidate-015", "score": 69.461, "components": { "target_coverage": 0.38336, "force_comfort": 0.31398, "smoothness": 0.97944, "penetration_safety": 0.75204, "contact_continuity": 1, "stroke_naturalness": 1, "reaction_settling": 0.99933, "peak_force_safety": 1 } },
+      { "profile": "candidate-004", "score": 69.28, "components": { "target_coverage": 0.43946, "force_comfort": 0.25055, "smoothness": 0.94419, "penetration_safety": 0.92443, "contact_continuity": 0.84348, "stroke_naturalness": 0.98574, "reaction_settling": 0.99999, "peak_force_safety": 1 } }
+    ]
+  },
+  "tunedBenchmark": {
+    "request": { "subjectId": "default_mew", "taskId": "head_petting", "agentId": "head-agent-tuned-primary", "seed": 424242, "profile": "candidate-016" },
+    "sequence": "Same benchmark as baseline (approach/contact, six alternating 0.11m strokes, settle), expectedRevision 0.",
+    "metrics": { "elapsedSeconds": 3.833333333333322, "contactSeconds": 2.5555555555555487, "targetContactSeconds": 1.233333333333331, "meanForce": 0.6160713636744386, "peakForce": 1.258397182000556, "meanJerk": 104.884160621329, "meanPenetration": 0.008701812151445465, "strokeTravel": 0.7236023911578312, "contactTransitions": 1 },
+    "score": 72.725,
+    "components": { "target_coverage": 0.51893, "force_comfort": 0.3197, "smoothness": 0.89, "penetration_safety": 0.85367, "contact_continuity": 1, "stroke_naturalness": 1, "reaction_settling": 1, "peak_force_safety": 1 },
+    "reproducibility": { "secondSeed": 424242, "score": 72.725, "metricsEqual": true, "componentsEqual": true }
+  },
+  "manualSequences": [
+    { "name": "slow_alternating_crown", "request": { "subjectId": "default_mew", "taskId": "head_petting", "agentId": "head-agent-manual-slow", "seed": 424242, "expectedRevision": 0, "profile": "candidate-016" }, "description": "Approach (-2.25,1.76,-0.32) 0.8s; contact (-2.25,1.76,-0.08) 0.5s; six alternating x=-2.34/-2.16 at 0.55s; settle 0.9s.", "metrics": { "elapsedSeconds": 5.533333333333316, "contactSeconds": 4.033333333333322, "targetContactSeconds": 1.4888888888888856, "meanForce": 0.18052371385511554, "peakForce": 1.087763724797613, "meanJerk": 71.1347500934027, "meanPenetration": 0.0024768430455502735, "strokeTravel": 0.6470243095879596, "contactTransitions": 25 }, "score": 60.852, "components": { "target_coverage": 0.43399, "force_comfort": 0.15665, "smoothness": 0.924, "penetration_safety": 0.95597, "contact_continuity": 0.16867, "stroke_naturalness": 1, "reaction_settling": 1, "peak_force_safety": 1 } },
+    { "name": "short_fast_stroke", "request": { "subjectId": "default_mew", "taskId": "head_petting", "agentId": "head-agent-manual-fast", "seed": 424242, "expectedRevision": 0, "profile": "candidate-016" }, "description": "Approach (-2.25,1.76,-0.32) 0.4s; contact (-2.25,1.76,-0.08) 0.5s; ten alternating x=-2.32/-2.18 strokes at 0.15s; settle 0.4s.", "metrics": { "elapsedSeconds": 2.8555555555555476, "contactSeconds": 1.544444444444441, "targetContactSeconds": 1.5222222222222188, "meanForce": 0.2323794021881091, "peakForce": 0.9589552700568698, "meanJerk": 90.54813987969555, "meanPenetration": 0.003364185060536012, "strokeTravel": 0.7207402961872382, "contactTransitions": 3 }, "score": 78.958, "components": { "target_coverage": 0.8598, "force_comfort": 0.17208, "smoothness": 0.90429, "penetration_safety": 0.94067, "contact_continuity": 0.92996, "stroke_naturalness": 1, "reaction_settling": 0.99989, "peak_force_safety": 1 } },
+    { "name": "low_compliance_settle", "request": { "subjectId": "default_mew", "taskId": "head_petting", "agentId": "head-agent-manual-settle", "seed": 424242, "expectedRevision": 0, "profile": "candidate-016-low-compliance" }, "description": "Approach (-2.25,1.76,-0.34) 0.7s; deeper contact (-2.25,1.76,-0.10) 0.5s; four short alternating x=-2.30/-2.20 strokes at 0.45s; settle 1.0s.", "metrics": { "elapsedSeconds": 4.022222222222211, "contactSeconds": 0, "targetContactSeconds": 0, "meanForce": 0, "peakForce": 0, "meanJerk": 48.98601634070001, "meanPenetration": 0, "strokeTravel": 0, "contactTransitions": 0 }, "score": 48.258, "components": { "target_coverage": 0, "force_comfort": 0, "smoothness": 0.94703, "penetration_safety": 1, "contact_continuity": 1, "stroke_naturalness": 0, "reaction_settling": 1, "peak_force_safety": 1 } }
+  ],
+  "comparison": { "winner": "candidate-016 tuned benchmark", "scoreDeltaVsBaseline": 19.001, "contactSecondsDelta": 1.211111111111107, "targetContactSecondsDelta": 0.7888888888888864, "strokeTravelDelta": 0.1873992405691174, "contactTransitionsDelta": -24, "apiSummary": "tuned leads baseline by 19.00 points" },
+  "conclusions": [
+    "Auto-tune with fixed seed 424242 evaluated 32 candidates at parallelism 4; candidate-016 ranked first at 72.725.",
+    "The reproducible tuned benchmark improved score and target coverage versus balanced baseline, with continuous contact and fewer transitions, at the cost of higher jerk and penetration.",
+    "Among manual sequences, short_fast_stroke scored highest (78.958) with 0.92996 contact continuity and 0.8598 target coverage; slow strokes were gentler but lost continuity; low compliance missed contact entirely.",
+    "All created experiments were deleted after recording; final API experiment list was empty."
+  ]
+}

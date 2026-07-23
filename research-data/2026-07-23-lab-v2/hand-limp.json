@@ -1,0 +1,157 @@
+{
+  "date": "2026-07-23",
+  "server": "http://127.0.0.1:17889",
+  "subjectId": "default_mew",
+  "tasks": {
+    "hand_hold": {
+      "seed": 726101,
+      "candidates": 40,
+      "parallelism": 4,
+      "bestProfile": {
+        "name": "candidate-028",
+        "positionSpringHz": 7.419592528646504,
+        "dampingRatio": 1.079179982134174,
+        "maxSpeed": 1.6219207621887328,
+        "maxAcceleration": 20.24937190316473,
+        "contactCompliance": 0.49393688395337054,
+        "predictionSeconds": 0.00702760357969795,
+        "handRadius": 0.075
+      },
+      "bestScore": 49.307,
+      "bestComponents": {
+        "target_coverage": 0.39812,
+        "force_comfort": 0.60059,
+        "smoothness": 0.97775,
+        "penetration_safety": 0.83471,
+        "contact_continuity": 1.0,
+        "stroke_naturalness": 0.0,
+        "reaction_settling": 0.9957,
+        "peak_force_safety": 1.0,
+        "target_force_gate": 0.72771,
+        "target_force_fit": 0.82532,
+        "post_contact_measurement": 1.0,
+        "evaluator_version": 2
+      },
+      "bestMetrics": {
+        "elapsedSeconds": 3.511111111111101,
+        "contactSeconds": 0.8666666666666656,
+        "targetContactSeconds": 0.8666666666666656,
+        "meanForce": 1.1063031049013468,
+        "peakForce": 3.072205350034285,
+        "meanJerk": 24.07184541806077,
+        "meanPenetration": 0.009937153196834261,
+        "strokeTravel": 0.04473269874377515,
+        "contactTransitions": 2,
+        "meanTargetForce": 1.1063031049013468,
+        "targetForceRmsRelativeError": 0.2954075914351493,
+        "meanTargetContactSpeed": 0.2734073003652749,
+        "peakTargetContactSpeed": 0.8404100768004964,
+        "directionReversals": 1,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.0013325071360147352,
+        "postContactPeakSubjectSpeed": 0.00395221124277226,
+        "peakTargetForce": 3.072205350034285,
+        "peakJerk": 20.24937190316472
+      },
+      "manualProfiles": {
+        "balanced_hold": { "positionSpringHz": 7.5, "dampingRatio": 1.0, "maxSpeed": 1.6, "maxAcceleration": 14, "contactCompliance": 0.70, "predictionSeconds": 0.02, "handRadius": 0.075 },
+        "compliant_hold": { "positionSpringHz": 6.5, "dampingRatio": 1.3, "maxSpeed": 1.3, "maxAcceleration": 9, "contactCompliance": 0.86, "predictionSeconds": 0.015, "handRadius": 0.075 },
+        "underdamped_hold": { "positionSpringHz": 8.0, "dampingRatio": 0.45, "maxSpeed": 2.0, "maxAcceleration": 18, "contactCompliance": 0.70, "predictionSeconds": 0.02, "handRadius": 0.075 },
+        "overdamped_hold": { "positionSpringHz": 6.0, "dampingRatio": 1.8, "maxSpeed": 1.1, "maxAcceleration": 7, "contactCompliance": 0.70, "predictionSeconds": 0.01, "handRadius": 0.075 },
+        "low_force_hold": { "positionSpringHz": 7.0, "dampingRatio": 1.2, "maxSpeed": 1.3, "maxAcceleration": 9, "contactCompliance": 0.95, "predictionSeconds": 0.015, "handRadius": 0.075 },
+        "excessive_force_hold": { "positionSpringHz": 10.5, "dampingRatio": 0.75, "maxSpeed": 2.5, "maxAcceleration": 25, "contactCompliance": 0.25, "predictionSeconds": 0.02, "handRadius": 0.075 },
+        "firm_force_deep": { "positionSpringHz": 10.0, "dampingRatio": 1.1, "maxSpeed": 2.2, "maxAcceleration": 20, "contactCompliance": 0.95, "predictionSeconds": 0.0, "handRadius": 0.075 }
+      },
+      "manualTrials": [
+        { "name": "balanced_hold", "score": 58.524, "target_force_gate": 0.84441, "reaction_settling": 0.99433, "target_coverage": 0.48581, "meanTargetForce": 1.23516, "meanPenetration": 0.0159733, "meanJerk": 47.4751, "postContactRmsSubjectSpeed": 0.0017147, "postContactPeakSubjectSpeed": 0.00549173, "postContactSampledSeconds": 0.9 },
+        { "name": "compliant_hold", "score": 51.623, "target_force_gate": 0.78513, "reaction_settling": 0.9958, "target_coverage": 0.39254, "meanTargetForce": 1.17032, "meanPenetration": 0.020485, "meanJerk": 19.865, "postContactRmsSubjectSpeed": 0.00125557, "postContactPeakSubjectSpeed": 0.00413434, "postContactSampledSeconds": 0.9 },
+        { "name": "underdamped_hold", "score": 29.278, "target_force_gate": 0.54669, "reaction_settling": 0.99977, "target_coverage": 0.28372, "meanTargetForce": 0.895077, "meanPenetration": 0.0115482, "meanJerk": 77.4095, "postContactRmsSubjectSpeed": 0.000071646, "postContactPeakSubjectSpeed": 0.000207934, "postContactSampledSeconds": 0.9 },
+        { "name": "overdamped_hold", "score": 24.557, "target_force_gate": 0.41577, "reaction_settling": 0.99716, "target_coverage": 0.32258, "meanTargetForce": 0.730798, "meanPenetration": 0.00851094, "meanJerk": 11.8022, "postContactRmsSubjectSpeed": 0.000857454, "postContactPeakSubjectSpeed": 0.0027463, "postContactSampledSeconds": 0.9 },
+        { "name": "low_force_hold", "score": 61.125, "target_force_gate": 0.93177, "reaction_settling": 0.99588, "target_coverage": 0.38865, "meanTargetForce": 1.3286, "meanPenetration": 0.0296486, "meanJerk": 22.1856, "postContactRmsSubjectSpeed": 0.00123758, "postContactPeakSubjectSpeed": 0.00403807, "postContactSampledSeconds": 0.9 },
+        { "name": "excessive_force_hold", "score": 10.208, "target_force_gate": 0.15883, "reaction_settling": 0.99896, "target_coverage": 0.68014, "meanTargetForce": 0.358276, "meanPenetration": 0.00289584, "meanJerk": 152.594, "postContactRmsSubjectSpeed": 0.000326711, "postContactPeakSubjectSpeed": 0.000910719, "postContactSampledSeconds": 0.9 },
+        { "name": "firm_force_deep", "score": 30.273, "target_force_gate": 0.52042, "reaction_settling": 0.99536, "target_coverage": 0.69818, "meanTargetForce": 2.27111, "meanPenetration": 0.0520369, "meanJerk": 69.7772, "postContactRmsSubjectSpeed": 0.00142398, "postContactPeakSubjectSpeed": 0.00435511, "postContactSampledSeconds": 0.9 }
+      ]
+    },
+    "limp_support": {
+      "seed": 726102,
+      "candidates": 40,
+      "parallelism": 4,
+      "bestProfile": {
+        "name": "candidate-023",
+        "positionSpringHz": 6.763490895493913,
+        "dampingRatio": 1.2793245731762508,
+        "maxSpeed": 2.661024425992182,
+        "maxAcceleration": 19.524183915482546,
+        "contactCompliance": 0.858324573393131,
+        "predictionSeconds": 0.006814230350691005,
+        "handRadius": 0.075
+      },
+      "bestScore": 65.832,
+      "bestComponents": {
+        "target_coverage": 0.71848,
+        "force_comfort": 0.64949,
+        "smoothness": 0.97911,
+        "penetration_safety": 0.59208,
+        "contact_continuity": 0.75455,
+        "stroke_naturalness": 0.0,
+        "reaction_settling": 0.99585,
+        "peak_force_safety": 1.0,
+        "target_force_gate": 0.91707,
+        "target_force_fit": 0.70822,
+        "post_contact_measurement": 1.0,
+        "evaluator_version": 2
+      },
+      "bestMetrics": {
+        "elapsedSeconds": 4.888888888888874,
+        "contactSeconds": 2.1777777777777723,
+        "targetContactSeconds": 2.1777777777777723,
+        "meanForce": 1.492718210483103,
+        "peakForce": 2.467466506356108,
+        "meanJerk": 95.97844305961748,
+        "meanPenetration": 0.028826409909878444,
+        "strokeTravel": 0.49160053538459736,
+        "contactTransitions": 8,
+        "meanTargetForce": 1.492718210483103,
+        "targetForceRmsRelativeError": 0.39600531714018317,
+        "meanTargetContactSpeed": 0.6394918920738504,
+        "peakTargetContactSpeed": 2.067312470660958,
+        "directionReversals": 4,
+        "postContactSampledSeconds": 0.8999999999999988,
+        "postContactRmsSubjectSpeed": 0.001337986439738266,
+        "postContactPeakSubjectSpeed": 0.003491893795844821,
+        "peakTargetForce": 2.467466506356108,
+        "peakJerk": 19.00048804819058
+      },
+      "manualProfiles": {
+        "balanced_support": { "positionSpringHz": 7.5, "dampingRatio": 1.0, "maxSpeed": 1.6, "maxAcceleration": 14, "contactCompliance": 0.70, "predictionSeconds": 0.02, "handRadius": 0.075 },
+        "compliant_support": { "positionSpringHz": 6.0, "dampingRatio": 1.35, "maxSpeed": 1.2, "maxAcceleration": 8, "contactCompliance": 0.86, "predictionSeconds": 0.015, "handRadius": 0.075 },
+        "underdamped_support": { "positionSpringHz": 8.0, "dampingRatio": 0.45, "maxSpeed": 2.0, "maxAcceleration": 18, "contactCompliance": 0.70, "predictionSeconds": 0.02, "handRadius": 0.075 },
+        "overdamped_support": { "positionSpringHz": 6.0, "dampingRatio": 1.8, "maxSpeed": 1.1, "maxAcceleration": 7, "contactCompliance": 0.70, "predictionSeconds": 0.01, "handRadius": 0.075 },
+        "low_force_support": { "positionSpringHz": 7.0, "dampingRatio": 1.2, "maxSpeed": 1.3, "maxAcceleration": 9, "contactCompliance": 0.95, "predictionSeconds": 0.015, "handRadius": 0.075 },
+        "excessive_force_support": { "positionSpringHz": 10.5, "dampingRatio": 0.75, "maxSpeed": 2.5, "maxAcceleration": 25, "contactCompliance": 0.25, "predictionSeconds": 0.02, "handRadius": 0.075 },
+        "firm_force_deep": { "positionSpringHz": 10.0, "dampingRatio": 1.1, "maxSpeed": 2.2, "maxAcceleration": 20, "contactCompliance": 0.95, "predictionSeconds": 0.0, "handRadius": 0.075 }
+      },
+      "manualTrials": [
+        { "name": "balanced_support", "score": 43.233, "target_force_gate": 0.60746, "reaction_settling": 0.99522, "target_coverage": 0.7534, "meanTargetForce": 0.967769, "meanPenetration": 0.0138127, "meanJerk": 64.6495, "postContactRmsSubjectSpeed": 0.00152356, "postContactPeakSubjectSpeed": 0.00412698, "postContactSampledSeconds": 0.9 },
+        { "name": "compliant_support", "score": 50.057, "target_force_gate": 0.67372, "reaction_settling": 0.99627, "target_coverage": 0.80645, "meanTargetForce": 1.0449, "meanPenetration": 0.0208273, "meanJerk": 29.3391, "postContactRmsSubjectSpeed": 0.00118638, "postContactPeakSubjectSpeed": 0.00323431, "postContactSampledSeconds": 0.9 },
+        { "name": "underdamped_support", "score": 36.355, "target_force_gate": 0.56473, "reaction_settling": 0.99776, "target_coverage": 0.61545, "meanTargetForce": 0.916869, "meanPenetration": 0.013381, "meanJerk": 111.067, "postContactRmsSubjectSpeed": 0.000685287, "postContactPeakSubjectSpeed": 0.00210022, "postContactSampledSeconds": 0.9 },
+        { "name": "overdamped_support", "score": 19.273, "target_force_gate": 0.28077, "reaction_settling": 0.99748, "target_coverage": 0.78877, "meanTargetForce": 0.546389, "meanPenetration": 0.00779027, "meanJerk": 21.0998, "postContactRmsSubjectSpeed": 0.000801617, "postContactPeakSubjectSpeed": 0.00218315, "postContactSampledSeconds": 0.9 },
+        { "name": "low_force_support", "score": 73.039, "target_force_gate": 0.97159, "reaction_settling": 0.99599, "target_coverage": 0.80999, "meanTargetForce": 1.43021, "meanPenetration": 0.0357549, "meanJerk": 40.0099, "postContactRmsSubjectSpeed": 0.00127693, "postContactPeakSubjectSpeed": 0.00346933, "postContactSampledSeconds": 0.9 },
+        { "name": "excessive_force_support", "score": 9.803, "target_force_gate": 0.18164, "reaction_settling": 0.99961, "target_coverage": 0.46689, "meanTargetForce": 0.395728, "meanPenetration": 0.00355034, "meanJerk": 170.679, "postContactRmsSubjectSpeed": 0.000121052, "postContactPeakSubjectSpeed": 0.000366141, "postContactSampledSeconds": 0.9 },
+        { "name": "firm_force_deep", "score": 31.937, "target_force_gate": 0.52779, "reaction_settling": 0.99563, "target_coverage": 0.77658, "meanTargetForce": 2.24757, "meanPenetration": 0.0571069, "meanJerk": 84.9197, "postContactRmsSubjectSpeed": 0.00140702, "postContactPeakSubjectSpeed": 0.00368483, "postContactSampledSeconds": 0.9 }
+      ]
+    }
+  },
+  "method": {
+    "manualTrialCountPerTask": 7,
+    "manualFinalRetreatDurationSeconds": 1.1,
+    "manualFinalRetreatMeasureSettling": true,
+    "experimentsDeletedAfterEvaluation": true,
+    "driverProfileApplied": false
+  },
+  "conclusion": {
+    "bestCrossTaskRecommendation": "For the lowest residual motion while retaining a strong force gate on both tasks, start near spring 7.0 Hz, damping 1.2, max speed 1.3, max acceleration 9, compliance 0.95, prediction 0.015 s: hand_hold gate 0.93177 with post-release RMS 0.00124 m/s and limp_support gate 0.97159 with RMS 0.00128 m/s. Validate penetration (0.0296/0.0358 m) in human testing, and tune task-specific coverage separately.",
+    "residualMotion": "All manual releases sampled the full 0.9 s telemetry window; RMS subject speed stayed below 0.00172 m/s. The lowest residual values came from high damping or unstable low-force/excess-force trials, but those were rejected by the target-force gate.",
+    "forceFinding": "The multiplicative target_force_gate rejects weak and excessive contact. The useful region was near the task desired force: limp_support low_force_support scored 73.039 with gate 0.97159 and mean target force 1.43021; firm_force_deep over-forced at 2.24757 and gate 0.52779."
+  }
+}

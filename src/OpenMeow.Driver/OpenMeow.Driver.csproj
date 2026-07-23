@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <Compile Include="..\OpenMeow.Common\KeyBindings.cs" Link="KeyBindings.cs" />
+    <Compile Include="..\OpenMeow.Common\MotionSettings.cs" Link="MotionSettings.cs" />
+    <Compile Include="..\OpenMeow.Common\BodyGaitKernel.cs" Link="BodyGaitKernel.cs" />
   </ItemGroup>
 
 </Project>

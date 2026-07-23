@@ -1,0 +1,61 @@
+{
+  "taskId": "limp_support",
+  "subjectId": "default_mew",
+  "agentId": "limp-agent",
+  "date": "2026-07-23",
+  "baseline": {
+    "profile": { "springHz": 7.5, "damping": 0.92, "maxSpeed": 1.8, "maxAcceleration": 12.0, "compliance": 0.62, "prediction": 0.035 },
+    "seed": 230724,
+    "score": 60.883,
+    "components": { "target_coverage": 0.36933, "force_comfort": 0.24483, "smoothness": 0.94694, "penetration_safety": 0.88332, "contact_continuity": 0.21739, "stroke_naturalness": 1.0, "reaction_settling": 0.99788, "peak_force_safety": 1.0 },
+    "metrics": { "elapsedSeconds": 3.833333, "contactSeconds": 1.111111, "targetContactSeconds": 0.877778, "meanForce": 0.600707, "peakForce": 2.563239, "meanJerk": 49.070523, "meanPenetration": 0.006824, "strokeTravel": 0.874854, "contactTransitions": 17 }
+  },
+  "autoTune": {
+    "seed": 424242,
+    "candidates": 32,
+    "parallelism": 4,
+    "bestScore": 79.896,
+    "bestProfile": { "name": "candidate-023", "springHz": 9.458142, "damping": 1.140658, "maxSpeed": 1.812025, "maxAcceleration": 20.453117, "compliance": 0.839173, "prediction": 0.030313 },
+    "topResults": [
+      { "name": "candidate-023", "score": 79.896, "target_coverage": 0.89762, "force_comfort": 0.56117, "smoothness": 0.84933, "penetration_safety": 0.61373, "reaction_settling": 0.9979 },
+      { "name": "candidate-016", "score": 79.426, "target_coverage": 0.88827, "force_comfort": 0.34619, "smoothness": 0.8894, "penetration_safety": 0.81451, "reaction_settling": 0.99996 },
+      { "name": "candidate-012", "score": 78.861, "target_coverage": 0.88827, "force_comfort": 0.29584, "smoothness": 0.89057, "penetration_safety": 0.84704, "reaction_settling": 0.99992 }
+    ]
+  },
+  "sequence": {
+    "targetPart": "left_forearm",
+    "observedTarget": { "x": 0.27, "y": 1.12, "z": 0.13 },
+    "contactCenterOffset": { "x": 0.0, "y": 0.0, "z": -0.125 },
+    "approachOffset": { "x": 0.0, "y": 0.0, "z": -0.365 },
+    "supportOffset": { "x": 0.0, "y": 0.077782, "z": 0.077782 },
+    "actions": ["approach", "catch", "support(+)", "support(-)", "support(+)", "support(-)", "support(+)", "support(-)", "settle"],
+    "durationsSeconds": [0.65, 0.70, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.90],
+    "expectedRevision": 0,
+    "finalRevision": 1,
+    "profileSweepCount": 10
+  },
+  "profiles": [
+    { "name": "gentle_low", "springHz": 5.0, "damping": 1.25, "maxSpeed": 1.2, "maxAcceleration": 8.0, "compliance": 0.78, "prediction": 0.015, "score": 79.411, "target_coverage": 0.87487, "force_comfort": 0.30044, "smoothness": 0.96616, "penetration_safety": 0.79184, "reaction_settling": 0.99999, "meanForce": 0.782049, "peakForce": 1.470541, "meanJerk": 30.98327, "meanPenetration": 0.012836 },
+    { "name": "balanced_refine", "springHz": 7.5, "damping": 0.95, "maxSpeed": 1.8, "maxAcceleration": 12.0, "compliance": 0.62, "prediction": 0.035, "score": 67.982, "target_coverage": 0.61365, "force_comfort": 0.22821, "smoothness": 0.93948, "penetration_safety": 0.88667, "reaction_settling": 0.99922, "meanForce": 0.541479, "peakForce": 3.013223, "meanJerk": 56.188512, "meanPenetration": 0.006616 },
+    { "name": "catch_firm", "springHz": 9.0, "damping": 1.05, "maxSpeed": 2.2, "maxAcceleration": 16.0, "compliance": 0.45, "prediction": 0.02, "score": 69.57, "target_coverage": 0.70487, "force_comfort": 0.22285, "smoothness": 0.91269, "penetration_safety": 0.91064, "reaction_settling": 0.99935, "meanForce": 0.52179, "peakForce": 3.659505, "meanJerk": 82.227904, "meanPenetration": 0.005148 },
+    { "name": "high_damped", "springHz": 11.0, "damping": 1.45, "maxSpeed": 1.8, "maxAcceleration": 18.0, "compliance": 0.55, "prediction": 0.025, "score": 77.097, "target_coverage": 0.91633, "force_comfort": 0.27534, "smoothness": 0.90543, "penetration_safety": 0.86528, "reaction_settling": 0.99938, "meanForce": 0.702979, "peakForce": 3.003598, "meanJerk": 89.415461, "meanPenetration": 0.007959 },
+    { "name": "compliant_slow", "springHz": 6.0, "damping": 1.3, "maxSpeed": 1.0, "maxAcceleration": 7.0, "compliance": 0.82, "prediction": 0.01, "score": 81.331, "target_coverage": 0.9495, "force_comfort": 0.3156, "smoothness": 0.97064, "penetration_safety": 0.76376, "reaction_settling": 1.0, "meanForce": 0.827922, "peakForce": 1.373829, "meanJerk": 26.818623, "meanPenetration": 0.014823 },
+    { "name": "responsive", "springHz": 13.0, "damping": 0.8, "maxSpeed": 2.8, "maxAcceleration": 24.0, "compliance": 0.35, "prediction": 0.06, "score": 56.201, "target_coverage": 0.10366, "force_comfort": 0.31034, "smoothness": 0.89423, "penetration_safety": 0.8894, "reaction_settling": 0.99923, "meanForce": 0.812145, "peakForce": 3.856723, "meanJerk": 100.61483, "meanPenetration": 0.006447 },
+    { "name": "predictive_soft", "springHz": 8.0, "damping": 1.1, "maxSpeed": 2.0, "maxAcceleration": 14.0, "compliance": 0.7, "prediction": 0.09, "score": 51.186, "target_coverage": 0.0539, "force_comfort": 0.28458, "smoothness": 0.94703, "penetration_safety": 0.8282, "reaction_settling": 1.0, "meanForce": 0.732578, "peakForce": 2.520379, "meanJerk": 48.985627, "meanPenetration": 0.010367 },
+    { "name": "high_compliance", "springHz": 10.0, "damping": 1.2, "maxSpeed": 2.3, "maxAcceleration": 20.0, "compliance": 0.9, "prediction": 0.0, "score": 82.875, "target_coverage": 0.97023, "force_comfort": 0.60978, "smoothness": 0.82368, "penetration_safety": 0.54256, "reaction_settling": 1.0, "meanForce": 1.577458, "peakForce": 2.712768, "meanJerk": 174.57825, "meanPenetration": 0.03363 },
+    { "name": "autotune_winner", "springHz": 9.458142, "damping": 1.140658, "maxSpeed": 1.812025, "maxAcceleration": 20.453117, "compliance": 0.839173, "prediction": 0.030313, "score": 82.445, "target_coverage": 0.99511, "force_comfort": 0.53792, "smoothness": 0.85374, "penetration_safety": 0.61878, "reaction_settling": 0.99835, "meanForce": 1.407347, "peakForce": 3.235095, "meanJerk": 142.319591, "meanPenetration": 0.0264 },
+    { "name": "recommended_balanced", "springHz": 8.5, "damping": 1.3, "maxSpeed": 1.8, "maxAcceleration": 14.0, "compliance": 0.82, "prediction": 0.015, "score": 81.063, "target_coverage": 0.92877, "force_comfort": 0.46285, "smoothness": 0.9302, "penetration_safety": 0.67296, "reaction_settling": 0.99998, "meanForce": 1.224764, "peakForce": 2.940827, "meanJerk": 65.124911, "meanPenetration": 0.021784 }
+  ],
+  "conclusions": {
+    "winnerByScore": "high_compliance",
+    "recommendedProfile": "autotune_winner",
+    "recommendation": "Use autotune_winner as the balance point: near-perfect coverage and high settling with lower jerk and penetration than high_compliance, at the cost of a slightly higher peak force. high_compliance scores highest but is harsher (meanJerk 174.578, meanPenetration 0.03363); compliant_slow is the smoothest but under-forces and travels less.",
+    "tradeoffs": [
+      "Higher compliance improves coverage and force comfort but increases penetration.",
+      "Lower speed/acceleration improves smoothness and settling but reduces stroke travel and force.",
+      "Prediction 0.09 caused severe coverage/stroke loss; modest prediction around 0.03 was effective.",
+      "All profiles settled well (reaction_settling >= 0.99835), so jerk, force and penetration distinguish candidates."
+    ],
+    "cleanup": { "experimentsRemaining": 0 }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "runId": "2026-07-23-lab-pilot",
+  "subject": "default_mew",
+  "parallelAgents": 3,
+  "autoTuneCandidates": 112,
+  "estimatedScoredRuns": 139,
+  "tasks": [
+    {
+      "task": "head_petting",
+      "baselineScore": 53.724,
+      "autoTuneScore": 72.725,
+      "bestObservedScore": 78.958,
+      "bestStrategy": "short_fast_stroke",
+      "recommendedProfile": {
+        "positionSpringHz": 5.803237839774307,
+        "dampingRatio": 1.3917911592483996,
+        "maxSpeed": 2.046714481584775,
+        "maxAcceleration": 19.670129709331515,
+        "contactCompliance": 0.620405206699113,
+        "predictionSeconds": 0.027048505932115254
+      }
+    },
+    {
+      "task": "cheek_nuzzle",
+      "baselineScore": 57.157,
+      "autoTuneScore": 72.327,
+      "bestObservedScore": 85.421,
+      "bestStrategy": "side_approach_vertical_nuzzle",
+      "recommendedProfile": {
+        "positionSpringHz": 5.982276704820728,
+        "dampingRatio": 1.2349429948686552,
+        "maxSpeed": 1.3798044577665391,
+        "maxAcceleration": 17.289256232325915,
+        "contactCompliance": 0.790234709964243,
+        "predictionSeconds": 0.02271209133216743
+      }
+    },
+    {
+      "task": "hand_hold",
+      "baselineScore": 58.764,
+      "autoTuneScore": 77.048,
+      "bestObservedScore": 81.999,
+      "bestStrategy": "lateral_grip_settle_release",
+      "recommendedProfile": {
+        "positionSpringHz": 7.110350041162622,
+        "dampingRatio": 1.097518655550655,
+        "maxSpeed": 1.6115380554438368,
+        "maxAcceleration": 18.54841784314559,
+        "contactCompliance": 0.7983064487102938,
+        "predictionSeconds": 0.04136441858781708
+      }
+    },
+    {
+      "task": "limp_support",
+      "baselineScore": 60.883,
+      "autoTuneScore": 79.896,
+      "bestObservedScore": 82.875,
+      "bestStrategy": "high_compliance",
+      "recommendedStrategy": "autotune_winner",
+      "recommendedStrategyScore": 82.445,
+      "recommendedProfile": {
+        "positionSpringHz": 9.458142,
+        "dampingRatio": 1.140658,
+        "maxSpeed": 1.812025,
+        "maxAcceleration": 20.453117,
+        "contactCompliance": 0.839173,
+        "predictionSeconds": 0.030313
+      }
+    }
+  ],
+  "crossTaskGeneralization": {
+    "cheekProfileOnHandHoldScore": 67.764,
+    "handProfileOnCheekNuzzleScore": 66.519,
+    "conclusion": "Task-specific profiles outperformed cross-task profile reuse."
+  },
+  "findings": [
+    "All four tasks improved substantially over the balanced baseline.",
+    "Contact compliance around 0.79-0.84 was repeatedly favored for cheek, hand-hold and limp-support tasks.",
+    "Moderate prediction around 0.02-0.04 seconds was useful; 0.09 seconds severely reduced limp-support coverage.",
+    "Hand-authored spatial trajectories beat parameter-only auto-tuning in every task.",
+    "The current evaluator can award a high score to contact whose mean force is far below the requested task force.",
+    "reaction_settling was nearly saturated across limp-support profiles and currently has weak discriminating power."
+  ]
+}

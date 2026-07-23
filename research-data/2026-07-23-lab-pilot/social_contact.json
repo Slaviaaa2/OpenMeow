@@ -1,0 +1,69 @@
+{
+  "date": "2026-07-23",
+  "subject": "default_mew",
+  "agentIdPrefix": "social-agent",
+  "tasks": {
+    "cheek_nuzzle": {
+      "seed": 230723,
+      "targetPart": "left_cheek",
+      "benchmarkCenter": { "x": -0.88, "y": 1.74, "z": -0.055 },
+      "baseline": {
+        "profile": "balanced",
+        "metrics": { "elapsedSeconds": 3.833333333333322, "contactSeconds": 0.7999999999999992, "targetContactSeconds": 0.47777777777777797, "meanForce": 0.466682990150391, "peakForce": 2.055262910257149, "meanJerk": 44.893456594077236, "meanPenetration": 0.005528947370110098, "strokeTravel": 0.4528967429448163, "contactTransitions": 19 },
+        "score": 57.157,
+        "components": { "target_coverage": 0.20103, "force_comfort": 0.31414, "smoothness": 0.95134, "penetration_safety": 0.90436, "contact_continuity": 0.11304, "stroke_naturalness": 1, "reaction_settling": 0.99839, "peak_force_safety": 1 }
+      },
+      "autoTune": {
+        "candidates": 24,
+        "parallelism": 4,
+        "seed": 230723,
+        "bestScore": 72.327,
+        "bestProfile": { "name": "candidate-020", "positionSpringHz": 5.982276704820728, "dampingRatio": 1.2349429948686552, "maxSpeed": 1.3798044577665391, "maxAcceleration": 17.289256232325915, "contactCompliance": 0.790234709964243, "predictionSeconds": 0.02271209133216743, "handRadius": 0.075 },
+        "topScores": [72.327, 70.47, 69.591, 69.175, 67.41]
+      },
+      "tunedBenchmark": {
+        "metrics": { "elapsedSeconds": 3.833333333333322, "contactSeconds": 1.6555555555555517, "targetContactSeconds": 1.6555555555555517, "meanForce": 0.5906801665190866, "peakForce": 1.5418954096547905, "meanJerk": 90.58927569657162, "meanPenetration": 0.012703062344205474, "strokeTravel": 0.6684054844377149, "contactTransitions": 13 },
+        "score": 72.327,
+        "components": { "target_coverage": 0.69659, "force_comfort": 0.39189, "smoothness": 0.90425, "penetration_safety": 0.79377, "contact_continuity": 0.42609, "stroke_naturalness": 1, "reaction_settling": 1, "peak_force_safety": 1 }
+      },
+      "manualSequences": [
+        { "name": "side_approach_vertical_nuzzle", "description": "Approach from cheek's lateral side, make contact, alternate vertical +/-0.085 m nuzzles, settle.", "score": 85.421, "metrics": { "elapsedSeconds": 4.12222222222221, "contactSeconds": 3.1666666666666576, "targetContactSeconds": 3.1666666666666576, "meanForce": 0.5272654825526389, "peakForce": 1.6224047591498856, "meanJerk": 63.50250309801687, "meanPenetration": 0.011888041652072377, "strokeTravel": 0.4059045128762639, "contactTransitions": 1 }, "components": { "target_coverage": 1, "force_comfort": 0.35101, "smoothness": 0.93187, "penetration_safety": 0.80562, "contact_continuity": 1, "stroke_naturalness": 1, "reaction_settling": 1, "peak_force_safety": 1 }, "actions": [{ "label": "cheek-side-approach", "target": { "x": -1.22, "y": 1.74, "z": -0.055 }, "durationSeconds": 0.8, "grip": false }, { "label": "cheek-contact", "target": { "x": -0.88, "y": 1.74, "z": -0.055 }, "durationSeconds": 0.7, "grip": false }, { "label": "vertical-nuzzle", "targetY": [1.655, 1.825], "repetitions": 4, "durationSeconds": 0.45, "grip": false }, { "label": "settle", "target": { "x": -0.88, "y": 1.74, "z": -0.055 }, "durationSeconds": 0.8, "grip": false }] },
+        { "name": "high_approach_micro_nuzzle", "description": "Higher diagonal approach, softer contact at z=-0.08, six short vertical micro-nuzzles, long settle.", "score": 72.245, "metrics": { "elapsedSeconds": 4.288888888888876, "contactSeconds": 2.011111111111106, "targetContactSeconds": 2.011111111111106, "meanForce": 0.2194905228812004, "peakForce": 0.7465154842882709, "meanJerk": 73.1560499332782, "meanPenetration": 0.004789276381040955, "strokeTravel": 0.3489064015079107, "contactTransitions": 13 }, "components": { "target_coverage": 0.75631, "force_comfort": 0.18851, "smoothness": 0.92193, "penetration_safety": 0.91661, "contact_continuity": 0.48705, "stroke_naturalness": 1, "reaction_settling": 1, "peak_force_safety": 1 }, "actions": [{ "label": "cheek-high-approach", "target": { "x": -1.05, "y": 1.82, "z": -0.12 }, "durationSeconds": 0.7, "grip": false }, { "label": "cheek-soft-contact", "target": { "x": -0.88, "y": 1.74, "z": -0.08 }, "durationSeconds": 0.65, "grip": false }, { "label": "vertical-micro-nuzzle", "targetY": [1.68, 1.80], "repetitions": 6, "durationSeconds": 0.32, "grip": false }, { "label": "long-settle", "target": { "x": -0.88, "y": 1.74, "z": -0.08 }, "durationSeconds": 1, "grip": false }] }
+      ]
+    },
+    "hand_hold": {
+      "seed": 230724,
+      "targetPart": "right_hand",
+      "benchmarkCenter": { "x": 2.76, "y": 0.91, "z": -0.02 },
+      "baseline": {
+        "profile": "balanced",
+        "metrics": { "elapsedSeconds": 2.455555555555549, "contactSeconds": 0.15555555555555553, "targetContactSeconds": 0.15555555555555553, "meanForce": 0.27368594749112973, "peakForce": 0.8391833987194814, "meanJerk": 24.86063544997792, "meanPenetration": 0.0028616792587929816, "strokeTravel": 0.2653537095749821, "contactTransitions": 4 },
+        "score": 58.764,
+        "components": { "target_coverage": 0.10217, "force_comfort": 0.17184, "smoothness": 0.97276, "penetration_safety": 0.9493, "contact_continuity": 0.8371, "stroke_naturalness": 0.82923, "reaction_settling": 1, "peak_force_safety": 1 }
+      },
+      "autoTune": {
+        "candidates": 24,
+        "parallelism": 4,
+        "seed": 230724,
+        "bestScore": 77.048,
+        "bestProfile": { "name": "candidate-013", "positionSpringHz": 7.110350041162622, "dampingRatio": 1.097518655550655, "maxSpeed": 1.6115380554438368, "maxAcceleration": 18.54841784314559, "contactCompliance": 0.7983064487102938, "predictionSeconds": 0.04136441858781708, "handRadius": 0.075 },
+        "topScores": [77.048, 75.997, 71.45, 70.497, 70.273]
+      },
+      "tunedBenchmark": {
+        "metrics": { "elapsedSeconds": 2.455555555555549, "contactSeconds": 0.8222222222222213, "targetContactSeconds": 0.8222222222222213, "meanForce": 1.404337764450802, "peakForce": 3.2631905575973748, "meanJerk": 46.288799760995445, "meanPenetration": 0.021463157700182013, "strokeTravel": 0.4011160417119596, "contactTransitions": 3 },
+        "score": 77.048,
+        "components": { "target_coverage": 0.54007, "force_comfort": 0.62797, "smoothness": 0.94987, "penetration_safety": 0.67689, "contact_continuity": 0.91855, "stroke_naturalness": 1, "reaction_settling": 0.99902, "peak_force_safety": 1 }
+      },
+      "manualSequences": [
+        { "name": "vertical_grip_settle_release", "description": "Approach from below, grip, lift/lower to settle, hold, then release and retreat.", "score": 76.862, "metrics": { "elapsedSeconds": 3.855555555555544, "contactSeconds": 1.3333333333333306, "targetContactSeconds": 1.3333333333333306, "meanForce": 1.5771023260698263, "peakForce": 2.55883727084495, "meanJerk": 86.33377336588633, "meanPenetration": 0.02396594706599102, "strokeTravel": 0.3676459198163464, "contactTransitions": 6 }, "components": { "target_coverage": 0.55778, "force_comfort": 0.7114, "smoothness": 0.90853, "penetration_safety": 0.64678, "contact_continuity": 0.79251, "stroke_naturalness": 1, "reaction_settling": 1, "peak_force_safety": 1 }, "actions": [{ "label": "hand-approach", "target": { "x": 2.76, "y": 0.91, "z": -0.3 }, "durationSeconds": 0.8, "grip": false }, { "label": "grip", "target": { "x": 2.76, "y": 0.91, "z": -0.02 }, "durationSeconds": 0.65, "grip": true }, { "label": "settle-lift", "target": { "x": 2.76, "y": 0.91, "z": 0.02 }, "durationSeconds": 0.4, "grip": true }, { "label": "settle-lower", "target": { "x": 2.76, "y": 0.91, "z": -0.06 }, "durationSeconds": 0.4, "grip": true }, { "label": "settle", "target": { "x": 2.76, "y": 0.91, "z": -0.02 }, "durationSeconds": 0.9, "grip": true }, { "label": "release", "target": { "x": 2.76, "y": 0.91, "z": -0.3 }, "durationSeconds": 0.7, "grip": false }] },
+        { "name": "lateral_grip_settle_release", "description": "Approach laterally, grip, make small forward/back settling motions, hold, then release laterally.", "score": 81.999, "metrics": { "elapsedSeconds": 4.299999999999987, "contactSeconds": 1.9555555555555506, "targetContactSeconds": 1.9555555555555506, "meanForce": 1.4454342182985747, "peakForce": 1.8771681367236988, "meanJerk": 113.71689772719529, "meanPenetration": 0.022373077946768474, "strokeTravel": 0.40465939764057995, "contactTransitions": 2 }, "components": { "target_coverage": 0.73352, "force_comfort": 0.64803, "smoothness": 0.8813, "penetration_safety": 0.66579, "contact_continuity": 1, "stroke_naturalness": 1, "reaction_settling": 1, "peak_force_safety": 1 }, "actions": [{ "label": "hand-side-approach", "target": { "x": 2.52, "y": 0.91, "z": -0.16 }, "durationSeconds": 0.7, "grip": false }, { "label": "grip", "target": { "x": 2.76, "y": 0.91, "z": -0.02 }, "durationSeconds": 0.8, "grip": true }, { "label": "settle-forward", "target": { "x": 2.8, "y": 0.91, "z": -0.02 }, "durationSeconds": 0.5, "grip": true }, { "label": "settle-back", "target": { "x": 2.72, "y": 0.91, "z": -0.02 }, "durationSeconds": 0.5, "grip": true }, { "label": "settle", "target": { "x": 2.76, "y": 0.91, "z": -0.02 }, "durationSeconds": 1, "grip": true }, { "label": "release", "target": { "x": 2.52, "y": 0.91, "z": -0.16 }, "durationSeconds": 0.8, "grip": false }] }
+      ]
+    }
+  },
+  "crossTaskGeneralization": {
+    "cheekProfileOnHandHold": { "profile": "candidate-020", "score": 67.764, "targetCoverage": 0.4014, "strokeNaturalness": 0.23638, "contactTransitions": 1 },
+    "handProfileOnCheekNuzzle": { "profile": "candidate-013", "score": 66.519, "targetCoverage": 0.61244, "strokeNaturalness": 1, "contactTransitions": 19 },
+    "conclusion": "No single tuned profile generalized as well as the task-specific winner: candidate-020 won cheek_nuzzle (72.327 benchmark; 85.421 best manual), while candidate-013 won hand_hold (77.048 benchmark; 81.999 best manual)."
+  },
+  "cleanup": { "remainingExperiments": 0 }
+}

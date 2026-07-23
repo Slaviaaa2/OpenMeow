@@ -1,0 +1,15 @@
+{
+  "id": "example_soft_avatar",
+  "displayName": "Example Soft Avatar",
+  "description": "A small replaceable subject example. Copy this file and adjust parts to add an avatar.",
+  "parts": [
+    { "id": "pelvis", "position": { "x": 0.0, "y": 0.82, "z": 0.0 }, "radius": 0.18, "mobility": 0.15, "softness": 0.50 },
+    { "id": "torso", "position": { "x": 0.0, "y": 1.20, "z": 0.0 }, "radius": 0.26, "mobility": 0.20, "softness": 0.72, "parent": "pelvis" },
+    { "id": "head", "position": { "x": 0.0, "y": 1.72, "z": 0.0 }, "radius": 0.19, "mobility": 0.62, "softness": 0.82, "parent": "torso" },
+    { "id": "left_cheek", "position": { "x": -0.14, "y": 1.70, "z": -0.08 }, "radius": 0.09, "mobility": 0.72, "softness": 0.92, "parent": "head" },
+    { "id": "left_ear", "position": { "x": -0.12, "y": 1.96, "z": 0.0 }, "radius": 0.10, "mobility": 0.88, "softness": 0.84, "parent": "head" },
+    { "id": "right_ear", "position": { "x": 0.12, "y": 1.96, "z": 0.0 }, "radius": 0.10, "mobility": 0.88, "softness": 0.84, "parent": "head" },
+    { "id": "left_forearm", "position": { "x": -0.46, "y": 1.10, "z": 0.0 }, "radius": 0.09, "mobility": 0.64, "softness": 0.66, "parent": "torso" },
+    { "id": "right_hand", "position": { "x": 0.50, "y": 0.92, "z": -0.04 }, "radius": 0.10, "mobility": 0.78, "softness": 0.68, "parent": "torso" }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "date": "2026-07-23",
+  "server": "http://127.0.0.1:17890",
+  "subjectId": "default_mew",
+  "autotune": {
+    "hand_hold": {
+      "seed": 726101,
+      "candidates": 32,
+      "parallelism": 4,
+      "bestProfile": { "name": "candidate-028", "positionSpringHz": 7.419592528646504, "dampingRatio": 1.079179982134174, "maxSpeed": 1.6219207621887328, "maxAcceleration": 20.24937190316473, "contactCompliance": 0.49393688395337054, "predictionSeconds": 0.00702760357969795, "handRadius": 0.075 },
+      "bestScore": 49.307,
+      "bestComponents": { "target_coverage": 0.39812, "force_comfort": 0.60059, "smoothness": 0.97775, "penetration_safety": 0.83471, "contact_continuity": 1.0, "stroke_naturalness": 0.0, "reaction_settling": 0.9957, "peak_force_safety": 1.0, "target_force_gate": 0.72771, "target_force_fit": 0.82532, "post_contact_measurement": 1.0, "evaluator_version": 3 },
+      "v2DeltaScore": 0.0
+    },
+    "limp_support": {
+      "seed": 726102,
+      "candidates": 32,
+      "parallelism": 4,
+      "bestProfile": { "name": "candidate-023", "positionSpringHz": 6.763490895493913, "dampingRatio": 1.2793245731762508, "maxSpeed": 2.661024425992182, "maxAcceleration": 19.524183915482546, "contactCompliance": 0.858324573393131, "predictionSeconds": 0.006814230350691005, "handRadius": 0.075 },
+      "bestScore": 65.832,
+      "bestComponents": { "target_coverage": 0.71848, "force_comfort": 0.64949, "smoothness": 0.97911, "penetration_safety": 0.59208, "contact_continuity": 0.75455, "stroke_naturalness": 0.0, "reaction_settling": 0.99585, "peak_force_safety": 1.0, "target_force_gate": 0.91707, "target_force_fit": 0.70822, "post_contact_measurement": 1.0, "evaluator_version": 3 },
+      "v2DeltaScore": 0.0
+    }
+  },
+  "profiles": {
+    "priorRecommended": { "name": "prior_recommended", "positionSpringHz": 7.0, "dampingRatio": 1.2, "maxSpeed": 1.3, "maxAcceleration": 9.0, "contactCompliance": 0.95, "predictionSeconds": 0.015, "handRadius": 0.075 },
+    "v1Soft": { "name": "v1_soft", "positionSpringHz": 6.0, "dampingRatio": 1.1, "maxSpeed": 1.5, "maxAcceleration": 14.0, "contactCompliance": 0.78, "predictionSeconds": 0.02, "handRadius": 0.075 }
+  },
+  "validationTrials": [
+    { "task": "hand_hold", "profile": "priorRecommended", "seed": 726401, "score": 65.091, "v2Score": 61.125, "v2Delta": 3.966, "components": { "target_coverage": 0.43087, "force_comfort": 0.69787, "smoothness": 0.99005, "penetration_safety": 0.57019, "contact_continuity": 0.91489, "stroke_naturalness": 0.0, "reaction_settling": 0.99588, "peak_force_safety": 1.0, "target_force_gate": 0.97146, "post_contact_measurement": 1.0 }, "metrics": { "targetContactSeconds": 1.255555555555553, "meanTargetForce": 1.3702879629972404, "meanPenetration": 0.03089843023753962, "meanJerk": 21.693521387674146, "postContactSampledSeconds": 0.8999999999999988, "postContactRmsSubjectSpeed": 0.0012375581036160566, "postContactPeakSubjectSpeed": 0.004037957266783471, "directionReversals": 2 } },
+    { "task": "limp_support", "profile": "priorRecommended", "seed": 726402, "score": 74.357, "v2Score": 73.039, "v2Delta": 1.318, "components": { "target_coverage": 0.74354, "force_comfort": 0.74846, "smoothness": 0.99005, "penetration_safety": 0.5232, "contact_continuity": 0.91489, "stroke_naturalness": 0.0, "reaction_settling": 0.99599, "peak_force_safety": 1.0, "target_force_gate": 0.98797, "post_contact_measurement": 1.0 }, "metrics": { "targetContactSeconds": 2.166666666666661, "meanTargetForce": 1.4126100730157083, "meanPenetration": 0.035628061116003404, "meanJerk": 34.35544061544514, "postContactSampledSeconds": 0.8999999999999988, "postContactRmsSubjectSpeed": 0.001276928625272596, "postContactPeakSubjectSpeed": 0.003469323119130472, "directionReversals": 4 } },
+    { "task": "hand_hold", "profile": "v1Soft", "seed": 726403, "score": 68.282, "v2Score": null, "v2Delta": null, "components": { "target_coverage": 0.48807, "force_comfort": 0.82481, "smoothness": 0.98807, "penetration_safety": 0.70042, "contact_continuity": 0.91489, "stroke_naturalness": 0.0, "reaction_settling": 0.99513, "peak_force_safety": 1.0, "target_force_gate": 0.94855, "post_contact_measurement": 1.0 }, "metrics": { "targetContactSeconds": 1.4222222222222192, "meanTargetForce": 1.3462841037603763, "meanPenetration": 0.01958421262449461, "meanJerk": 34.50300516436264, "postContactSampledSeconds": 0.8999999999999988, "postContactRmsSubjectSpeed": 0.001481454401887688, "postContactPeakSubjectSpeed": 0.004655905830651814, "directionReversals": 1 } },
+    { "task": "limp_support", "profile": "v1Soft", "seed": 726404, "score": 65.458, "v2Score": null, "v2Delta": null, "components": { "target_coverage": 0.73972, "force_comfort": 0.76004, "smoothness": 0.98795, "penetration_safety": 0.68815, "contact_continuity": 0.91489, "stroke_naturalness": 0.0, "reaction_settling": 0.99551, "peak_force_safety": 1.0, "target_force_gate": 0.85021, "post_contact_measurement": 1.0 }, "metrics": { "targetContactSeconds": 2.15555555555555, "meanTargetForce": 1.2414403361892092, "meanPenetration": 0.02055652308303215, "meanJerk": 45.756848073078864, "postContactSampledSeconds": 0.8999999999999988, "postContactRmsSubjectSpeed": 0.0014346522108109152, "postContactPeakSubjectSpeed": 0.0038477745848625143, "directionReversals": 2 } }
+  ],
+  "noContactControl": { "task": "hand_hold", "profile": "priorRecommended", "seed": 726405, "score": 0.0, "components": { "target_coverage": 0.0, "force_comfort": 0.0, "stroke_naturalness": 0.0, "reaction_settling": 0.0, "target_force_gate": 0.0, "target_force_fit": 0.0, "target_speed_naturalness": 0.0, "direction_reversal_naturalness": 0.0, "post_contact_measurement": 1.0 }, "metrics": { "targetContactSeconds": 0.0, "contactTransitions": 0, "directionReversals": 0, "postContactSampledSeconds": 0.8999999999999988, "postContactRmsSubjectSpeed": 1.4766182277479803e-16 }, "assertions": { "noContact": true, "strokeNaturalnessZero": true, "directionReversalNaturalnessZero": true, "reactionSettlingZero": true } },
+  "summary": { "validTrialCount": 4, "priorRecommendedMean": 69.724, "priorRecommendedWorst": 65.091, "v1SoftMean": 66.87, "v1SoftWorst": 65.458, "priorRecommendedMeanDeltaVsV2": 2.642, "cleanupRemainingExperiments": 0, "finalRetreatDurationSeconds": 1.1, "finalRetreatMeasureSettling": true, "driverProfileApplied": false }
+}
