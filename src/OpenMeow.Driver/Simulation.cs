@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using OpenMeow;
 
 namespace OpenMeow.Driver;
 
@@ -34,16 +35,6 @@ internal static class Simulation
     private static extern short GetAsyncKeyState(int vKey);
 
     private static bool Down(int vk) => (GetAsyncKeyState(vk) & 0x8000) != 0;
-
-    // Virtual-Key codes
-    private const int VK_MBUTTON = 0x04, VK_XBUTTON1 = 0x05, VK_XBUTTON2 = 0x06;
-    private const int VK_BACK = 0x08, VK_TAB = 0x09;
-    private const int VK_SPACE = 0x20;
-    private const int VK_PRIOR = 0x21, VK_NEXT = 0x22; // PgUp / PgDn
-    private const int VK_LEFT = 0x25, VK_UP = 0x26, VK_RIGHT = 0x27, VK_DOWN = 0x28;
-    private const int VK_F5 = 0x74, VK_F6 = 0x75;
-    private const int VK_F7 = 0x76, VK_F8 = 0x77, VK_F9 = 0x78, VK_F10 = 0x79;
-    private const int VK_LSHIFT = 0xA0, VK_LCONTROL = 0xA2, VK_LMENU = 0xA4;
 
     // 移動・回転
     private const double MoveSpeed = 1.0;          // m/s
@@ -93,6 +84,8 @@ internal static class Simulation
     private static bool _prevB, _prevY;
     private static bool _invertX, _invertY;              // 方向反転(F5 / F6)
     private static bool _prevF5, _prevF6;
+    private static KeyBindings _keys = KeyBindings.Defaults();
+    private static DateTime _keyConfigChecked = DateTime.MinValue;
 
     /// <summary>直近の <see cref="Update"/> で合成された左手のボタン状態。</summary>
     public static HandButtons LeftButtons;
@@ -108,6 +101,7 @@ internal static class Simulation
     public static void Update(double dt)
     {
         _time += dt;
+        RefreshKeyBindings();
 
         ControlSample link = ControlLink.Sample();
         if (link.Fresh)
@@ -120,7 +114,7 @@ internal static class Simulation
         }
         else
         {
-            bool f9 = Down(VK_F9);
+            bool f9 = Down("CaptureToggle");
             if (f9 && !_prevF9)
             {
                 CaptureEnabled = !CaptureEnabled;
@@ -132,7 +126,7 @@ internal static class Simulation
 
         if (!CaptureEnabled)
         {
-            _prevF10 = Down(VK_F10);
+            _prevF10 = Down("TargetNext");
             LeftButtons = default;
             RightButtons = default;
             UpdateHandPose(ref _left, -1, dt);
@@ -145,7 +139,7 @@ internal static class Simulation
         // パネル未接続のフォールバックだけ F10 の対象切替を残す
         if (!mouseFresh)
         {
-            bool f10 = Down(VK_F10);
+            bool f10 = Down("TargetNext");
             if (f10 && !_prevF10)
             {
                 Target = (ControlTarget)(((int)Target + 1) % 3);
@@ -155,38 +149,38 @@ internal static class Simulation
         }
 
         // F5=左右反転 / F6=上下反転(視線・手首・手の位置に適用。スティックは対象外)
-        bool f5 = Down(VK_F5);
+        bool f5 = Down("InvertX");
         if (f5 && !_prevF5) { _invertX = !_invertX; Log.Write($"invertX={_invertX}"); WriteState(); }
         _prevF5 = f5;
-        bool f6 = Down(VK_F6);
+        bool f6 = Down("InvertY");
         if (f6 && !_prevF6) { _invertY = !_invertY; Log.Write($"invertY={_invertY}"); WriteState(); }
         _prevF6 = f6;
         double mdx = link.MouseDx * (_invertX ? -1 : 1);
         double mdy = link.MouseDy * (_invertY ? -1 : 1);
 
         // --- ホールド判定(モードレス)---
-        bool leftMod = Down(VK_XBUTTON1) || Down(VK_LMENU);
-        bool leftWrist = Down(VK_XBUTTON2) || (Down(VK_MBUTTON) && leftMod);
+        bool leftMod = Down("LeftPosition") || Down("LeftPositionAlt");
+        bool leftWrist = Down("LeftWrist") || (Down("LeftWristMouse") && leftMod);
         bool leftPos = leftMod && !leftWrist;
-        bool rightWrist = Down(VK_MBUTTON) && !leftMod;
-        bool rightPos = Down(VK_SPACE) && !rightWrist;
-        bool stick = Down(VK_TAB);  // 仮想スティック(左トラックパッド)
-        bool stickR = Down('R');    // 仮想スティック(右トラックパッド)
+        bool rightWrist = Down("RightWrist") && !leftMod;
+        bool rightPos = Down("RightPosition") && !rightWrist;
+        bool stick = Down("LeftStick");
+        bool stickR = Down("RightStick");
 
         // マウスの行き先(優先: スティック > 左手首 > 左位置 > 右手首 > 右位置 > 視線)
         int route = stick ? 5 : stickR ? 6 : leftWrist ? 1 : leftPos ? 2 : rightWrist ? 3 : rightPos ? 4 : 0;
 
         // --- 移動(常に頭。EMA でなめらか加減速)---
-        double mult = Down(VK_LSHIFT) ? FastMultiplier : Down(VK_LCONTROL) ? SlowMultiplier : 1.0;
+        double mult = Down("Fast") ? FastMultiplier : Down("Slow") ? SlowMultiplier : 1.0;
         double speed = MoveSpeed * mult * dt;
         double turn = TurnSpeed * mult * dt;
         double alpha = Math.Min(1.0, dt / SmoothTau);
-        _sx += (((Down('D') ? 1 : 0) - (Down('A') ? 1 : 0)) - _sx) * alpha;
-        _sz += (((Down('S') ? 1 : 0) - (Down('W') ? 1 : 0)) - _sz) * alpha;
-        _sy += (((Down('E') ? 1 : 0) - (Down('Q') ? 1 : 0)) - _sy) * alpha;
-        _syaw += (((Down(VK_LEFT) ? 1 : 0) - (Down(VK_RIGHT) ? 1 : 0)) - _syaw) * alpha;
-        _spitch += (((Down(VK_UP) ? 1 : 0) - (Down(VK_DOWN) ? 1 : 0)) - _spitch) * alpha;
-        bool reset = Down(VK_BACK);
+        _sx += (((Down("MoveRight") ? 1 : 0) - (Down("MoveLeft") ? 1 : 0)) - _sx) * alpha;
+        _sz += (((Down("MoveBack") ? 1 : 0) - (Down("MoveForward") ? 1 : 0)) - _sz) * alpha;
+        _sy += (((Down("MoveUp") ? 1 : 0) - (Down("MoveDown") ? 1 : 0)) - _sy) * alpha;
+        _syaw += (((Down("TurnLeft") ? 1 : 0) - (Down("TurnRight") ? 1 : 0)) - _syaw) * alpha;
+        _spitch += (((Down("LookUp") ? 1 : 0) - (Down("LookDown") ? 1 : 0)) - _spitch) * alpha;
+        bool reset = Down("Reset");
 
         {
             double sin = Math.Sin(_headYaw), cos = Math.Cos(_headYaw);
@@ -252,7 +246,7 @@ internal static class Simulation
             }
             {
                 double cp = Math.Cos(_headPitch), sp = Math.Sin(_headPitch);
-                double depth = ((Down(VK_PRIOR) ? 1 : 0) - (Down(VK_NEXT) ? 1 : 0)) * speed;
+                double depth = ((Down("DepthForward") ? 1 : 0) - (Down("DepthBack") ? 1 : 0)) * speed;
                 hand.My += depth * sp;
                 hand.Mz -= depth * cp;
             }
@@ -277,17 +271,17 @@ internal static class Simulation
 
         // --- ボタン ---
         LeftButtons = ReadHandButtons(
-            trigger: 'Z', grip: 'X', menu: 'C', padClick: 'V',
-            padUp: 'T', padLeft: 'F', padDown: 'G', padRight: 'H', system: VK_F7);
+            trigger: "LeftTrigger", grip: "LeftGrip", menu: "LeftMenu", padClick: "LeftPadClick",
+            padUp: "LeftPadUp", padLeft: "LeftPadLeft", padDown: "LeftPadDown", padRight: "LeftPadRight", system: "LeftSystem");
         RightButtons = ReadHandButtons(
-            trigger: 'U', grip: 'O', menu: 'P', padClick: 'M',
-            padUp: 'I', padLeft: 'J', padDown: 'K', padRight: 'L', system: VK_F8);
+            trigger: "RightTrigger", grip: "RightGrip", menu: "RightMenu", padClick: "RightPadClick",
+            padUp: "RightPadUp", padLeft: "RightPadLeft", padDown: "RightPadDown", padRight: "RightPadRight", system: "RightSystem");
 
         // グリップ保持トグル: Y=右手 / B=左手(押すたびに保持⇔解除)
-        bool bKey = Down('B');
+        bool bKey = Down("GripHoldLeft");
         if (bKey && !_prevB) _gripHoldL = !_gripHoldL;
         _prevB = bKey;
-        bool yKey = Down('Y');
+        bool yKey = Down("GripHoldRight");
         if (yKey && !_prevY) _gripHoldR = !_gripHoldR;
         _prevY = yKey;
         LeftButtons.Grip |= _gripHoldL;
@@ -386,8 +380,8 @@ internal static class Simulation
     }
 
     private static HandButtons ReadHandButtons(
-        int trigger, int grip, int menu, int padClick,
-        int padUp, int padLeft, int padDown, int padRight, int system)
+        string trigger, string grip, string menu, string padClick,
+        string padUp, string padLeft, string padDown, string padRight, string system)
     {
         float x = (Down(padRight) ? 1 : 0) - (Down(padLeft) ? 1 : 0);
         float y = (Down(padUp) ? 1 : 0) - (Down(padDown) ? 1 : 0);
@@ -403,6 +397,15 @@ internal static class Simulation
             PadX = x,
             PadY = y,
         };
+    }
+
+    private static bool Down(string id) => Down(_keys.Get(id));
+
+    private static void RefreshKeyBindings()
+    {
+        if (DateTime.UtcNow - _keyConfigChecked < TimeSpan.FromSeconds(1)) return;
+        _keyConfigChecked = DateTime.UtcNow;
+        _keys = KeyBindings.LoadOrDefault();
     }
 
     // --- 姿勢の出力 ---

@@ -1,6 +1,45 @@
 ﻿# OpenMeow ドライバのビルド → dist 組み立て → SteamVR への登録
+[CmdletBinding()]
+param([switch]$NoPause)
+
 $ErrorActionPreference = "Stop"
 $root = $PSScriptRoot
+
+function Wait-ForUser {
+    if (-not $NoPause -and $Host.Name -notmatch "ServerRemoteHost") {
+        [void](Read-Host "セットアップが終了しました。Enterキーを押すとこのウィンドウを閉じます")
+    }
+}
+
+trap {
+    Write-Host ""
+    Write-Host "セットアップに失敗しました: $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "SteamVRが起動中の場合は終了してから、もう一度実行してください。" -ForegroundColor Yellow
+    Wait-ForUser
+    exit 1
+}
+
+Write-Host @"
+========================================
+ OpenMeow セットアップ
+========================================
+このスクリプトは、OpenMeowをビルドしてSteamVRへ登録し、
+スタートメニューにコントロールパネルを追加します。
+
+留意事項:
+ - SteamVRは終了した状態で実行してください。
+ - .NET SDKとC++ Build Toolsがない場合は、公式サイトからダウンロードしてインストールします。
+ - SteamVRの設定(chaperone_info.vrchap)を更新します。既存データは universe 2 がなければ追記されます。
+ - 仮想HMDのため、実際の部屋の境界や衝突防止には使用できません。
+ - 完了後はスタートメニューの「OpenMeow」から起動できます。
+"@ -ForegroundColor Cyan
+
+$startAnswer = Read-Host "内容を確認して続行しますか? (y/n)"
+if ($startAnswer -notmatch '^[Yy]') {
+    Write-Host "キャンセルしました。"
+    Wait-ForUser
+    exit 0
+}
 
 function Test-CommandExists([string]$name) {
     return [bool](Get-Command $name -ErrorAction SilentlyContinue)
@@ -100,6 +139,7 @@ Get-Process -Name OpenMeowOverlay -ErrorAction SilentlyContinue | ForEach-Object
     } catch { }
 }
 Copy-Item -Force "$overlayPublish\*" "$dist\bin\win64\"
+Copy-Item -Force "$root\uninstall.ps1" "$dist\uninstall.ps1"
 
 Write-Host "== ルームセットアップ免除 (chaperone データ直書き) ==" -ForegroundColor Cyan
 # ドライバは Prop_CurrentUniverseId_Uint64=2 を名乗る。universe 2 のキャリブレーション済み
@@ -177,3 +217,4 @@ Write-Host ""
 Write-Host "完了。スタートメニューの『OpenMeow』を開き、『SteamVR を起動』ボタンを押すと開始できます。" -ForegroundColor Green
 Write-Host "(SteamVR を先に起動した場合も、コントロールパネルは自動で開きます)"
 Write-Host "ログ: $env:LOCALAPPDATA\OpenMeow\openmeow_driver.log および SteamVR の vrserver.txt"
+Wait-ForUser

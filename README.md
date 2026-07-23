@@ -33,6 +33,25 @@
 
 ## インストール
 
+### いちばん簡単な方法(PowerShell)
+
+Gitや開発環境をあらかじめ用意する必要はありません。PowerShellを開き、次の1行を貼り付けて実行してください。
+
+```powershell
+irm https://raw.githubusercontent.com/Slaviaaa2/OpenMeow/main/bootstrap.ps1 | iex
+```
+
+このセットアップは、GitHubからOpenMeowのソース一式をHTTPSでダウンロードし、
+`%LOCALAPPDATA%\OpenMeow\source` に保存してビルド・登録まで行います。
+途中で.NET SDKやC++ Build Toolsが必要になった場合は、公式インストーラーの起動を確認します。
+この1行は、取得したセットアップスクリプトをそのまま実行する便利な方法です。
+内容を確認してから実行したい場合は、URLの `bootstrap.ps1` を保存してからPowerShellで開いてください。
+なお、上記URLは`main`ブランチの最新版を取得するため、再現性を重視する場合はタグやリリース版をご利用ください。
+
+インストール中は案内と注意事項が表示されます。完了後にEnterキーを押すとウィンドウを閉じられます。
+
+### ソースを既に取得している場合
+
 ```powershell
 git clone https://github.com/Slaviaaa2/OpenMeow.git
 cd OpenMeow
@@ -50,6 +69,9 @@ cd OpenMeow
 .\uninstall.ps1
 ```
 
+オンラインセットアップを利用した場合は、`%LOCALAPPDATA%\OpenMeow\source\uninstall.ps1` からも実行できます。
+コントロールパネルの **設定 → ドライバ登録を削除** から開始することもできます。
+
 ## 使い方
 
 コントロールパネルに VR 映像が表示されます。**映像をクリックすると操作開始**、
@@ -57,6 +79,13 @@ cd OpenMeow
 
 操作はモードレスのホールド式です。ボタンを押している間だけ意味が変わり、
 手は「置いた位置+頭への追従」を維持します(勝手に動きません)。
+
+### 設定
+
+コントロールパネル右上の **設定** から、タブごとにキー割り当てを変更できます。
+割り当てボタンを押してから新しいキーを押し、保存してください。設定は
+`%LOCALAPPDATA%\OpenMeow\keybindings.cfg` に保存され、ドライバへ自動反映されます。
+同じ画面から初期設定への復元と、確認付きのドライバ登録削除も行えます。
 
 ### マウス
 

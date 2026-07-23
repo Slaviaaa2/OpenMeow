@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO.MemoryMappedFiles;
 using System.Runtime.InteropServices;
+using OpenMeow;
 
 namespace OpenMeow.Overlay;
 
@@ -200,6 +201,7 @@ internal sealed class ControlForm : Form
     private readonly ViewPanel _viewPanel = new();
     private readonly Button _launchBtn;
     private readonly Button _helpBtn;
+    private readonly Button _settingsBtn;
 
     private bool _captured;
     private bool _invX, _invY;
@@ -229,6 +231,8 @@ internal sealed class ControlForm : Form
         _launchBtn.Click += (_, _) => LaunchSteamVr();
         _helpBtn = MakeButton("操作説明を隠す", Color.FromArgb(55, 58, 68));
         _helpBtn.Click += (_, _) => ToggleHelp();
+        _settingsBtn = MakeButton("設定", Color.FromArgb(75, 78, 92));
+        _settingsBtn.Click += (_, _) => ShowSettings();
 
         var bar = new FlowLayoutPanel
         {
@@ -241,6 +245,7 @@ internal sealed class ControlForm : Form
         };
         bar.Controls.Add(_launchBtn);
         bar.Controls.Add(_helpBtn);
+        bar.Controls.Add(_settingsBtn);
 
         _state.Dock = DockStyle.Fill;
         _state.Font = new Font("Yu Gothic UI", 11f, FontStyle.Bold);
@@ -348,6 +353,13 @@ internal sealed class ControlForm : Form
     {
         _help.Visible = !_help.Visible;
         _helpBtn.Text = _help.Visible ? "操作説明を隠す" : "操作説明を表示";
+    }
+
+    private void ShowSettings()
+    {
+        using var settings = new SettingsForm();
+        settings.ShowDialog(this);
+        if (settings.UninstallStarted) Close();
     }
 
     private static bool IsSteamVrRunning()
@@ -491,6 +503,258 @@ internal sealed class ControlForm : Form
         {
             _state.Text = "○ 待機中 — 映像をクリックで操作開始" + inv;
             _state.ForeColor = Color.Orange;
+        }
+    }
+}
+
+/// <summary>キー割り当てとインストール管理をまとめた設定画面。</summary>
+internal sealed class SettingsForm : Form
+{
+    private readonly KeyBindings _bindings = KeyBindings.LoadOrDefault();
+    private readonly Dictionary<string, Button> _keyButtons = new(StringComparer.Ordinal);
+    private readonly Label _info = new();
+    private Button? _capturingButton;
+    private string? _capturingId;
+
+    public bool UninstallStarted { get; private set; }
+
+    public SettingsForm()
+    {
+        Text = "OpenMeow 設定";
+        StartPosition = FormStartPosition.CenterParent;
+        MinimumSize = new Size(700, 560);
+        Size = new Size(820, 680);
+        BackColor = Color.FromArgb(24, 26, 32);
+        ForeColor = Color.Gainsboro;
+        KeyPreview = true;
+        KeyDown += CaptureKey;
+
+        var tabs = new TabControl { Dock = DockStyle.Fill, Padding = new Point(12, 5) };
+        foreach (string group in KeyBindings.Definitions.Select(x => x.Group).Distinct())
+            tabs.TabPages.Add(CreateTab(group));
+
+        var note = new Label
+        {
+            Dock = DockStyle.Top,
+            Height = 42,
+            Text = "割り当てたいボタンを押してから、変更したいキーを押してください。保存後、約1秒で反映されます。",
+            ForeColor = Color.LightGray,
+            Padding = new Padding(12, 9, 12, 0),
+        };
+        _info.Dock = DockStyle.Top;
+        _info.Height = 24;
+        _info.Padding = new Padding(12, 2, 12, 0);
+        _info.ForeColor = Color.Khaki;
+
+        var save = MakeActionButton("保存", Color.FromArgb(34, 150, 90));
+        save.Click += (_, _) => SaveAndClose();
+        var defaults = MakeActionButton("初期設定に戻す", Color.FromArgb(75, 78, 92));
+        defaults.Click += (_, _) => ResetDefaults();
+        var uninstall = MakeActionButton("ドライバ登録を削除…", Color.FromArgb(170, 55, 55));
+        uninstall.Click += (_, _) => UninstallDriver();
+        var cancel = MakeActionButton("キャンセル", Color.FromArgb(55, 58, 68));
+        cancel.Click += (_, _) => Close();
+
+        var actions = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Bottom,
+            Height = 52,
+            FlowDirection = FlowDirection.RightToLeft,
+            WrapContents = false,
+            Padding = new Padding(8, 8, 12, 8),
+        };
+        actions.Controls.Add(cancel);
+        actions.Controls.Add(save);
+        actions.Controls.Add(defaults);
+        actions.Controls.Add(uninstall);
+
+        Controls.Add(tabs);
+        Controls.Add(_info);
+        Controls.Add(note);
+        Controls.Add(actions);
+        UpdateConflictInfo();
+    }
+
+    private TabPage CreateTab(string group)
+    {
+        var tab = new TabPage(group) { BackColor = Color.FromArgb(24, 26, 32), ForeColor = Color.Gainsboro };
+        var scroll = new Panel { Dock = DockStyle.Fill, AutoScroll = true, Padding = new Padding(8) };
+        var table = new TableLayoutPanel
+        {
+            Dock = DockStyle.Top,
+            AutoSize = true,
+            ColumnCount = 2,
+            CellBorderStyle = TableLayoutPanelCellBorderStyle.Single,
+            BackColor = Color.FromArgb(30, 32, 40),
+        };
+        table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70f));
+        table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30f));
+
+        foreach (var definition in KeyBindings.Definitions.Where(x => x.Group == group))
+        {
+            var label = new Label
+            {
+                Text = definition.Label,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Padding = new Padding(10, 0, 0, 0),
+                ForeColor = Color.Gainsboro,
+            };
+            var key = new Button
+            {
+                Text = KeyName(_bindings.Get(definition.Id)),
+                Dock = DockStyle.Fill,
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.FromArgb(55, 58, 68),
+                ForeColor = Color.White,
+                Tag = definition.Id,
+                Height = 30,
+                Margin = new Padding(4),
+                TabStop = false,
+            };
+            key.FlatAppearance.BorderColor = Color.FromArgb(85, 88, 100);
+            key.Click += BeginCapture;
+            _keyButtons[definition.Id] = key;
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 38));
+            table.Controls.Add(label);
+            table.Controls.Add(key);
+        }
+
+        scroll.Controls.Add(table);
+        tab.Controls.Add(scroll);
+        return tab;
+    }
+
+    private static Button MakeActionButton(string text, Color color) => new()
+    {
+        Text = text,
+        AutoSize = true,
+        Height = 30,
+        FlatStyle = FlatStyle.Flat,
+        BackColor = color,
+        ForeColor = Color.White,
+        Margin = new Padding(4, 0, 0, 0),
+        Padding = new Padding(10, 3, 10, 3),
+        UseVisualStyleBackColor = false,
+    };
+
+    private static string KeyName(int key)
+    {
+        if (key == 0) return "なし";
+        return new KeysConverter().ConvertToString((Keys)key) ?? $"VK 0x{key:X2}";
+    }
+
+    private void BeginCapture(object? sender, EventArgs e)
+    {
+        if (sender is not Button button || button.Tag is not string id) return;
+        _capturingButton = button;
+        _capturingId = id;
+        button.Text = "キーを押してください…";
+        button.BackColor = Color.FromArgb(180, 120, 35);
+        button.Focus();
+        _info.Text = "Escでキャンセルできます。";
+    }
+
+    private void CaptureKey(object? sender, KeyEventArgs e)
+    {
+        if (_capturingId == null || _capturingButton == null) return;
+        if (e.KeyCode == Keys.Escape)
+        {
+            _capturingId = null;
+            _capturingButton.BackColor = Color.FromArgb(55, 58, 68);
+            UpdateAllKeyButtons();
+        }
+        else
+        {
+            _bindings.Set(_capturingId, (int)e.KeyCode);
+            _capturingId = null;
+            _capturingButton.BackColor = Color.FromArgb(55, 58, 68);
+            UpdateAllKeyButtons();
+            UpdateConflictInfo();
+        }
+        e.SuppressKeyPress = true;
+        e.Handled = true;
+    }
+
+    private void UpdateAllKeyButtons()
+    {
+        foreach (var definition in KeyBindings.Definitions)
+            if (_keyButtons.TryGetValue(definition.Id, out var button))
+                button.Text = KeyName(_bindings.Get(definition.Id));
+        if (_capturingButton != null) _capturingButton.BackColor = Color.FromArgb(55, 58, 68);
+    }
+
+    private void UpdateConflictInfo()
+    {
+        var conflicts = KeyBindings.Definitions
+            .Where(x => _bindings.Get(x.Id) != 0)
+            .GroupBy(x => _bindings.Get(x.Id))
+            .Where(x => x.Count() > 1)
+            .Select(x => KeyName(x.Key))
+            .ToArray();
+        _info.Text = conflicts.Length == 0
+            ? ""
+            : "注意: 重複しているキーがあります（同時使用時は両方の操作が反応します）: " + string.Join(", ", conflicts);
+    }
+
+    private void ResetDefaults()
+    {
+        if (MessageBox.Show(this, "キー割り当てを初期設定に戻しますか?", "確認",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+        var defaults = KeyBindings.Defaults();
+        foreach (var definition in KeyBindings.Definitions) _bindings.Set(definition.Id, defaults.Get(definition.Id));
+        UpdateAllKeyButtons();
+        UpdateConflictInfo();
+    }
+
+    private void SaveAndClose()
+    {
+        try
+        {
+            _bindings.Save();
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this, "設定を保存できませんでした。\n\n" + ex.Message,
+                "OpenMeow", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+    }
+
+    private void UninstallDriver()
+    {
+        string script = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "uninstall.ps1"));
+        if (!File.Exists(script))
+        {
+            MessageBox.Show(this, "アンインストール用スクリプトが見つかりません。install.ps1を再実行してください。",
+                "OpenMeow", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+        if (MessageBox.Show(this,
+                "SteamVRへのOpenMeowドライバ登録とスタートメニュー登録を削除します。続行しますか?\n\nSteamVRは終了してから実行してください。",
+                "ドライバ登録を削除", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+        try
+        {
+            var start = new ProcessStartInfo("powershell.exe")
+            {
+                UseShellExecute = true,
+                WorkingDirectory = Path.GetDirectoryName(script)!,
+            };
+            start.ArgumentList.Add("-NoProfile");
+            start.ArgumentList.Add("-ExecutionPolicy");
+            start.ArgumentList.Add("Bypass");
+            start.ArgumentList.Add("-File");
+            start.ArgumentList.Add(script);
+            start.ArgumentList.Add("-NoPause");
+            Process.Start(start);
+            UninstallStarted = true;
+            Close();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this, "アンインストールを開始できませんでした。\n\n" + ex.Message,
+                "OpenMeow", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

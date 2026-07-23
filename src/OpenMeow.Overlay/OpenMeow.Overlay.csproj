@@ -12,4 +12,8 @@
     <SelfContained>false</SelfContained>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="..\OpenMeow.Common\KeyBindings.cs" Link="KeyBindings.cs" />
+  </ItemGroup>
+
 </Project>
