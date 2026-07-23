@@ -190,6 +190,49 @@ internal sealed class ViewPanel : Panel
     }
 }
 
+/// <summary>OBS 等からウィンドウキャプチャするための、映像だけを表示する出力画面。</summary>
+internal sealed class VideoOutputForm : Form
+{
+    private readonly ViewPanel _view = new();
+
+    public VideoOutputForm(FrameReceiver receiver)
+    {
+        Text = "OpenMeow 映像出力 (OBS)";
+        StartPosition = FormStartPosition.CenterScreen;
+        FormBorderStyle = FormBorderStyle.Sizable;
+        ShowInTaskbar = true;
+        TopMost = false;
+        BackColor = Color.Black;
+        MinimumSize = new Size(640, 360);
+
+        var workingArea = Screen.PrimaryScreen!.WorkingArea;
+        int width = Math.Min(1280, Math.Max(640, workingArea.Width - 64));
+        int height = width * 9 / 16;
+        if (height > workingArea.Height - 64)
+        {
+            height = Math.Max(360, workingArea.Height - 64);
+            width = height * 16 / 9;
+        }
+        ClientSize = new Size(width, height);
+
+        _view.Dock = DockStyle.Fill;
+        _view.Receiver = receiver;
+        _view.IdleText = "SteamVR の映像を待っています…";
+        Controls.Add(_view);
+
+        // TopMost のメイン画面から開いても背面に隠さず、ゲームへ戻った後は
+        // 通常ウィンドウへ戻してプレイ画面を覆わないようにする。
+        Activated += (_, _) =>
+        {
+            TopMost = true;
+            BringToFront();
+        };
+        Deactivate += (_, _) => TopMost = false;
+    }
+
+    public void RefreshFrame() => _view.Invalidate();
+}
+
 /// <summary>
 /// OpenMeow コントロールパネル。
 /// ドライバ直結のライブビュー(合成済みフレーム)を表示し、
@@ -215,7 +258,9 @@ internal sealed class ControlForm : Form
     private readonly ViewPanel _viewPanel = new();
     private readonly Button _launchBtn;
     private readonly Button _helpBtn;
+    private readonly Button _outputBtn;
     private readonly Button _settingsBtn;
+    private VideoOutputForm? _outputForm;
 
     private bool _captured;
     private bool _invX, _invY;
@@ -247,6 +292,8 @@ internal sealed class ControlForm : Form
         _launchBtn.Click += (_, _) => LaunchSteamVr();
         _helpBtn = MakeButton("操作説明を隠す", Color.FromArgb(55, 58, 68));
         _helpBtn.Click += (_, _) => ToggleHelp();
+        _outputBtn = MakeButton("OBS出力", Color.FromArgb(109, 76, 170));
+        _outputBtn.Click += (_, _) => ShowVideoOutput();
         _settingsBtn = MakeButton("設定", Color.FromArgb(75, 78, 92));
         _settingsBtn.Click += (_, _) => ShowSettings();
 
@@ -261,6 +308,7 @@ internal sealed class ControlForm : Form
         };
         bar.Controls.Add(_launchBtn);
         bar.Controls.Add(_helpBtn);
+        bar.Controls.Add(_outputBtn);
         bar.Controls.Add(_settingsBtn);
 
         _state.Dock = DockStyle.Fill;
@@ -341,7 +389,13 @@ internal sealed class ControlForm : Form
         _viewPanel.MouseDown += (_, e) => { if (!_captured && e.Button == MouseButtons.Left) StartCapture(); };
         _viewPanel.MouseWheel += (_, e) => { if (_captured) _channel.Wheel += e.Delta / 120.0; };
         MouseWheel += (_, e) => { if (_captured) _channel.Wheel += e.Delta / 120.0; };
-        FormClosed += (_, _) => { ReleaseCapture(); _channel.Dispose(); _receiver.Dispose(); };
+        FormClosed += (_, _) =>
+        {
+            _outputForm?.Close();
+            ReleaseCapture();
+            _channel.Dispose();
+            _receiver.Dispose();
+        };
         Resize += (_, _) => { if (_captured) ClipToView(); };
 
         UpdateIdleText();
@@ -394,6 +448,29 @@ internal sealed class ControlForm : Form
     {
         _help.Visible = !_help.Visible;
         _helpBtn.Text = _help.Visible ? "操作説明を隠す" : "操作説明を表示";
+    }
+
+    private void ShowVideoOutput()
+    {
+        if (_outputForm is { IsDisposed: false })
+        {
+            if (_outputForm.WindowState == FormWindowState.Minimized)
+                _outputForm.WindowState = FormWindowState.Normal;
+            _outputForm.Activate();
+            _outputForm.BringToFront();
+            return;
+        }
+
+        var output = new VideoOutputForm(_receiver);
+        output.FormClosed += (_, _) =>
+        {
+            if (ReferenceEquals(_outputForm, output)) _outputForm = null;
+        };
+        _outputForm = output;
+
+        // 所有ウィンドウにはしない。メイン画面を最小化してもOBS出力を残すため。
+        output.Show();
+        output.Activate();
     }
 
     private void ShowSettings()
@@ -532,7 +609,11 @@ internal sealed class ControlForm : Form
             }
         }
 
-        if (_receiver.Poll()) _viewPanel.Invalidate();
+        if (_receiver.Poll())
+        {
+            _viewPanel.Invalidate();
+            _outputForm?.RefreshFrame();
+        }
     }
 
     private void UpdateStateLabel()
