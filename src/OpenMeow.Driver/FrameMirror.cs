@@ -37,6 +37,7 @@ internal static unsafe class FrameMirror
     }
 
     private static IntPtr _device, _context;
+    private static MemoryMappedFile? _mmf;
     private static MemoryMappedViewAccessor? _view;
     private static byte* _viewPtr;
     private static IntPtr _staging;
@@ -59,8 +60,10 @@ internal static unsafe class FrameMirror
         {
             if (_view == null)
             {
-                var mmf = MemoryMappedFile.CreateOrOpen("Local\\OpenMeowFrame", HeaderBytes + MaxPixelBytes);
-                _view = mmf.CreateViewAccessor(0, HeaderBytes + MaxPixelBytes);
+#pragma warning disable CA1416 // NativeAOT driver is win-x64 by definition.
+                _mmf = MemoryMappedFile.CreateOrOpen("Local\\OpenMeowFrame", HeaderBytes + MaxPixelBytes);
+#pragma warning restore CA1416
+                _view = _mmf.CreateViewAccessor(0, HeaderBytes + MaxPixelBytes);
                 byte* p = null;
                 _view.SafeMemoryMappedViewHandle.AcquirePointer(ref p);
                 _viewPtr = p;
@@ -136,7 +139,8 @@ internal static unsafe class FrameMirror
             return true;
 
         if (_staging != IntPtr.Zero) { Release(_staging); _staging = IntPtr.Zero; }
-        if (desc.Width * desc.Height * 4 > MaxPixelBytes)
+        ulong pixelBytes = (ulong)desc.Width * desc.Height * 4;
+        if (desc.Width == 0 || desc.Height == 0 || pixelBytes > MaxPixelBytes)
         {
             if (!_loggedFirst) { Log.Write($"FrameMirror: frame too large {desc.Width}x{desc.Height}"); _loggedFirst = true; }
             return false;
@@ -173,10 +177,11 @@ internal static unsafe class FrameMirror
     }
 
     /// <summary>Present から毎フレーム呼ばれる。offset 0 に共有テクスチャハンドル。</summary>
-    public static void OnPresent(IntPtr presentInfo)
+    public static void OnPresent(IntPtr presentInfo, uint presentInfoSize)
     {
         _frameCount++;
         if (_frameCount % FrameDivider != 0) return;
+        if (presentInfo == IntPtr.Zero || presentInfoSize < sizeof(ulong)) return;
         if (!EnsureInit()) return;
 
         try
@@ -197,50 +202,87 @@ internal static unsafe class FrameMirror
                     Log.Write($"FrameMirror: AcquireSync failed 0x{ahr:x8}");
                     _loggedAcquireFail = true;
                 }
+                if (!acquired) return;
             }
 
-            var copy = (delegate* unmanaged<IntPtr, IntPtr, IntPtr, void>)Vtbl.Slot(_context, 47);
-            copy(_context, _staging, tex);
-
-            if (acquired)
+            bool mapped = false;
+            try
             {
-                var release2 = (delegate* unmanaged<IntPtr, ulong, int>)Vtbl.Slot(mutex, 9);
-                release2(mutex, 0);
+                var copy = (delegate* unmanaged<IntPtr, IntPtr, IntPtr, void>)Vtbl.Slot(_context, 47);
+                copy(_context, _staging, tex);
+
+                // D3D11_MAPPED_SUBRESOURCE { void* pData; uint RowPitch; uint DepthPitch; }
+                IntPtr data = IntPtr.Zero;
+                uint rowPitch = 0;
+                var map = (delegate* unmanaged<IntPtr, IntPtr, uint, int, uint, void**, int>)Vtbl.Slot(_context, 14);
+                void* mappedRaw = stackalloc byte[16];
+                int hr = map(_context, _staging, 0, 1 /*D3D11_MAP_READ*/, 0, (void**)mappedRaw);
+                if (hr < 0) return;
+                mapped = true;
+                data = *(IntPtr*)mappedRaw;
+                rowPitch = *(uint*)((byte*)mappedRaw + 8);
+
+                int width = (int)_stagingDesc.Width, height = (int)_stagingDesc.Height;
+                int rowBytes = checked(width * 4);
+                if (rowPitch < rowBytes) return;
+
+                Interlocked.Increment(ref _seq);            // 奇数 = 書き込み中
+                *(long*)_viewPtr = _seq;
+                byte* dst = _viewPtr + HeaderBytes;
+                for (int y = 0; y < height; y++)
+                    Buffer.MemoryCopy((byte*)data + (long)y * rowPitch, dst + (long)y * rowBytes, rowBytes, rowBytes);
+                *(int*)(_viewPtr + 8) = width;
+                *(int*)(_viewPtr + 12) = height;
+                *(int*)(_viewPtr + 16) = rowBytes;
+                *(int*)(_viewPtr + 20) = _stagingDesc.Format;
+                *(long*)(_viewPtr + 24) = _frameCount;
+                Interlocked.Increment(ref _seq);            // 偶数 = 完了
+                *(long*)_viewPtr = _seq;
             }
-
-            // D3D11_MAPPED_SUBRESOURCE { void* pData; uint RowPitch; uint DepthPitch; }
-            IntPtr data = IntPtr.Zero;
-            uint rowPitch = 0, depthPitch = 0;
-            var map = (delegate* unmanaged<IntPtr, IntPtr, uint, int, uint, void**, int>)Vtbl.Slot(_context, 14);
-            void* mappedRaw = stackalloc byte[16];
-            int hr = map(_context, _staging, 0, 1 /*D3D11_MAP_READ*/, 0, (void**)mappedRaw);
-            if (hr < 0) return;
-            data = *(IntPtr*)mappedRaw;
-            rowPitch = *(uint*)((byte*)mappedRaw + 8);
-
-            int width = (int)_stagingDesc.Width, height = (int)_stagingDesc.Height;
-            int rowBytes = width * 4;
-
-            Interlocked.Increment(ref _seq);            // 奇数 = 書き込み中
-            *(long*)_viewPtr = _seq;
-            byte* dst = _viewPtr + HeaderBytes;
-            for (int y = 0; y < height; y++)
-                Buffer.MemoryCopy((byte*)data + (long)y * rowPitch, dst + (long)y * rowBytes, rowBytes, rowBytes);
-            *(int*)(_viewPtr + 8) = width;
-            *(int*)(_viewPtr + 12) = height;
-            *(int*)(_viewPtr + 16) = rowBytes;
-            *(int*)(_viewPtr + 20) = _stagingDesc.Format;
-            *(long*)(_viewPtr + 24) = _frameCount;
-            Interlocked.Increment(ref _seq);            // 偶数 = 完了
-            *(long*)_viewPtr = _seq;
-
-            var unmap = (delegate* unmanaged<IntPtr, IntPtr, uint, void>)Vtbl.Slot(_context, 15);
-            unmap(_context, _staging, 0);
+            finally
+            {
+                if (mapped)
+                {
+                    var unmap = (delegate* unmanaged<IntPtr, IntPtr, uint, void>)Vtbl.Slot(_context, 15);
+                    unmap(_context, _staging, 0);
+                }
+                if (acquired)
+                {
+                    var release2 = (delegate* unmanaged<IntPtr, ulong, int>)Vtbl.Slot(mutex, 9);
+                    release2(mutex, 0);
+                }
+            }
         }
         catch (Exception ex)
         {
             Log.Write($"FrameMirror error: {ex.Message}");
-            _failed = true;
         }
+    }
+
+    /// <summary>SteamVRの再初期化時にD3D11と共有メモリを解放する。</summary>
+    public static void Cleanup()
+    {
+        foreach (var item in _textureCache.Values)
+        {
+            Release(item.Mutex);
+            Release(item.Tex);
+        }
+        _textureCache.Clear();
+        Release(_staging);
+        Release(_context);
+        Release(_device);
+        _staging = _context = _device = IntPtr.Zero;
+        if (_view != null)
+        {
+            if (_viewPtr != null) _view.SafeMemoryMappedViewHandle.ReleasePointer();
+            _view.Dispose();
+            _view = null;
+        }
+        _mmf?.Dispose();
+        _mmf = null;
+        _viewPtr = null;
+        _failed = false;
+        _frameCount = _seq = 0;
+        _loggedFirst = _loggedAcquireFail = false;
     }
 }

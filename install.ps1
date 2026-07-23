@@ -21,6 +21,11 @@ function Request-InstallerRun([string]$label, [string]$url, [string]$fileName, [
     $installerPath = Join-Path $env:TEMP $fileName
     Write-Host "ダウンロード中: $url" -ForegroundColor Cyan
     Invoke-WebRequest -Uri $url -OutFile $installerPath -UseBasicParsing
+    $signature = Get-AuthenticodeSignature -FilePath $installerPath
+    if ($signature.Status -ne 'Valid' -or $signature.SignerCertificate.Subject -notmatch 'Microsoft') {
+        Remove-Item -LiteralPath $installerPath -Force -ErrorAction SilentlyContinue
+        throw "$label の署名検証に失敗しました。実行を中止します。"
+    }
     Write-Host "インストーラーを起動します。インストールが完了したらこのウィンドウに戻ってください。" -ForegroundColor Cyan
     if ($arguments.Count -gt 0) {
         Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait
@@ -86,7 +91,14 @@ if (Test-Path $targetDll) {
     catch { Rename-Item $targetDll "driver_openmeow.dll.old-$(Get-Date -Format yyyyMMddHHmmss)" -Force }
 }
 Copy-Item -Force $publishDll $targetDll
-Get-Process -Name OpenMeowOverlay -ErrorAction SilentlyContinue | Stop-Process -Force
+$overlayExe = [System.IO.Path]::GetFullPath((Join-Path $dist "bin\win64\OpenMeowOverlay.exe"))
+Get-Process -Name OpenMeowOverlay -ErrorAction SilentlyContinue | ForEach-Object {
+    try {
+        if ([System.IO.Path]::GetFullPath($_.MainModule.FileName) -ieq $overlayExe) {
+            Stop-Process -Id $_.Id -Force
+        }
+    } catch { }
+}
 Copy-Item -Force "$overlayPublish\*" "$dist\bin\win64\"
 
 Write-Host "== ルームセットアップ免除 (chaperone データ直書き) ==" -ForegroundColor Cyan

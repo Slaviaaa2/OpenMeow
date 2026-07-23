@@ -54,8 +54,10 @@ internal static class StateFile
                 Directory.CreateDirectory(dir);
                 _path = Path.Combine(dir, "state.txt");
             }
-            File.WriteAllText(_path,
+            string temp = _path + ".tmp";
+            File.WriteAllText(temp,
                 $"capture={(capture ? 1 : 0)}\ntarget={(int)target}\ninvertX={(invertX ? 1 : 0)}\ninvertY={(invertY ? 1 : 0)}\n");
+            File.Move(temp, _path, overwrite: true);
         }
         catch { }
     }

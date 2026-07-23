@@ -110,6 +110,23 @@ internal static unsafe class Provider
         return len == 0 ? null : Path.GetDirectoryName(new string(buffer, 0, (int)len));
     }
 
+    private static bool IsOverlayRunning(string exe)
+    {
+        string expected = Path.GetFullPath(exe);
+        foreach (var process in Process.GetProcessesByName("OpenMeowOverlay"))
+        {
+            try
+            {
+                string? actual = process.MainModule?.FileName;
+                if (actual != null && string.Equals(Path.GetFullPath(actual), expected,
+                        StringComparison.OrdinalIgnoreCase)) return true;
+            }
+            catch { }
+            finally { process.Dispose(); }
+        }
+        return false;
+    }
+
     private static void LaunchOverlay()
     {
         try
@@ -118,7 +135,7 @@ internal static unsafe class Provider
             if (dir == null) { Log.Write("overlay: driver dir unresolved"); return; }
             string exe = Path.Combine(dir, "OpenMeowOverlay.exe");
             if (!File.Exists(exe)) { Log.Write("overlay exe not found, skipping"); return; }
-            if (System.Diagnostics.Process.GetProcessesByName("OpenMeowOverlay").Length > 0) return;
+            if (IsOverlayRunning(exe)) return;
             _overlay = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(exe)
             {
                 WorkingDirectory = Path.GetDirectoryName(exe),
@@ -196,6 +213,8 @@ internal static unsafe class Provider
         _poseThread = null;
         try { if (_overlay is { HasExited: false }) _overlay.Kill(); } catch { }
         _overlay = null;
+        FrameMirror.Cleanup();
+        ControlLink.Cleanup();
     }
 
     [UnmanagedCallersOnly]

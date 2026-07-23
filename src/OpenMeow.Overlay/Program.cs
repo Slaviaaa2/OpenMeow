@@ -86,7 +86,9 @@ internal sealed unsafe class FrameReceiver : IDisposable
         int height = *(int*)(_ptr + 12);
         int rowBytes = *(int*)(_ptr + 16);
         int format = *(int*)(_ptr + 20);
-        if (width <= 0 || height <= 0 || (long)rowBytes * height > MaxPixelBytes) return false;
+        long minRowBytes = (long)width * 4;
+        if (width <= 0 || height <= 0 || width % 2 != 0 || rowBytes < minRowBytes ||
+            (long)rowBytes > MaxPixelBytes / height) return false;
 
         // 左右の目が横並びなので左半分だけ取り出す
         int eyeWidth = width / 2;

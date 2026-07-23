@@ -31,6 +31,7 @@ internal static class ControlLink
 {
     public const string MapName = "Local\\OpenMeowControl";
 
+    private static MemoryMappedFile? _mmf;
     private static MemoryMappedViewAccessor? _view;
     private static double _lastX, _lastY, _lastWheel;
     private static bool _wasFresh;
@@ -40,8 +41,10 @@ internal static class ControlLink
         if (_view != null) return true;
         try
         {
-            var mmf = MemoryMappedFile.CreateOrOpen(MapName, 64);
-            _view = mmf.CreateViewAccessor(0, 64);
+#pragma warning disable CA1416 // NativeAOT driver is win-x64 by definition.
+            _mmf = MemoryMappedFile.CreateOrOpen(MapName, 64);
+#pragma warning restore CA1416
+            _view = _mmf.CreateViewAccessor(0, 64);
             return true;
         }
         catch
@@ -62,18 +65,41 @@ internal static class ControlLink
             Log.Write($"control link {(s.Fresh ? "connected" : "lost")}");
             _wasFresh = s.Fresh;
         }
-        if (!s.Fresh) return s;
-
-        s.Active = _view.ReadInt64(8) != 0;
         double x = _view.ReadDouble(16);
         double y = _view.ReadDouble(24);
         double w = _view.ReadDouble(32);
+        if (!s.Fresh)
+        {
+            // 接続断中にオーバーレイが再起動して累積値を初期化しても、
+            // 再接続時に巨大なマウス移動として扱わないよう基準値を更新する。
+            _lastX = x; _lastY = y; _lastWheel = w;
+            return s;
+        }
+
+        s.Active = _view.ReadInt64(8) != 0;
+        if (!double.IsFinite(x) || !double.IsFinite(y) || !double.IsFinite(w)) return s;
         s.MouseDx = x - _lastX;
         s.MouseDy = y - _lastY;
         s.WheelDelta = w - _lastWheel;
+        if (!double.IsFinite(s.MouseDx) || !double.IsFinite(s.MouseDy) || !double.IsFinite(s.WheelDelta) ||
+            Math.Abs(s.MouseDx) > 512 || Math.Abs(s.MouseDy) > 512 || Math.Abs(s.WheelDelta) > 32)
+        {
+            _lastX = x; _lastY = y; _lastWheel = w;
+            return s;
+        }
         _lastX = x; _lastY = y; _lastWheel = w;
         s.Lmb = _view.ReadInt64(40) != 0;
         s.Rmb = _view.ReadInt64(48) != 0;
         return s;
+    }
+
+    public static void Cleanup()
+    {
+        _view?.Dispose();
+        _view = null;
+        _mmf?.Dispose();
+        _mmf = null;
+        _lastX = _lastY = _lastWheel = 0;
+        _wasFresh = false;
     }
 }

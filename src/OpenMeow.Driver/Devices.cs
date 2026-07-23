@@ -266,7 +266,7 @@ internal static unsafe class Devices
 
     [UnmanagedCallersOnly]
     private static void Present(IntPtr thisPtr, IntPtr presentInfo, uint presentInfoSize)
-        => FrameMirror.OnPresent(presentInfo);
+        => FrameMirror.OnPresent(presentInfo, presentInfoSize);
 
     [UnmanagedCallersOnly]
     private static void WaitForPresent(IntPtr thisPtr)
